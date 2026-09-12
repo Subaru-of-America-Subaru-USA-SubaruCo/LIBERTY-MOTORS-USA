@@ -3,1007 +3,736 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Liberty Motors USA</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Liberty Motors USA - 500+ Vehicles From $500 | Bitcoin Accepted</title>
     <style>
         *{margin:0;padding:0;box-sizing:border-box}
-        :root{--primary:#1a365d;--secondary:#c53030;--accent:#ed8936;--light:#f7fafc;--dark:#1a202c;--gray:#718096;--success:#38a169;--budget:#2d3748}
-        body{font-family:'Inter',sans-serif;background:var(--light);color:var(--dark);line-height:1.6}
-        .auth-modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.8);z-index:3000;align-items:center;justify-content:center}
-        .auth-modal.active{display:flex}
-        .auth-container{background:white;border-radius:20px;width:90%;max-width:450px;overflow:hidden}
-        .auth-tabs{display:flex;border-bottom:2px solid #e2e8f0}
-        .auth-tab{flex:1;padding:20px;background:none;border:none;font-weight:600;cursor:pointer;transition:all .3s}
-        .auth-tab.active{color:var(--secondary);border-bottom:3px solid var(--secondary)}
-        .auth-form{padding:40px}
-        .auth-form input{width:100%;padding:14px;margin-bottom:15px;border:2px solid #e2e8f0;border-radius:10px;font-size:1rem}
-        .auth-form button[type="submit"]{width:100%;padding:14px;background:var(--secondary);color:white;border:none;border-radius:10px;font-size:1rem;font-weight:600;cursor:pointer}
-        .auth-error{color:var(--secondary);font-size:.9rem;margin-bottom:15px;display:none}
-        .user-menu{position:relative;display:none}
-        .user-menu.active{display:block}
-        .user-dropdown{position:absolute;top:50px;right:0;background:white;border-radius:12px;box-shadow:0 10px 40px rgba(0,0,0,0.15);min-width:200px;padding:15px 0;display:none}
-        .user-dropdown.active{display:block}
-        .user-dropdown a{display:block;padding:12px 20px;color:var(--dark);text-decoration:none;transition:background .2s}
-        .user-dropdown a:hover{background:var(--light)}
-        .calc-modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.8);z-index:2500;align-items:center;justify-content:center}
-        .calc-modal.active{display:flex}
-        .calc-container{background:white;border-radius:20px;width:90%;max-width:500px;padding:40px}
-        .calc-slider{width:100%;margin:20px 0}
-        .calc-result{background:var(--primary);color:white;padding:30px;border-radius:15px;text-align:center;margin-top:25px}
-        .calc-result .payment{font-size:3rem;font-weight:800}
-        .calc-result .details{opacity:.9;margin-top:10px}
-        .fav-count{position:absolute;top:-5px;right:-5px;background:var(--secondary);color:white;font-size:.7rem;width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700}
-        .badge-budget{background:var(--budget);color:white}
-        .price-tag-budget{color:var(--budget)}
-        .lead-form{background:#f7fafc;padding:30px;border-radius:15px;margin-top:20px}
-        .lead-form h4{margin-bottom:20px;color:var(--primary)}
-        .toast{position:fixed;bottom:30px;right:30px;background:var(--success);color:white;padding:20px 30px;border-radius:12px;box-shadow:0 10px 40px rgba(0,0,0,0.2);transform:translateX(150%);transition:transform .3s;z-index:4000}
-        .toast.active{transform:translateX(0)}
-        .toast.error{background:var(--secondary)}
-        header{background:linear-gradient(135deg,var(--primary) 0%,#2c5282 100%);color:white;position:sticky;top:0;z-index:1000;box-shadow:0 4px 6px rgba(0,0,0,0.1)}
-        .top-bar{background:rgba(0,0,0,0.2);padding:8px 0;font-size:.85rem}
-        .container{max-width:1400px;margin:0 auto;padding:0 20px}
-        .top-bar-content{display:flex;justify-content:space-between;align-items:center}
-        .contact-info span{margin-right:25px}
-        .contact-info i{margin-right:5px;color:var(--accent)}
-        nav{display:flex;justify-content:space-between;align-items:center;padding:15px 0}
-        .logo{display:flex;align-items:center;gap:12px;font-size:1.8rem;font-weight:800;text-decoration:none;color:white}
-        .logo i{font-size:2.2rem;color:var(--accent)}
-        .nav-links{display:flex;list-style:none;gap:35px}
-        .nav-links a{color:white;text-decoration:none;font-weight:500;transition:color .3s;position:relative}
+        :root{--primary:#0f172a;--secondary:#1e293b;--accent:#f59e0b;--accent-dark:#d97706;--success:#10b981;--danger:#ef4444;--btc-orange:#f7931a;--light:#f8fafc;--gray:#64748b}
+        body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--primary);color:var(--light);line-height:1.6}
+        header{position:fixed;top:0;width:100%;background:rgba(15,23,42,0.98);backdrop-filter:blur(10px);border-bottom:2px solid var(--accent);z-index:1000;padding:1rem 2rem}
+        nav{max-width:1400px;margin:0 auto;display:flex;justify-content:space-between;align-items:center}
+        .logo{font-size:1.5rem;font-weight:800;color:var(--accent);text-decoration:none;display:flex;align-items:center;gap:0.5rem}
+        .logo-icon{font-size:2rem}
+        .nav-links{display:flex;gap:2rem;align-items:center}
+        .nav-links a{color:var(--light);text-decoration:none;font-weight:500;transition:color 0.3s}
         .nav-links a:hover{color:var(--accent)}
-        .nav-links a::after{content:'';position:absolute;bottom:-5px;left:0;width:0;height:2px;background:var(--accent);transition:width .3s}
-        .nav-links a:hover::after{width:100%}
-        .nav-actions{display:flex;gap:15px;align-items:center}
-        .btn{padding:10px 24px;border-radius:8px;font-weight:600;cursor:pointer;transition:all .3s;border:none;text-decoration:none;display:inline-flex;align-items:center;gap:8px}
-        .btn-primary{background:var(--secondary);color:white}
-        .btn-primary:hover{background:#9b2c2c;transform:translateY(-2px)}
-        .btn-outline{background:transparent;color:white;border:2px solid white}
-        .btn-outline:hover{background:white;color:var(--primary)}
-        .hero{background:linear-gradient(rgba(26,54,93,0.85),rgba(26,54,93,0.9)),url('images/hero-bg.jpg') center/cover;padding:100px 0;text-align:center;color:white}
-        .hero h1{font-size:3.5rem;font-weight:800;margin-bottom:20px;text-shadow:2px 2px 4px rgba(0,0,0,0.3)}
-        .hero p{font-size:1.3rem;margin-bottom:40px;opacity:.9}
-        .search-section{background:white;padding:40px 0;margin-top:-50px;position:relative;z-index:100}
-        .search-container{background:white;border-radius:16px;box-shadow:0 20px 40px rgba(0,0,0,0.1);padding:30px}
-        .search-tabs{display:flex;gap:10px;margin-bottom:25px;border-bottom:2px solid #e2e8f0;flex-wrap:wrap}
-        .search-tab{padding:12px 30px;background:none;border:none;font-size:1rem;font-weight:600;cursor:pointer;color:var(--gray);position:relative;transition:color .3s}
-        .search-tab.active{color:var(--primary)}
-        .search-tab.active::after{content:'';position:absolute;bottom:-2px;left:0;width:100%;height:3px;background:var(--secondary)}
-        .search-form{display:grid;grid-template-columns:2fr 1fr 1fr 1fr auto;gap:15px;align-items:end}
-        .form-group{display:flex;flex-direction:column}
-        .form-group label{font-size:.85rem;font-weight:600;color:var(--gray);margin-bottom:8px;text-transform:uppercase;letter-spacing:.5px}
-        .form-group input,.form-group select{padding:14px 18px;border:2px solid #e2e8f0;border-radius:10px;font-size:1rem;transition:border-color .3s}
-        .form-group input:focus,.form-group select:focus{outline:none;border-color:var(--primary)}
-        .search-btn{padding:14px 35px;background:var(--secondary);color:white;border:none;border-radius:10px;font-size:1rem;font-weight:600;cursor:pointer;transition:all .3s}
-        .search-btn:hover{background:#9b2c2c;transform:translateY(-2px)}
-        .stats{padding:60px 0;background:var(--light)}
-        .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:30px}
-        .stat-card{text-align:center;padding:30px;background:white;border-radius:12px;box-shadow:0 4px 6px rgba(0,0,0,0.05)}
-        .stat-card i{font-size:2.5rem;color:var(--secondary);margin-bottom:15px}
-        .stat-number{font-size:2.5rem;font-weight:800;color:var(--primary)}
-        .stat-label{color:var(--gray);font-weight:500}
-        .brands{padding:80px 0;background:white}
-        .section-header{text-align:center;margin-bottom:50px}
-        .section-header h2{font-size:2.5rem;color:var(--primary);margin-bottom:15px}
-        .section-header p{color:var(--gray);font-size:1.1rem}
-        .brands-grid{display:grid;grid-template-columns:repeat(8,1fr);gap:25px}
-        .brand-card{background:var(--light);padding:25px;border-radius:12px;text-align:center;cursor:pointer;transition:all .3s;border:2px solid transparent}
-        .brand-card:hover{transform:translateY(-5px);box-shadow:0 10px 30px rgba(0,0,0,0.1);border-color:var(--secondary)}
-        .brand-card span{display:block;font-weight:600;color:var(--primary)}
-        .inventory{padding:80px 0;background:var(--light)}
-        .inventory-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:40px;flex-wrap:wrap;gap:20px}
-        .filter-tags{display:flex;gap:12px;flex-wrap:wrap}
-        .filter-tag{padding:8px 20px;background:white;border:2px solid #e2e8f0;border-radius:25px;cursor:pointer;transition:all .3s;font-weight:500}
-        .filter-tag:hover,.filter-tag.active{background:var(--secondary);color:white;border-color:var(--secondary)}
-        .sort-dropdown{padding:10px 20px;border:2px solid #e2e8f0;border-radius:8px;background:white;cursor:pointer}
-        .cars-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:30px}
-        .car-card{background:white;border-radius:16px;overflow:hidden;box-shadow:0 4px 6px rgba(0,0,0,0.05);transition:all .3s;position:relative}
-        .car-card:hover{transform:translateY(-8px);box-shadow:0 20px 40px rgba(0,0,0,0.15)}
-        .car-badge{position:absolute;top:15px;left:15px;padding:6px 16px;border-radius:20px;font-size:.75rem;font-weight:700;text-transform:uppercase;z-index:10}
-        .badge-new{background:var(--success);color:white}
-        .badge-used{background:var(--accent);color:white}
-        .car-image{position:relative;height:220px;overflow:hidden}
-        .car-image img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
-        .car-card:hover .car-image img{transform:scale(1.1)}
-        .car-favorite{position:absolute;top:15px;right:15px;width:40px;height:40px;background:white;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .3s;box-shadow:0 2px 8px rgba(0,0,0,0.15)}
-        .car-favorite:hover,.car-favorite.active{background:var(--secondary);color:white}
-        .car-favorite.active i{font-weight:900}
-        .car-info{padding:25px}
-        .car-title{font-size:1.25rem;font-weight:700;color:var(--primary);margin-bottom:8px}
-        .car-meta{display:flex;gap:15px;color:var(--gray);font-size:.9rem;margin-bottom:15px}
-        .car-meta span{display:flex;align-items:center;gap:5px}
-        .car-features{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
-        .feature-tag{padding:4px 12px;background:#edf2f7;border-radius:15px;font-size:.8rem;color:var(--gray)}
-        .car-price-section{display:flex;justify-content:space-between;align-items:center;padding-top:15px;border-top:1px solid #e2e8f0}
-        .car-price{font-size:1.5rem;font-weight:800;color:var(--secondary)}
-        .car-price.budget{color:var(--budget)}
-        .car-payment{font-size:.85rem;color:var(--gray)}
-        .car-actions{display:flex;gap:10px;margin-top:20px}
-        .btn-small{padding:10px 20px;font-size:.9rem;flex:1;justify-content:center}
-        .services{padding:80px 0;background:white}
-        .services-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:30px}
-        .service-card{padding:40px 30px;text-align:center;border-radius:16px;background:var(--light);transition:all .3s}
-        .service-card:hover{background:var(--primary);color:white;transform:translateY(-5px)}
-        .service-card:hover h3,.service-card:hover p{color:white}
-        .service-card i{font-size:3rem;color:var(--secondary);margin-bottom:20px;transition:color .3s}
-        .service-card:hover i{color:var(--accent)}
-        .service-card h3{font-size:1.3rem;margin-bottom:15px;color:var(--primary)}
-        .service-card p{color:var(--gray);line-height:1.7}
-        footer{background:var(--dark);color:white;padding:70px 0 30px}
-        .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:50px;margin-bottom:50px}
-        .footer-brand .logo{margin-bottom:20px;color:white}
-        .footer-brand p{color:#a0aec0;line-height:1.8;margin-bottom:25px}
-        .social-links{display:flex;gap:15px}
-        .social-links a{width:45px;height:45px;background:rgba(255,255,255,0.1);border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;transition:all .3s}
-        .social-links a:hover{background:var(--secondary);transform:translateY(-3px)}
-        .footer-column h4{font-size:1.2rem;margin-bottom:25px;color:white}
-        .footer-column ul{list-style:none}
-        .footer-column li{margin-bottom:12px}
-        .footer-column a{color:#a0aec0;text-decoration:none;transition:color .3s}
-        .footer-column a:hover{color:var(--accent)}
-        .footer-bottom{border-top:1px solid rgba(255,255,255,0.1);padding-top:30px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px}
-        .footer-bottom p{color:#a0aec0}
-        .modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.8);z-index:2000;align-items:center;justify-content:center}
-        .modal.active{display:flex}
-        .modal-content{background:white;border-radius:20px;max-width:900px;width:90%;max-height:90vh;overflow-y:auto;position:relative}
-        .modal-close{position:absolute;top:20px;right:20px;width:40px;height:40px;background:var(--light);border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1.2rem;transition:all .3s}
-        .modal-close:hover{background:var(--secondary);color:white}
-        .loading{display:none;text-align:center;padding:50px}
-        .loading.active{display:block}
-        .spinner{width:50px;height:50px;border:4px solid #e2e8f0;border-top-color:var(--secondary);border-radius:50%;animation:spin 1s linear infinite;margin:0 auto 20px}
-        @keyframes spin{to{transform:rotate(360deg)}}
-        .no-results{text-align:center;padding:60px;display:none}
-        .no-results.active{display:block}
-        .pagination{display:flex;justify-content:center;gap:10px;margin-top:50px}
-        .page-btn{padding:12px 20px;border:2px solid #e2e8f0;background:white;border-radius:8px;cursor:pointer;transition:all .3s;font-weight:600}
-        .page-btn:hover,.page-btn.active{background:var(--secondary);color:white;border-color:var(--secondary)}
-        @media(max-width:1200px){.brands-grid{grid-template-columns:repeat(4,1fr)}.services-grid{grid-template-columns:repeat(2,1fr)}}
-        @media(max-width:768px){.nav-links{display:none}.hero h1{font-size:2rem}.search-form{grid-template-columns:1fr}.stats-grid{grid-template-columns:repeat(2,1fr)}.brands-grid{grid-template-columns:repeat(2,1fr)}.services-grid{grid-template-columns:1fr}.footer-grid{grid-template-columns:1fr}}
+        .btn{padding:0.75rem 1.5rem;border:none;border-radius:8px;cursor:pointer;font-weight:600;transition:all 0.3s;font-size:0.9rem}
+        .btn-primary{background:var(--accent);color:var(--primary)}
+        .btn-primary:hover{background:var(--accent-dark);transform:translateY(-2px)}
+        .btn-secondary{background:transparent;border:2px solid var(--accent);color:var(--accent)}
+        .btn-secondary:hover{background:var(--accent);color:var(--primary)}
+        .btn-danger{background:var(--danger);color:white}
+        .contact-bar{background:linear-gradient(90deg,var(--secondary),var(--primary));padding:0.75rem;text-align:center;font-size:0.9rem;border-bottom:1px solid rgba(245,158,11,0.3);margin-top:70px}
+        .contact-bar a{color:var(--accent);text-decoration:none;font-weight:600}
+        .hero{padding:4rem 2rem;text-align:center;background:linear-gradient(135deg,var(--primary) 0%,var(--secondary) 100%)}
+        .hero h1{font-size:3rem;margin-bottom:1rem}
+        .hero h1 span{color:var(--accent)}
+        .hero p{color:var(--gray);font-size:1.2rem;margin-bottom:2rem}
+        .stats{display:flex;justify-content:center;gap:3rem;margin:2rem 0;flex-wrap:wrap}
+        .stat{text-align:center}
+        .stat-value{font-size:2rem;font-weight:800;color:var(--accent)}
+        .stat-label{color:var(--gray);font-size:0.9rem}
+        .filters{padding:2rem;display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+        .filter-btn{padding:0.75rem 1.5rem;background:var(--secondary);border:2px solid transparent;color:var(--light);border-radius:25px;cursor:pointer;transition:all 0.3s}
+        .filter-btn:hover,.filter-btn.active{border-color:var(--accent);background:rgba(245,158,11,0.1)}
+        .car-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:1.5rem;padding:0 2rem 2rem;max-width:1400px;margin:0 auto}
+        .car-card{background:var(--secondary);border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,0.1);transition:all 0.3s;cursor:pointer;position:relative}
+        .car-card:hover{transform:translateY(-5px);box-shadow:0 10px 40px rgba(0,0,0,0.4);border-color:var(--accent)}
+        .car-image{height:200px;background:linear-gradient(135deg,#334155,#1e293b);display:flex;align-items:center;justify-content:center;font-size:4rem;position:relative}
+        .car-badge{position:absolute;top:10px;right:10px;background:var(--accent);color:var(--primary);padding:0.25rem 0.75rem;border-radius:20px;font-size:0.75rem;font-weight:700}
+        .discount-badge{position:absolute;top:10px;left:10px;background:var(--success);color:white;padding:0.25rem 0.75rem;border-radius:20px;font-size:0.75rem;font-weight:700}
+        .favorite-btn{position:absolute;top:10px;right:10px;width:40px;height:40px;background:rgba(0,0,0,0.5);border:none;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1.2rem;transition:all 0.3s}
+        .favorite-btn:hover,.favorite-btn.active{background:var(--danger)}
+        .car-info{padding:1.25rem}
+        .car-title{font-size:1.1rem;font-weight:700;margin-bottom:0.5rem}
+        .car-details{display:flex;gap:1rem;color:var(--gray);font-size:0.85rem;margin-bottom:0.75rem}
+        .car-price{display:flex;align-items:center;gap:0.75rem;margin-bottom:0.75rem}
+        .price-current{font-size:1.5rem;font-weight:800;color:var(--success)}
+        .price-original{text-decoration:line-through;color:var(--gray);font-size:0.9rem}
+        .price-savings{color:var(--accent);font-size:0.8rem;font-weight:600}
+        .car-features{display:flex;flex-wrap:wrap;gap:0.5rem}
+        .feature-tag{background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.3);padding:0.25rem 0.5rem;border-radius:4px;font-size:0.75rem;color:var(--accent)}
+        .modal-overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.95);z-index:2000;overflow-y:auto}
+        .modal-overlay.active{display:block}
+        .modal-content{background:var(--primary);min-height:100vh}
+        .modal-header{position:sticky;top:0;background:rgba(15,23,42,0.98);backdrop-filter:blur(10px);padding:1rem 2rem;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid rgba(245,158,11,0.3);z-index:10}
+        .modal-body{display:grid;grid-template-columns:1fr 1fr;min-height:calc(100vh - 70px)}
+        .modal-image-section{background:var(--secondary);padding:2rem;display:flex;flex-direction:column;align-items:center}
+        .modal-main-image{width:100%;max-width:600px;height:400px;background:linear-gradient(135deg,#334155,#1e293b);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:6rem;margin-bottom:1rem}
+        .image-thumbnails{display:flex;gap:0.5rem;flex-wrap:wrap;justify-content:center}
+        .thumb{width:80px;height:60px;background:#334155;border-radius:6px;cursor:pointer;border:2px solid transparent;transition:all 0.3s;display:flex;align-items:center;justify-content:center;font-size:1.5rem}
+        .thumb:hover,.thumb.active{border-color:var(--accent)}
+        .modal-details-section{padding:2rem;overflow-y:auto}
+        .modal-car-title{font-size:2rem;margin-bottom:0.5rem}
+        .modal-car-subtitle{color:var(--gray);margin-bottom:1.5rem}
+        .pricing-box{background:linear-gradient(135deg,rgba(245,158,11,0.1),rgba(245,158,11,0.05));border:2px solid var(--accent);border-radius:12px;padding:1.5rem;margin-bottom:1.5rem}
+        .price-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:0.75rem}
+        .price-row:last-child{margin-bottom:0;padding-top:0.75rem;border-top:1px solid rgba(245,158,11,0.2)}
+        .specs-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;margin-bottom:1.5rem}
+        .spec-item{background:rgba(255,255,255,0.05);padding:1rem;border-radius:8px}
+        .spec-label{color:var(--gray);font-size:0.8rem;text-transform:uppercase}
+        .spec-value{font-weight:600;margin-top:0.25rem}
+        .features-list{margin-bottom:1.5rem}
+        .features-list h3{margin-bottom:0.75rem;color:var(--accent)}
+        .modal-actions{display:flex;gap:1rem;margin-top:2rem}
+        .payment-modal,.auth-modal,.calc-modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.95);z-index:3000;align-items:center;justify-content:center;padding:2rem}
+        .payment-modal.active,.auth-modal.active,.calc-modal.active{display:flex}
+        .modal-box{background:var(--secondary);border-radius:16px;width:100%;max-width:500px;max-height:90vh;overflow-y:auto;border:1px solid rgba(245,158,11,0.3)}
+        .modal-box-header{padding:1.5rem;border-bottom:1px solid rgba(255,255,255,0.1);display:flex;justify-content:space-between;align-items:center}
+        .modal-box-body{padding:1.5rem}
+        .payment-options{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.5rem}
+        .payment-option{background:rgba(255,255,255,0.05);border:2px solid rgba(255,255,255,0.1);border-radius:12px;padding:1.5rem;text-align:center;cursor:pointer;transition:all 0.3s}
+        .payment-option:hover:not(.disabled){border-color:var(--accent)}
+        .payment-option.disabled{opacity:0.4;cursor:not-allowed;position:relative}
+        .payment-option.disabled::after{content:'UNAVAILABLE';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) rotate(-10deg);background:var(--danger);color:white;padding:0.5rem;font-size:0.7rem;font-weight:700;border-radius:4px}
+        .payment-option.selected{border-color:var(--accent);background:rgba(245,158,11,0.1)}
+        .crypto-section{display:none}
+        .crypto-section.active{display:block}
+        .btc-box{background:rgba(247,147,26,0.1);border:2px solid var(--btc-orange);border-radius:8px;padding:1rem;margin:1rem 0;text-align:center}
+        .btc-address{font-family:monospace;font-size:0.9rem;color:var(--btc-orange);word-break:break-all}
+        .btc-amount{font-size:1.5rem;font-weight:800;color:var(--btc-orange);margin:1rem 0}
+        .loading-screen{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:var(--primary);z-index:4000;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+        .loading-screen.active{display:flex}
+        .blockchain-animation{width:200px;height:200px;border:3px solid var(--btc-orange);border-radius:50%;animation:pulse 2s infinite;margin-bottom:2rem}
+        @keyframes pulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.1);opacity:0.5}}
+        .loading-text h2{color:var(--btc-orange);margin-bottom:1rem}
+        .loading-status{color:var(--gray);margin-bottom:2rem}
+        .progress-bar{width:300px;height:4px;background:rgba(255,255,255,0.1);border-radius:2px;overflow:hidden}
+        .progress-fill{height:100%;background:var(--btc-orange);width:0%;animation:progress 3s infinite}
+        @keyframes progress{0%{width:0%}50%{width:70%}100%{width:95%}}
+        .form-group{margin-bottom:1rem}
+        .form-group label{display:block;margin-bottom:0.5rem;color:var(--gray);font-size:0.9rem}
+        .form-group input{width:100%;padding:0.75rem;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:6px;color:var(--light);font-size:1rem}
+        .form-group input:focus{outline:none;border-color:var(--accent)}
+        .calc-slider{margin-bottom:1.5rem}
+        .calc-slider label{display:flex;justify-content:space-between;margin-bottom:0.5rem}
+        .calc-slider input[type="range"]{width:100%;accent-color:var(--accent)}
+        .calc-result{background:var(--accent);color:var(--primary);padding:1rem;border-radius:8px;text-align:center;margin-top:1rem}
+        .calc-result-value{font-size:2rem;font-weight:800}
+        footer{background:var(--secondary);padding:2rem;text-align:center;border-top:1px solid rgba(245,158,11,0.2);margin-top:2rem}
+        .footer-content{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:2rem;margin-bottom:2rem;text-align:left}
+        .footer-section h3{color:var(--accent);margin-bottom:1rem}
+        .footer-section a{color:var(--gray);text-decoration:none;display:block;margin-bottom:0.5rem}
+        .footer-section a:hover{color:var(--accent)}
+        .favorites-float{position:fixed;bottom:20px;right:20px;background:var(--accent);color:var(--primary);width:60px;height:60px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.5rem;cursor:pointer;box-shadow:0 4px 20px rgba(245,158,11,0.4);z-index:500}
+        .favorites-count{position:absolute;top:-5px;right:-5px;background:var(--danger);color:white;width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.75rem;font-weight:700}
+        @media(max-width:768px){.modal-body{grid-template-columns:1fr}.nav-links{display:none}.hero h1{font-size:2rem}.car-grid{grid-template-columns:1fr}}
     </style>
 </head>
 <body>
-    <div class="toast" id="toast"></div>
-    <div class="auth-modal" id="authModal">
-        <div class="auth-container">
-            <div class="auth-tabs">
-                <button class="auth-tab active" onclick="switchAuthTab('login')">Sign In</button>
-                <button class="auth-tab" onclick="switchAuthTab('register')">Create Account</button>
-            </div>
-            <form class="auth-form" id="loginForm" onsubmit="handleLogin(event)">
-                <div class="auth-error" id="loginError"></div>
-                <input type="email" id="loginEmail" placeholder="Email address" required>
-                <input type="password" id="loginPassword" placeholder="Password" required>
-                <button type="submit">Sign In</button>
-                <p style="text-align:center;margin-top:20px;color:var(--gray)"><a href="#" onclick="showForgotPassword()" style="color:var(--secondary)">Forgot password?</a></p>
-            </form>
-            <form class="auth-form" id="registerForm" style="display:none" onsubmit="handleRegister(event)">
-                <div class="auth-error" id="registerError"></div>
-                <input type="text" id="regName" placeholder="Full name" required>
-                <input type="email" id="regEmail" placeholder="Email address" required>
-                <input type="tel" id="regPhone" placeholder="Phone number" required>
-                <input type="password" id="regPassword" placeholder="Password (min 8 characters)" required minlength="8">
-                <input type="password" id="regConfirmPassword" placeholder="Confirm password" required>
-                <button type="submit">Create Account</button>
-            </form>
-        </div>
-    </div>
-    <div class="calc-modal" id="calcModal">
-        <div class="calc-container">
-            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:25px">
-                <h2 style="color:var(--primary)">Payment Calculator</h2>
-                <div class="modal-close" onclick="closeCalcModal()" style="position:relative;top:0;right:0"><i class="fas fa-times"></i></div>
-            </div>
-            <div class="form-group">
-                <label>Vehicle Price: $<span id="calcPriceDisplay">25,000</span></label>
-                <input type="range" class="calc-slider" id="calcPrice" min="500" max="200000" value="25000" step="500" oninput="updateCalc()">
-            </div>
-            <div class="form-group">
-                <label>Down Payment: $<span id="calcDownDisplay">2,500</span></label>
-                <input type="range" class="calc-slider" id="calcDown" min="0" max="50000" value="2500" step="100" oninput="updateCalc()">
-            </div>
-            <div class="form-group">
-                <label>Interest Rate: <span id="calcRateDisplay">6.5</span>%</label>
-                <input type="range" class="calc-slider" id="calcRate" min="0" max="20" value="6.5" step="0.1" oninput="updateCalc()">
-            </div>
-            <div class="form-group">
-                <label>Loan Term (months): <span id="calcTermDisplay">72</span></label>
-                <input type="range" class="calc-slider" id="calcTerm" min="12" max="84" value="72" step="12" oninput="updateCalc()">
-            </div>
-            <div class="form-group">
-                <label>Credit Score</label>
-                <select id="calcCredit" onchange="updateCalc()">
-                    <option value="excellent">Excellent (750+)</option>
-                    <option value="good" selected>Good (700-749)</option>
-                    <option value="fair">Fair (650-699)</option>
-                    <option value="poor">Poor (600-649)</option>
-                    <option value="bad">Bad (Below 600)</option>
-                </select>
-            </div>
-            <div class="calc-result">
-                <div class="payment">$<span id="monthlyPayment">0</span>/mo</div>
-                <div class="details">Total Interest: $<span id="totalInterest">0</span> | Total Cost: $<span id="totalCost">0</span></div>
-            </div>
-            <button class="btn btn-primary" style="width:100%;margin-top:25px" onclick="applyForFinancing()"><i class="fas fa-check-circle"></i> Apply for This Rate</button>
-        </div>
-    </div>
-    <div class="modal" id="carModal">
-        <div class="modal-content" id="modalContent"></div>
-    </div>
     <header>
-        <div class="top-bar">
-            <div class="container">
-                <div class="top-bar-content">
-                    <div class="contact-info">
-                        <span><i class="fas fa-phone"></i> 1-800-LIBERTY</span>
-                        <span><i class="fas fa-envelope"></i> sales@libertymotorsusa.com</span>
-                        <span><i class="fas fa-map-marker-alt"></i> Nationwide Delivery</span>
-                    </div>
-                    <div class="hours"><i class="fas fa-clock"></i> Open Today: 9AM - 8PM</div>
-                </div>
+        <nav>
+            <a href="#" class="logo"><span class="logo-icon">🗽</span>Liberty Motors <span style="color:var(--accent)">USA</span></a>
+            <div class="nav-links">
+                <a href="#inventory">Inventory</a>
+                <a href="#contact">Contact</a>
+                <button class="btn btn-secondary" onclick="openCalculator()">Calculator</button>
+                <button class="btn btn-primary" onclick="openAuth()">Sign In</button>
             </div>
-        </div>
-        <div class="container">
-            <nav>
-                <a href="#" class="logo"><i class="fas fa-flag-usa"></i> Liberty Motors USA</a>
-                <ul class="nav-links">
-                    <li><a href="#new">New Cars</a></li>
-                    <li><a href="#used">Used Cars</a></li>
-                    <li><a href="#budget">Under $10K</a></li>
-                    <li><a href="#" onclick="openCalcModal()">Financing</a></li>
-                    <li><a href="#trade">Trade-In</a></li>
-                </ul>
-                <div class="nav-actions">
-                    <a href="#" class="btn btn-outline" onclick="showFavorites()"><i class="fas fa-heart"></i> Saved <span class="fav-count" id="favCount" style="display:none">0</span></a>
-                    <div class="user-menu" id="userMenu">
-                        <a href="#" class="btn btn-primary" onclick="toggleUserMenu()"><i class="fas fa-user"></i> <span id="userName">Account</span></a>
-                        <div class="user-dropdown" id="userDropdown">
-                            <a href="#" onclick="showSavedCars()"><i class="fas fa-heart"></i> Saved Cars</a>
-                            <a href="#" onclick="showApplications()"><i class="fas fa-file-alt"></i> My Applications</a>
-                            <a href="#" onclick="showTestDrives()"><i class="fas fa-calendar"></i> Test Drives</a>
-                            <a href="#" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Sign Out</a>
-                        </div>
-                    </div>
-                    <a href="#" class="btn btn-primary" id="loginBtn" onclick="openAuthModal()"><i class="fas fa-user"></i> Sign In</a>
-                </div>
-            </nav>
-        </div>
+        </nav>
     </header>
+
+    <div class="contact-bar">
+        📧 <a href="mailto:management01098@gmail.com">management01098@gmail.com</a> | 💬 <a href="https://tr.ee/pxo6p9VhqF" target="_blank">Telegram Support</a> | 🚗 500+ Vehicles from $500
+    </div>
+
     <section class="hero">
-        <div class="container">
-            <h1>Find Your Perfect American Ride</h1>
-            <p>Cars from $350 to $111,000+ with guaranteed financing approval</p>
+        <h1>Liberty Motors <span>USA</span></h1>
+        <p>500+ Real Vehicles at 30% Below Market Value | Bitcoin Accepted | Starting from $500</p>
+        <div class="stats">
+            <div class="stat"><div class="stat-value">500+</div><div class="stat-label">Vehicles</div></div>
+            <div class="stat"><div class="stat-value">$500+</div><div class="stat-label">Starting Price</div></div>
+            <div class="stat"><div class="stat-value">30%</div><div class="stat-label">Below Market</div></div>
+            <div class="stat"><div class="stat-value">₿</div><div class="stat-label">Bitcoin Ready</div></div>
         </div>
+        <button class="btn btn-primary" onclick="document.getElementById('inventory').scrollIntoView({behavior:'smooth'})">Browse Inventory</button>
     </section>
-    <section class="search-section">
-        <div class="container">
-            <div class="search-container">
-                <div class="search-tabs">
-                    <button class="search-tab active" onclick="switchTab('all')">All Vehicles</button>
-                    <button class="search-tab" onclick="switchTab('new')">New Cars</button>
-                    <button class="search-tab" onclick="switchTab('used')">Used Cars</button>
-                    <button class="search-tab" onclick="switchTab('budget')">Under $10K</button>
-                </div>
-                <form class="search-form" onsubmit="handleSearch(event)">
-                    <div class="form-group">
-                        <label>Search by Keyword</label>
-                        <input type="text" id="keywordSearch" placeholder="e.g., Ford F-150, SUV, Red...">
-                    </div>
-                    <div class="form-group">
-                        <label>Make</label>
-                        <select id="brandFilter" onchange="filterByBrand()">
-                            <option value="">All Brands</option>
-                            <option value="Acura">Acura</option>
-                            <option value="Audi">Audi</option>
-                            <option value="BMW">BMW</option>
-                            <option value="Buick">Buick</option>
-                            <option value="Cadillac">Cadillac</option>
-                            <option value="Chevrolet">Chevrolet</option>
-                            <option value="Chrysler">Chrysler</option>
-                            <option value="Dodge">Dodge</option>
-                            <option value="Ford">Ford</option>
-                            <option value="GMC">GMC</option>
-                            <option value="Honda">Honda</option>
-                            <option value="Hyundai">Hyundai</option>
-                            <option value="Infiniti">Infiniti</option>
-                            <option value="Jeep">Jeep</option>
-                            <option value="Kia">Kia</option>
-                            <option value="Lexus">Lexus</option>
-                            <option value="Lincoln">Lincoln</option>
-                            <option value="Mazda">Mazda</option>
-                            <option value="Mercedes-Benz">Mercedes-Benz</option>
-                            <option value="Nissan">Nissan</option>
-                            <option value="Ram">Ram</option>
-                            <option value="Subaru">Subaru</option>
-                            <option value="Tesla">Tesla</option>
-                            <option value="Toyota">Toyota</option>
-                            <option value="Volkswagen">Volkswagen</option>
-                            <option value="Volvo">Volvo</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>Price Range</label>
-                        <select id="priceFilter">
-                            <option value="">Any Price</option>
-                            <option value="0-10000">Under $10,000</option>
-                            <option value="10000-20000">$10,000 - $20,000</option>
-                            <option value="20000-35000">$20,000 - $35,000</option>
-                            <option value="35000-50000">$35,000 - $50,000</option>
-                            <option value="50000-75000">$50,000 - $75,000</option>
-                            <option value="75000+">$75,000+</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>Body Type</label>
-                        <select id="bodyFilter">
-                            <option value="">All Types</option>
-                            <option value="Sedan">Sedan</option>
-                            <option value="SUV">SUV</option>
-                            <option value="Truck">Truck</option>
-                            <option value="Coupe">Coupe</option>
-                            <option value="Hatchback">Hatchback</option>
-                        </select>
-                    </div>
-                    <button type="submit" class="search-btn"><i class="fas fa-search"></i> Search</button>
-                </form>
+
+    <section id="inventory">
+        <div class="filters">
+            <button class="filter-btn active" onclick="filterCars('all')">All Vehicles</button>
+            <button class="filter-btn" onclick="filterCars('budget')">Budget ($500-$2k)</button>
+            <button class="filter-btn" onclick="filterCars('economy')">Economy ($2k-$10k)</button>
+            <button class="filter-btn" onclick="filterCars('standard')">Standard ($10k+)</button>
+            <button class="filter-btn" onclick="showFavorites()">❤️ Favorites</button>
+        </div>
+        <div class="car-grid" id="carGrid"></div>
+    </section>
+
+    <section id="contact" style="padding:4rem 2rem;text-align:center">
+        <h2 style="font-size:2rem;margin-bottom:1rem;color:var(--accent)">Contact Us</h2>
+        <p style="color:var(--gray);margin-bottom:2rem">Have questions? We're here to help!</p>
+        <div style="display:flex;justify-content:center;gap:3rem;flex-wrap:wrap;max-width:800px;margin:0 auto">
+            <div style="text-align:center">
+                <div style="font-size:3rem;margin-bottom:0.5rem">📧</div>
+                <h3>Email</h3>
+                <a href="mailto:management01098@gmail.com" style="color:var(--accent);text-decoration:none">management01098@gmail.com</a>
+            </div>
+            <div style="text-align:center">
+                <div style="font-size:3rem;margin-bottom:0.5rem">💬</div>
+                <h3>Telegram</h3>
+                <a href="https://tr.ee/pxo6p9VhqF" target="_blank" style="color:var(--accent);text-decoration:none">@LibertyMotorsSupport</a>
             </div>
         </div>
-    </section>
-    <section class="stats">
-        <div class="container">
-            <div class="stats-grid">
-                <div class="stat-card"><i class="fas fa-car"></i><div class="stat-number">400+</div><div class="stat-label">Vehicles Available</div></div>
-                <div class="stat-card"><i class="fas fa-dollar-sign"></i><div class="stat-number">$350</div><div class="stat-label">Starting Price</div></div>
-                <div class="stat-card"><i class="fas fa-users"></i><div class="stat-number">100K+</div><div class="stat-label">Happy Customers</div></div>
-                <div class="stat-card"><i class="fas fa-percentage"></i><div class="stat-number">99%</div><div class="stat-label">Approval Rate</div></div>
-            </div>
+        <div style="max-width:600px;margin:3rem auto;padding:1.5rem;background:rgba(245,158,11,0.1);border:2px solid var(--accent);border-radius:12px">
+            <h3 style="color:var(--accent);margin-bottom:0.5rem">⚠️ Payment Information</h3>
+            <p>Credit card payments are currently unavailable. We accept <strong>Bitcoin (BTC) only</strong>. After selecting your vehicle, you'll receive our BTC address for payment.</p>
         </div>
     </section>
-    <section class="inventory" id="inventory">
-        <div class="container">
-            <div class="section-header">
-                <h2>Featured Inventory</h2>
-                <p>Browse our complete selection - All at 30% OFF!</p>
-            </div>
-            <div class="inventory-header">
-                <div class="filter-tags">
-                    <span class="filter-tag active" onclick="filterByType('all')">All Vehicles</span>
-                    <span class="filter-tag" onclick="filterByType('new')">New</span>
-                    <span class="filter-tag" onclick="filterByType('used')">Used</span>
-                    <span class="filter-tag" onclick="filterByType('budget')">Under $10K</span>
-                </div>
-                <select class="sort-dropdown" onchange="sortCars(this.value)">
-                    <option value="featured">Sort by: Featured</option>
-                    <option value="price-low">Price: Low to High</option>
-                    <option value="price-high">Price: High to Low</option>
-                </select>
-            </div>
-            <div class="loading" id="loading">
-                <div class="spinner"></div>
-                <p>Loading inventory...</p>
-            </div>
-            <div class="no-results" id="noResults">
-                <i class="fas fa-search" style="font-size:4rem;color:var(--gray);margin-bottom:20px"></i>
-                <h3>No vehicles found</h3>
-                <p>Try adjusting your search criteria</p>
-            </div>
-            <div class="cars-grid" id="carsGrid"></div>
-        </div>
-    </section>
-    <section class="services">
-        <div class="container">
-            <div class="section-header">
-                <h2>Why Choose Liberty Motors</h2>
-                <p>We make car buying simple, transparent, and enjoyable</p>
-            </div>
-            <div class="services-grid">
-                <div class="service-card"><i class="fas fa-shield-alt"></i><h3>Guaranteed Approval</h3><p>We work with 50+ lenders to get you approved regardless of credit history.</p></div>
-                <div class="service-card"><i class="fas fa-undo"></i><h3>7-Day Return</h3><p>Not satisfied? Return any vehicle within 7 days for a full refund.</p></div>
-                <div class="service-card"><i class="fas fa-hand-holding-usd"></i><h3>Best Price Guarantee</h3><p>All vehicles priced at 70% of market value. Find lower? We'll beat it by $500.</p></div>
-                <div class="service-card"><i class="fas fa-truck"></i><h3>Nationwide Delivery</h3><p>We deliver to your doorstep anywhere in the continental USA within 48 hours.</p></div>
-            </div>
-        </div>
-    </section>
+
     <footer>
-        <div class="container">
-            <div class="footer-grid">
-                <div class="footer-brand">
-                    <a href="#" class="logo"><i class="fas fa-flag-usa"></i> Liberty Motors USA</a>
-                    <p>America's trusted destination for new and used vehicles. From $350 budget cars to $111k+ luxury vehicles, all at 30% off market prices.</p>
-                    <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                    </div>
-                </div>
-                <div class="footer-column">
-                    <h4>Inventory</h4>
-                    <ul>
-                        <li><a href="#">Cars Under $10K</a></li>
-                        <li><a href="#">New Vehicles</a></li>
-                        <li><a href="#">Used Vehicles</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h4>Financing</h4>
-                    <ul>
-                        <li><a href="#" onclick="openCalcModal()">Payment Calculator</a></li>
-                        <li><a href="#">Apply for Financing</a></li>
-                        <li><a href="#">Bad Credit OK</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h4>Contact</h4>
-                    <ul>
-                        <li><i class="fas fa-phone"></i> 1-800-LIBERTY</li>
-                        <li><i class="fas fa-envelope"></i> sales@libertymotorsusa.com</li>
-                    </ul>
-                </div>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Liberty Motors USA</h3>
+                <p style="color:var(--gray)">500+ affordable vehicles at 30% below market value. Quality cars, honest prices.</p>
             </div>
-            <div class="footer-bottom">
-                <p>&copy; 2026 Liberty Motors USA. All rights reserved.</p>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <a href="#inventory">Browse Inventory</a>
+                <a href="#" onclick="openCalculator();return false">Payment Calculator</a>
+                <a href="#" onclick="showFavorites();return false">My Favorites</a>
+            </div>
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <a href="mailto:management01098@gmail.com">management01098@gmail.com</a>
+                <a href="https://tr.ee/pxo6p9VhqF" target="_blank">Telegram Support</a>
             </div>
         </div>
+        <p style="color:var(--gray);font-size:0.9rem">&copy; 2024 Liberty Motors USA. All rights reserved.</p>
     </footer>
 
-    <script>
-        // CAR DATABASE - 400+ VEHICLES AT 70% PRICING
-        const carDatabase = [
-            // BUDGET CARS ($350-$7,000)
-            {id:1001,brand:"Ford",model:"Taurus",year:2005,price:665,mileage:185000,condition:"used",bodyType:"Sedan",fuel:"Gasoline",transmission:"Automatic",color:"Silver",features:["Runs Well","AS IS","Power Windows"],image:"images/cars/placeholder.jpg",mpg:"19/26"},
-            {id:1002,brand:"Chevrolet",model:"Malibu",year:2004,price:840,mileage:172000,condition:"used",bodyType:"Sedan",fuel:"Gasoline",transmission:"Automatic",color:"White",features:["Daily Driver","Reliable"],image:"images/cars/placeholder.jpg",mpg:"22/30"},
-            {id:1003,brand:"Toyota",model:"Camry",year:2002,price:1260,mileage:195000,condition:"used",bodyType:"Sedan",fuel:"Gasoline",transmission:"Automatic",color:"Gold",features:["Toyota Reliability","Clean Title"],image:"images/cars/placeholder.jpg",mpg:"20/28"},
-            {id:1004,brand:"Honda",model:"Civic",year:2003,price:1050,mileage:188000,condition:"used",bodyType:"Sedan",fuel:"Gasoline",transmission:"Manual",color:"Blue",features:["Manual","Gas Saver"],image:"images/cars/placeholder.jpg",mpg:"28/35"},
-            {id:1005,brand:"Nissan",model:"Altima",year:2006,price:560,mileage:210000,condition:"used",bodyType:"Sedan",fuel:"Gasoline",transmission:"Automatic",color:"Black",features:["Parts Car","Good Body"],image:"images/cars/placeholder.jpg",mpg:"21/27"},
-            {id:1006,brand:"Ford",model:"Focus",year:2007,price:770,mileage:165000,condition:"used",bodyType:"Sedan",fuel:"Gasoline",transmission:"Automatic",color:"Red",features:["Daily Driver","Good MPG"],image:"images/cars/placeholder.jpg",mpg:"24/32"},
-            {id:1007,brand:"Chevrolet",model:"Cavalier",year:2003,price:420,mileage:195000,condition:"used",bodyType:"Sedan",fuel:"Gasoline",transmission:"Automatic",color:"Green",features:["Budget Special","Runs"],image:"images/cars/placeholder.jpg",mpg:"24/32"},
-            {id:1008,brand:"Dodge",model:"Neon",year:2005,price:525,mileage:180000,condition:"used",bodyType:"Sedan",fuel:"Gasoline",transmission:"Automatic",color:"Silver",features:["Basic Transport"],image:"images/cars/placeholder.jpg",mpg:"22/29"},
-            {id:1009,brand:"Hyundai",model:"Elantra",year:2004,price:630,mileage:175000,condition:"used",bodyType:"Sedan",fuel:"Gasoline",transmission:"Automatic",color:"White",features:["Import Quality"],image:"images/cars/placeholder.jpg",mpg:"24/32"},
-            {id:1010,brand:"Kia",model:"Spectra",year:2006,price:595,mileage:168000,condition:"used",bodyType:"Sedan",fuel:"Gasoline",transmission:"Automatic",color:"Gray",features:["Budget Friendly"],image:"images/cars/placeholder.jpg",mpg:"24/32"},
-            {id:1011,brand:"Toyota",model:"Corolla",year:2006,price:1960,mileage:145000,condition:"used",bodyType:"Sedan",fuel:"Gasoline",transmission:"Automatic",color:"Silver",features:["Toyota Reliability"],image:"images/cars/placeholder.jpg",mpg:"26/35"},
-            {id:1012,brand:"Honda",model:"Accord",year:2005,price:2240,mileage:152000,condition:"used",bodyType:"Sedan",fuel:"Gasoline",transmission:"Automatic",color:"Black",features:["Reliable","Spacious"],image:"images/cars/placeholder.jpg",mpg:"21/30"},
-            {id:1013,brand:"Ford",model:"Crown Victoria",year:2008,price:1680,mileage:165000,condition:"used",bodyType:"Sedan",fuel:"Gasoline",transmission:"Automatic",color:"White",features:["Police Interceptor","V8"],image:"images/cars/placeholder.jpg",mpg:"15/23"},
-            {id:1014,brand:"Chevrolet",model:"Impala",year:2007,price:1470,mileage:158000,condition:"used",bodyType:"Sedan",fuel:"Gasoline",transmission:"Automatic",color:"Blue",features:["Full Size","V6"],image:"images/cars/placeholder.jpg",mpg:"18/28"},
-            {id:1015,brand:"Nissan",model:"Sentra",year:2008,price:1820,mileage:142000,condition:"used",bodyType:"Sedan",fuel:"Gasoline",transmission:"Automatic",color:"Gray",features:["Good MPG"],image:"images/cars/placeholder.jpg",mpg:"25/33"},
-            {id:1016,brand:"Hyundai",model:"Sonata",year:2007,price:1610,mileage:148000,condition:"used",bodyType:"Sedan",fuel:"Gasoline",transmission:"Automatic",color:"Silver",features:["Warranty"],image:"images/cars/placeholder.jpg",mpg:"21/30"},
-            {id:1017,brand:"Kia",model:"Optima",year:2008,price:1540,mileage:155000,condition:"used",bodyType:"Sedan",fuel:"Gasoline",transmission:"Automatic",color:"White",features:["Budget Luxury"],image:"images/cars/placeholder.jpg",mpg:"21/31"},
-            {id:1018,brand:"Mazda",model:"3",year:2006,price:2030,mileage:138000,condition:"used",bodyType:"Sedan",fuel:"Gasoline",transmission:"Manual",color:"Red",features:["Fun to Drive"],image:"images/cars/placeholder.jpg",mpg:"24/32"},
-            {id:1019,brand:"Subaru",model:"Legacy",year:2005,price:1890,mileage:165000,condition:"used",bodyType:"Sedan",fuel:"Gasoline",transmission:"Automatic",color:"Green",features:["AWD"],image:"images/cars/placeholder.jpg",mpg:"19/26"},
-            {id:1020,brand:"Volkswagen",model:"Jetta",year:2004,price:1750,mileage:145000,condition:"used",bodyType:"Sedan",fuel:"Gasoline",transmission:"Manual",color:"Black",features:["German Engineering"],image:"images/cars/placeholder.jpg",mpg:"22/30"},
-            {id:1021,brand:"Ford",model:"Explorer",year:2004,price:1260,mileage:185000,condition:"used",bodyType:"SUV",fuel:"Gasoline",transmission:"Automatic",color:"Blue",features:["4x4","Third Row"],image:"images/cars/placeholder.jpg",mpg:"14/19"},
-            {id:1022,brand:"Chevrolet",model:"Blazer",year:2003,price:1050,mileage:175000,condition:"used",bodyType:"SUV",fuel:"Gasoline",transmission:"Automatic",color:"Red",features:["4x4"],image:"images/cars/placeholder.jpg",mpg:"15/20"},
-            {id:1023,brand:"Jeep",model:"Grand Cherokee",year:2002,price:1540,mileage:195000,condition:"used",bodyType:"SUV",fuel:"Gasoline",transmission:"Automatic",color:"Green",features:["4x4","Leather"],image:"images/cars/placeholder.jpg",mpg:"14/19"},
-            {id:1024,brand:"Ford",model:"Ranger",year:2005,price:2240,mileage:165000,condition:"used",bodyType:"Truck",fuel:"Gasoline",transmission:"Manual",color:"White",features:["4x4","Manual"],image:"images/cars/placeholder.jpg",mpg:"16/21"},
-            {id:1025,brand:"Toyota",model:"4Runner",year:2001,price:2450,mileage:198000,condition:"used",bodyType:"SUV",fuel:"Gasoline",transmission:"Automatic",color:"Tan",features:["4x4","Bulletproof"],image:"images/cars/placeholder.jpg",mpg:"15/19"},
-            {id:1026,brand:"Honda",model:"CR-V",year:2003,price:2030,mileage:172000,condition:"used",bodyType:"SUV",fuel:"Gasoline",transmission:"Automatic",color:"Silver",features:["AWD"],image:"images/cars/placeholder.jpg",mpg:"19/24"},
-            {id:1027,brand:"Nissan",model:"Xterra",year:2004,price:1820,mileage:168000,condition:"used",bodyType:"SUV",fuel:"Gasoline",transmission:"Automatic",color:"Yellow",features:["4x4"],image:"images/cars/placeholder.jpg",mpg:"15/19"},
-            {id:1028,brand:"Toyota",model:"Camry",year:2010,price:3640,mileage:125000,condition:"used",bodyType:"Sedan",fuel:"Gasoline",transmission:"Automatic",color:"Silver",features:["Reliable"],image:"images/cars/placeholder.jpg",mpg:"22/32"},
-            {id:1029,brand:"Toyota",model:"Corolla",year:2011,price:4060,mileage:118000,condition:"used",bodyType:"Sedan",fuel:"Gasoline",transmission:"Automatic",color:"White",features:["Perfect First Car"],image:"images/cars/placeholder.jpg",mpg:"26/34"},
-            {id:1030,brand:"Honda",model:"Civic",year:2010,price:3850,mileage:122000,condition:"used",bodyType:"Sedan",fuel:"Gasoline",transmission:"Automatic",color:"Black",features:["Sporty"],image:"images/cars/placeholder.jpg",mpg:"25/36"},
-            {id:1031,brand:"Honda",model:"Accord",year:2009,price:4340,mileage:135000,condition:"used",bodyType:"Sedan",fuel:"Gasoline",transmission:"Automatic",color:"Gray",features:["Full Size"],image:"images/cars/placeholder.jpg",mpg:"21/30"},
-            {id:1032,brand:"Ford",model:"Fusion",year:2012,price:4130,mileage:115000,condition:"used",bodyType:"Sedan",fuel:"Gasoline",transmission:"Automatic",color:"Blue",features:["Sync"],image:"images/cars/placeholder.jpg",mpg:"22/34"},
-            {id:1033,brand:"Chevrolet",model:"Cruze",year:2013,price:3920,mileage:108000,condition:"used",bodyType:"Sedan",fuel:"Gasoline",transmission:"Automatic",color:"Red",features:["Turbo"],image:"images/cars/placeholder.jpg",mpg:"26/38"},
-            {id:1034,brand:"Nissan",model:"Altima",year:2011,price:3360,mileage:128000,condition:"used",bodyType:"Sedan",fuel:"Gasoline",transmission:"Automatic",color:"Silver",features:["Spacious"],image:"images/cars/placeholder.jpg",mpg:"23/32"},
-            {id:1035,brand:"Hyundai",model:"Elantra",year:2012,price:3640,mileage:112000,condition:"used",bodyType:"Sedan",fuel:"Gasoline",transmission:"Automatic",color:"White",features:["Warranty"],image:"images/cars/placeholder.jpg",mpg:"28/38"},
-            {id:1036,brand:"Kia",model:"Forte",year:2013,price:3780,mileage:105000,condition:"used",bodyType:"Sedan",fuel:"Gasoline",transmission:"Automatic",color:"Gray",features:["Bluetooth"],image:"images/cars/placeholder.jpg",mpg:"26/36"},
-            {id:1037,brand:"Mazda",model:"3",year:2011,price:4060,mileage:118000,condition:"used",bodyType:"Sedan",fuel:"Gasoline",transmission:"Manual",color:"Blue",features:["Fun"],image:"images/cars/placeholder.jpg",mpg:"25/33"},
-            {id:1038,brand:"Subaru",model:"Impreza",year:2010,price:3430,mileage:142000,condition:"used",bodyType:"Sedan",fuel:"Gasoline",transmission:"Automatic",color:"Red",features:["AWD"],image:"images/cars/placeholder.jpg",mpg:"20/26"},
-            {id:1039,brand:"Volkswagen",model:"Jetta",year:2010,price:3570,mileage:125000,condition:"used",bodyType:"Sedan",fuel:"Gasoline",transmission:"Manual",color:"Black",features:["TDI"],image:"images/cars/placeholder.jpg",mpg:"30/42"},
-            {id:1040,brand:"Ford",model:"Focus",year:2012,price:3150,mileage:118000,condition:"used",bodyType:"Sedan",fuel:"Gasoline",transmission:"Automatic",color:"White",features:["Sync"],image:"images/cars/placeholder.jpg",mpg:"26/36"},
-            {id:1041,brand:"Honda",model:"CR-V",year:2007,price:4060,mileage:145000,condition:"used",bodyType:"SUV",fuel:"Gasoline",transmission:"Automatic",color:"Silver",features:["AWD"],image:"images/cars/placeholder.jpg",mpg:"20/26"},
-            {id:1042,brand:"Toyota",model:"RAV4",year:2008,price:4340,mileage:138000,condition:"used",bodyType:"SUV",fuel:"Gasoline",transmission:"Automatic",color:"White",features:["4WD"],image:"images/cars/placeholder.jpg",mpg:"19/26"},
-            {id:1043,brand:"Ford",model:"Escape",year:2011,price:3780,mileage:125000,condition:"used",bodyType:"SUV",fuel:"Gasoline",transmission:"Automatic",color:"Blue",features:["Sync"],image:"images/cars/placeholder.jpg",mpg:"20/27"},
-            {id:1044,brand:"Jeep",model:"Liberty",year:2009,price:3360,mileage:148000,condition:"used",bodyType:"SUV",fuel:"Gasoline",transmission:"Automatic",color:"Green",features:["4x4"],image:"images/cars/placeholder.jpg",mpg:"15/21"},
-            {id:1045,brand:"Chevrolet",model:"Equinox",year:2010,price:3920,mileage:132000,condition:"used",bodyType:"SUV",fuel:"Gasoline",transmission:"Automatic",color:"Gray",features:["Spacious"],image:"images/cars/placeholder.jpg",mpg:"17/24"},
-            {id:1046,brand:"Ford",model:"F-150",year:2006,price:4760,mileage:165000,condition:"used",bodyType:"Truck",fuel:"Gasoline",transmission:"Automatic",color:"White",features:["V8","4x4"],image:"images/cars/placeholder.jpg",mpg:"13/17"},
-            {id:1047,brand:"Chevrolet",model:"Silverado 1500",year:2005,price:4340,mileage:175000,condition:"used",bodyType:"Truck",fuel:"Gasoline",transmission:"Automatic",color:"Red",features:["V8","4x4"],image:"images/cars/placeholder.jpg",mpg:"14/18"},
-            {id:1048,brand:"Toyota",model:"Tacoma",year:2004,price:5040,mileage:185000,condition:"used",bodyType:"Truck",fuel:"Gasoline",transmission:"Manual",color:"Silver",features:["4x4","Manual"],image:"images/cars/placeholder.jpg",mpg:"16/20"},
-            {id:1049,brand:"Nissan",model:"Frontier",year:2008,price:4060,mileage:155000,condition:"used",bodyType:"Truck",fuel:"Gasoline",transmission:"Automatic",color:"Black",features:["4x4"],image:"images/cars/placeholder.jpg",mpg:"14/19"},
-            {id:1050,brand:"Dodge",model:"Ram 1500",year:2006,price:4480,mileage:168000,condition:"used",bodyType:"Truck",fuel:"Gasoline",transmission:"Automatic",color:"Blue",features:["Hemi","4x4"],image:"images/cars/placeholder.jpg",mpg:"13/17"},
+    <div class="favorites-float" onclick="showFavorites()">
+        ❤️
+        <div class="favorites-count" id="favCount" style="display:none">0</div>
+    </div>
 
-            // NEW & LUXURY CARS (70% of original prices)
-            {id:1,brand:"Ford",model:"F-150",year:2026,price:32197,mileage:0,condition:"new",bodyType:"Truck",fuel:"Gasoline",transmission:"Automatic",color:"Black",features:["4x4","V6 EcoBoost","Sync 4"],image:"images/cars/placeholder.jpg",mpg:"20/24"},
-            {id:2,brand:"Ford",model:"F-150 Lightning",year:2026,price:44797,mileage:0,condition:"new",bodyType:"Truck",fuel:"Electric",transmission:"Automatic",color:"White",features:["Extended Range","BlueCruise"],image:"images/cars/placeholder.jpg",mpg:"300 mi"},
-            {id:3,brand:"Ford",model:"Mustang",year:2026,price:23097,mileage:0,condition:"new",bodyType:"Coupe",fuel:"Gasoline",transmission:"Manual",color:"Red",features:["5.0L V8","Track Pack"],image:"images/cars/placeholder.jpg",mpg:"15/24"},
-            {id:4,brand:"Chevrolet",model:"Silverado 1500",year:2026,price:30797,mileage:0,condition:"new",bodyType:"Truck",fuel:"Gasoline",transmission:"Automatic",color:"White",features:["4x4","Crew Cab"],image:"images/cars/placeholder.jpg",mpg:"18/21"},
-            {id:5,brand:"Chevrolet",model:"Corvette",year:2026,price:48997,mileage:0,condition:"new",bodyType:"Coupe",fuel:"Gasoline",transmission:"Automatic",color:"Red",features:["Stingray","Z51"],image:"images/cars/placeholder.jpg",mpg:"16/24"},
-            {id:6,brand:"Toyota",model:"Camry",year:2026,price:20297,mileage:0,condition:"new",bodyType:"Sedan",fuel:"Gasoline",transmission:"Automatic",color:"Black",features:["XSE","AWD"],image:"images/cars/placeholder.jpg",mpg:"28/39"},
-            {id:7,brand:"Toyota",model:"RAV4",year:2026,price:22397,mileage:0,condition:"new",bodyType:"SUV",fuel:"Hybrid",transmission:"Automatic",color:"White",features:["Hybrid","XSE","AWD"],image:"images/cars/placeholder.jpg",mpg:"41/38"},
-            {id:8,brand:"Toyota",model:"Tundra",year:2026,price:30797,mileage:0,condition:"new",bodyType:"Truck",fuel:"Hybrid",transmission:"Automatic",color:"Gray",features:["i-FORCE MAX","Capstone"],image:"images/cars/placeholder.jpg",mpg:"20/24"},
-            {id:9,brand:"Honda",model:"Accord",year:2026,price:20997,mileage:0,condition:"new",bodyType:"Sedan",fuel:"Hybrid",transmission:"Automatic",color:"Silver",features:["Hybrid","Touring"],image:"images/cars/placeholder.jpg",mpg:"51/44"},
-            {id:10,brand:"Honda",model:"CR-V",year:2026,price:23097,mileage:0,condition:"new",bodyType:"SUV",fuel:"Hybrid",transmission:"Automatic",color:"Gray",features:["Hybrid","Sport Touring"],image:"images/cars/placeholder.jpg",mpg:"43/36"},
-            {id:11,brand:"Jeep",model:"Wrangler",year:2026,price:27997,mileage:0,condition:"new",bodyType:"SUV",fuel:"Gasoline",transmission:"Automatic",color:"Red",features:["Rubicon","4x4"],image:"images/cars/placeholder.jpg",mpg:"17/23"},
-            {id:12,brand:"Jeep",model:"Grand Cherokee",year:2026,price:30797,mileage:0,condition:"new",bodyType:"SUV",fuel:"Gasoline",transmission:"Automatic",color:"Black",features:["Overland","4x4"],image:"images/cars/placeholder.jpg",mpg:"19/26"},
-            {id:13,brand:"Ram",model:"1500",year:2026,price:30097,mileage:0,condition:"new",bodyType:"Truck",fuel:"Gasoline",transmission:"Automatic",color:"Blue",features:["Laramie","4x4"],image:"images/cars/placeholder.jpg",mpg:"19/24"},
-            {id:14,brand:"Ram",model:"1500 TRX",year:2026,price:59497,mileage:0,condition:"new",bodyType:"Truck",fuel:"Gasoline",transmission:"Automatic",color:"Black",features:["TRX","702 HP"],image:"images/cars/placeholder.jpg",mpg:"10/14"},
-            {id:15,brand:"GMC",model:"Sierra 1500",year:2026,price:32897,mileage:0,condition:"new",bodyType:"Truck",fuel:"Gasoline",transmission:"Automatic",color:"Black",features:["Denali","4x4"],image:"images/cars/placeholder.jpg",mpg:"16/20"},
-            {id:16,brand:"GMC",model:"Hummer EV",year:2026,price:77207,mileage:0,condition:"new",bodyType:"Truck",fuel:"Electric",transmission:"Automatic",color:"White",features:["Edition 1","1000 HP"],image:"images/cars/placeholder.jpg",mpg:"329 mi"},
-            {id:17,brand:"Cadillac",model:"Escalade",year:2026,price:59497,mileage:0,condition:"new",bodyType:"SUV",fuel:"Gasoline",transmission:"Automatic",color:"Black",features:["Platinum","4WD"],image:"images/cars/placeholder.jpg",mpg:"14/19"},
-            {id:18,brand:"Cadillac",model:"Lyriq",year:2026,price:41297,mileage:0,condition:"new",bodyType:"SUV",fuel:"Electric",transmission:"Automatic",color:"Silver",features:["Luxury 3","AWD"],image:"images/cars/placeholder.jpg",mpg:"307 mi"},
-            {id:19,brand:"BMW",model:"3 Series",year:2026,price:32197,mileage:0,condition:"new",bodyType:"Sedan",fuel:"Gasoline",transmission:"Automatic",color:"White",features:["330i","M Sport"],image:"images/cars/placeholder.jpg",mpg:"26/36"},
-            {id:20,brand:"BMW",model:"X5",year:2026,price:46897,mileage:0,condition:"new",bodyType:"SUV",fuel:"Hybrid",transmission:"Automatic",color:"Green",features:["xDrive50e","PHEV"],image:"images/cars/placeholder.jpg",mpg:"50 MPGe"},
-            {id:21,brand:"Mercedes-Benz",model:"C-Class",year:2026,price:34297,mileage:0,condition:"new",bodyType:"Sedan",fuel:"Gasoline",transmission:"Automatic",color:"White",features:["C300","4MATIC"],image:"images/cars/placeholder.jpg",mpg:"25/35"},
-            {id:22,brand:"Mercedes-Benz",model:"G-Class",year:2026,price:100797,mileage:0,condition:"new",bodyType:"SUV",fuel:"Gasoline",transmission:"Automatic",color:"Green",features:["G63","AMG","V8"],image:"images/cars/placeholder.jpg",mpg:"13/15"},
-            {id:23,brand:"Audi",model:"Q5",year:2026,price:34297,mileage:0,condition:"new",bodyType:"SUV",fuel:"Gasoline",transmission:"Automatic",color:"Gray",features:["Prestige","quattro"],image:"images/cars/placeholder.jpg",mpg:"23/28"},
-            {id:24,brand:"Audi",model:"e-tron GT",year:2026,price:46897,mileage:0,condition:"new",bodyType:"Sedan",fuel:"Electric",transmission:"Automatic",color:"Blue",features:["GT","quattro"],image:"images/cars/placeholder.jpg",mpg:"238 mi"},
-            {id:25,brand:"Lexus",model:"RX",year:2026,price:37097,mileage:0,condition:"new",bodyType:"SUV",fuel:"Hybrid",transmission:"Automatic",color:"Black",features:["RX500h","F SPORT"],image:"images/cars/placeholder.jpg",mpg:"27/28"},
-            {id:26,brand:"Lexus",model:"ES",year:2026,price:30797,mileage:0,condition:"new",bodyType:"Sedan",fuel:"Hybrid",transmission:"Automatic",color:"White",features:["ES300h","Ultra Luxury"],image:"images/cars/placeholder.jpg",mpg:"44/43"},
-            {id:27,brand:"Tesla",model:"Model 3",year:2026,price:27297,mileage:0,condition:"new",bodyType:"Sedan",fuel:"Electric",transmission:"Automatic",color:"Silver",features:["Long Range","AWD"],image:"images/cars/placeholder.jpg",mpg:"341 mi"},
-            {id:28,brand:"Tesla",model:"Model Y",year:2026,price:34297,mileage:0,condition:"new",bodyType:"SUV",fuel:"Electric",transmission:"Automatic",color:"Black",features:["Performance","AWD"],image:"images/cars/placeholder.jpg",mpg:"285 mi"},
-            {id:29,brand:"Tesla",model:"Cybertruck",year:2026,price:69997,mileage:0,condition:"new",bodyType:"Truck",fuel:"Electric",transmission:"Automatic",color:"Silver",features:["Cyberbeast","845 HP"],image:"images/cars/placeholder.jpg",mpg:"320 mi"},
-            {id:30,brand:"Porsche",model:"911",year:2026,price:80497,mileage:0,condition:"new",bodyType:"Coupe",fuel:"Gasoline",transmission:"Automatic",color:"Red",features:["Carrera S","473 HP"],image:"images/cars/placeholder.jpg",mpg:"18/24"},
-            {id:31,brand:"Porsche",model:"Taycan",year:2026,price:65097,mileage:0,condition:"new",bodyType:"Sedan",fuel:"Electric",transmission:"Automatic",color:"Blue",features:["4S","AWD"],image:"images/cars/placeholder.jpg",mpg:"320 mi"},
-            {id:32,brand:"Nissan",model:"GT-R",year:2024,price:85397,mileage:3000,condition:"used",bodyType:"Coupe",fuel:"Gasoline",transmission:"Automatic",color:"Blue",features:["Nismo","600 HP"],image:"images/cars/placeholder.jpg",mpg:"16/22"},
-            {id:33,brand:"Nissan",model:"Z",year:2026,price:30797,mileage:0,condition:"new",bodyType:"Coupe",fuel:"Gasoline",transmission:"Manual",color:"Yellow",features:["Performance"],image:"images/cars/placeholder.jpg",mpg:"18/24"},
-            {id:34,brand:"Hyundai",model:"Ioniq 5",year:2026,price:34297,mileage:0,condition:"new",bodyType:"SUV",fuel:"Electric",transmission:"Automatic",color:"Gray",features:["N","641 HP"],image:"images/cars/placeholder.jpg",mpg:"220 mi"},
-            {id:35,brand:"Kia",model:"EV6",year:2026,price:30797,mileage:0,condition:"new",bodyType:"SUV",fuel:"Electric",transmission:"Automatic",color:"Blue",features:["GT","576 HP"],image:"images/cars/placeholder.jpg",mpg:"206 mi"},
-            {id:36,brand:"Subaru",model:"Outback",year:2026,price:21697,mileage:0,condition:"new",bodyType:"SUV",fuel:"Gasoline",transmission:"Automatic",color:"Green",features:["Wilderness","AWD"],image:"images/cars/placeholder.jpg",mpg:"22/26"},
-            {id:37,brand:"Mazda",model:"CX-5",year:2026,price:20997,mileage:0,condition:"new",bodyType:"SUV",fuel:"Gasoline",transmission:"Automatic",color:"Red",features:["Carbon Turbo","AWD"],image:"images/cars/placeholder.jpg",mpg:"22/27"},
-            {id:38,brand:"Volkswagen",model:"Golf GTI",year:2026,price:23797,mileage:0,condition:"new",bodyType:"Hatchback",fuel:"Gasoline",transmission:"Manual",color:"Red",features:["Autobahn","241 HP"],image:"images/cars/placeholder.jpg",mpg:"24/34"},
-            {id:39,brand:"Volvo",model:"XC90",year:2026,price:39897,mileage:0,condition:"new",bodyType:"SUV",fuel:"Hybrid",transmission:"Automatic",color:"Blue",features:["T8","PHEV"],image:"images/cars/placeholder.jpg",mpg:"58 MPGe"},
-            {id:40,brand:"Land Rover",model:"Range Rover",year:2026,price:76997,mileage:0,condition:"new",bodyType:"SUV",fuel:"Hybrid",transmission:"Automatic",color:"Green",features:["Autobiography","PHEV"],image:"images/cars/placeholder.jpg",mpg:"62 MPGe"},
-            {id:41,brand:"Jaguar",model:"F-TYPE",year:2024,price:55997,mileage:5000,condition:"used",bodyType:"Coupe",fuel:"Gasoline",transmission:"Automatic",color:"Orange",features:["R","575 HP"],image:"images/cars/placeholder.jpg",mpg:"16/24"},
-            {id:42,brand:"Acura",model:"MDX",year:2026,price:36397,mileage:0,condition:"new",bodyType:"SUV",fuel:"Gasoline",transmission:"Automatic",color:"White",features:["Type S","SH-AWD"],image:"images/cars/placeholder.jpg",mpg:"17/21"},
-            {id:43,brand:"Infiniti",model:"QX60",year:2026,price:34997,mileage:0,condition:"new",bodyType:"SUV",fuel:"Gasoline",transmission:"Automatic",color:"Black",features:["Autograph","AWD"],image:"images/cars/placeholder.jpg",mpg:"20/23"},
-            {id:44,brand:"Lincoln",model:"Navigator",year:2026,price:58097,mileage:0,condition:"new",bodyType:"SUV",fuel:"Gasoline",transmission:"Automatic",color:"Black",features:["Black Label","4x4"],image:"images/cars/placeholder.jpg",mpg:"16/22"},
-            {id:45,brand:"Buick",model:"Enclave",year:2026,price:34297,mileage:0,condition:"new",bodyType:"SUV",fuel:"Gasoline",transmission:"Automatic",color:"White",features:["Avenir","3-Row"],image:"images/cars/placeholder.jpg",mpg:"18/26"},
-            {id:46,brand:"Chrysler",model:"Pacifica",year:2026,price:29397,mileage:0,condition:"new",bodyType:"Minivan",fuel:"Hybrid",transmission:"Automatic",color:"Black",features:["Pinnacle","PHEV"],image:"images/cars/placeholder.jpg",mpg:"82 MPGe"},
-            {id:47,brand:"Dodge",model:"Charger",year:2023,price:27297,mileage:8000,condition:"used",bodyType:"Sedan",fuel:"Gasoline",transmission:"Automatic",color:"Black",features:["Scat Pack","6.4L Hemi"],image:"images/cars/placeholder.jpg",mpg:"15/24"},
-            {id:48,brand:"Dodge",model:"Challenger",year:2023,price:30097,mileage:5000,condition:"used",bodyType:"Coupe",fuel:"Gasoline",transmission:"Manual",color:"Purple",features:["Scat Pack","Shaker"],image:"images/cars/placeholder.jpg",mpg:"15/23"},
-            {id:49,brand:"Mini",model:"Cooper",year:2026,price:23097,mileage:0,condition:"new",bodyType:"Hatchback",fuel:"Electric",transmission:"Automatic",color:"Green",features:["SE","Electric"],image:"images/cars/placeholder.jpg",mpg:"114 mi"},
-            {id:50,brand:"Mitsubishi",model:"Outlander",year:2026,price:20997,mileage:0,condition:"new",bodyType:"SUV",fuel:"Hybrid",transmission:"Automatic",color:"White",features:["PHEV","SEL"],image:"images/cars/placeholder.jpg",mpg:"64 MPGe"}
+    <div class="modal-overlay" id="carModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Vehicle Details</h2>
+                <button class="btn btn-secondary" onclick="closeModal()">Close</button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-image-section">
+                    <div class="modal-main-image" id="modalMainImage">🚗</div>
+                    <div class="image-thumbnails" id="imageThumbnails"></div>
+                </div>
+                <div class="modal-details-section">
+                    <div class="modal-car-title" id="modalTitle">Select a Vehicle</div>
+                    <div class="modal-car-subtitle" id="modalSubtitle"></div>
+                    <div class="pricing-box">
+                        <div class="price-row">
+                            <span style="color:var(--gray)">Market Value</span>
+                            <span style="text-decoration:line-through;color:var(--gray)" id="modalMarketPrice">$0</span>
+                        </div>
+                        <div class="price-row">
+                            <span style="color:var(--gray)">Your Price (30% Off)</span>
+                            <span style="font-size:1.5rem;font-weight:800;color:var(--success)" id="modalYourPrice">$0</span>
+                        </div>
+                        <div class="price-row">
+                            <span style="color:var(--gray)">You Save</span>
+                            <span style="color:var(--accent);font-weight:600" id="modalSavings">$0</span>
+                        </div>
+                    </div>
+                    <div class="specs-grid" id="modalSpecs"></div>
+                    <div class="features-list">
+                        <h3>Key Features</h3>
+                        <div class="car-features" id="modalFeatures"></div>
+                    </div>
+                    <div class="modal-actions">
+                        <button class="btn btn-secondary" onclick="openCalculator()">Calculate Payment</button>
+                        <button class="btn btn-primary" onclick="proceedToPayment()">Buy with Bitcoin</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="payment-modal" id="paymentModal">
+        <div class="modal-box">
+            <div class="modal-box-header">
+                <h2>Complete Your Purchase</h2>
+                <button class="btn btn-secondary" onclick="closePayment()">✕</button>
+            </div>
+            <div class="modal-box-body">
+                <div class="payment-options">
+                    <div class="payment-option disabled">
+                        <div style="font-size:2rem">💳</div>
+                        <h3>Credit Card</h3>
+                        <p style="font-size:0.8rem;color:var(--gray)">Temporarily unavailable</p>
+                    </div>
+                    <div class="payment-option selected" onclick="selectPayment('crypto')">
+                        <div style="font-size:2rem">₿</div>
+                        <h3>Bitcoin</h3>
+                        <p style="font-size:0.8rem;color:var(--gray)">Fast & Secure</p>
+                    </div>
+                </div>
+                <div class="crypto-section active" id="cryptoSection">
+                    <div class="btc-box">
+                        <div style="margin-bottom:0.5rem">Amount Due</div>
+                        <div class="btc-amount" id="btcAmount">0.00 BTC</div>
+                        <div style="color:var(--gray);font-size:0.9rem" id="btcUsd">$0.00 USD</div>
+                    </div>
+                    <div style="text-align:center;margin:1rem 0">
+                        <div style="width:150px;height:150px;background:white;margin:0 auto;border-radius:8px;display:flex;align-items:center;justify-content:center;color:black;font-size:3rem">₿</div>
+                        <p style="font-size:0.8rem;color:var(--gray);margin-top:0.5rem">Scan QR code or copy address</p>
+                    </div>
+                    <div class="btc-box">
+                        <div style="font-size:0.8rem;margin-bottom:0.5rem">BTC Address</div>
+                        <div class="btc-address" id="btcAddress">bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh</div>
+                        <button class="btn btn-secondary" style="margin-top:1rem;width:100%" onclick="copyBTC()">Copy Address</button>
+                    </div>
+                    <div style="background:rgba(16,185,129,0.1);border-left:4px solid var(--success);padding:1rem;border-radius:0 8px 8px 0;margin:1rem 0">
+                        <h4 style="color:var(--success);margin-bottom:0.5rem">✓ Instructions</h4>
+                        <ol style="color:var(--gray);font-size:0.9rem;padding-left:1rem">
+                            <li>Copy the BTC address above</li>
+                            <li>Send the exact amount from your wallet</li>
+                            <li>Click "I've Sent Payment" below</li>
+                            <li>Wait for blockchain confirmation</li>
+                        </ol>
+                    </div>
+                    <button class="btn btn-primary" style="width:100%" onclick="confirmPayment()">I've Sent Payment →</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="auth-modal" id="authModal">
+        <div class="modal-box">
+            <div class="modal-box-header">
+                <h2>Sign In</h2>
+                <button class="btn btn-secondary" onclick="closeAuth()">✕</button>
+            </div>
+            <div class="modal-box-body">
+                <form onsubmit="handleAuth(event)">
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" placeholder="your@email.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input type="password" placeholder="••••••••" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width:100%">Sign In</button>
+                </form>
+                <p style="text-align:center;margin-top:1rem;color:var(--gray);font-size:0.9rem">Don't have an account? <a href="#" style="color:var(--accent)">Register</a></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="calc-modal" id="calcModal">
+        <div class="modal-box">
+            <div class="modal-box-header">
+                <h2>Payment Calculator</h2>
+                <button class="btn btn-secondary" onclick="closeCalculator()">✕</button>
+            </div>
+            <div class="modal-box-body">
+                <div class="calc-slider">
+                    <label>Vehicle Price: <span id="calcPriceVal">$5,000</span></label>
+                    <input type="range" id="calcPrice" min="500" max="50000" value="5000" step="100" oninput="updateCalc()">
+                </div>
+                <div class="calc-slider">
+                    <label>Down Payment: <span id="calcDownVal">$1,000</span></label>
+                    <input type="range" id="calcDown" min="0" max="20000" value="1000" step="100" oninput="updateCalc()">
+                </div>
+                <div class="calc-slider">
+                    <label>Loan Term: <span id="calcTermVal">36 months</span></label>
+                    <input type="range" id="calcTerm" min="12" max="72" value="36" step="6" oninput="updateCalc()">
+                </div>
+                <div class="calc-result">
+                    <div style="font-size:0.9rem">Estimated Monthly Payment</div>
+                    <div class="calc-result-value" id="calcMonthly">$135</div>
+                </div>
+                <p style="text-align:center;margin-top:1rem;color:var(--gray);font-size:0.8rem">*This is an estimate. Actual rates may vary.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="loading-screen" id="loadingScreen">
+        <div class="blockchain-animation"></div>
+        <div class="loading-text">
+            <h2>Confirming Transaction</h2>
+            <div class="loading-status" id="loadingStatus">Waiting for blockchain confirmation...</div>
+            <div class="progress-bar"><div class="progress-fill"></div></div>
+            <div style="margin-top:2rem;color:var(--gray);font-size:0.9rem">
+                <div style="margin-bottom:0.5rem">✓ Transaction detected in mempool</div>
+                <div style="margin-bottom:0.5rem">⏳ Awaiting miner confirmation...</div>
+                <div>Network: Bitcoin Mainnet</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const STATIC_BTC_ADDRESS = 'bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh';
+        const BTC_PRICE = 43000;
+        let currentCar = null;
+        let favorites = JSON.parse(localStorage.getItem('libertyFavorites')) || [];
+        
+        const carDatabase = [
+            {id:'b001',tier:'budget',make:'Toyota',model:'Corolla',year:1998,marketPrice:1200,miles:'180,000',engine:'1.8L 4-Cyl',trans:'Automatic',drivetrain:'FWD',mpg:'28/35',features:['Reliable','Great MPG','Low Maintenance'],emoji:'🚗'},
+            {id:'b002',tier:'budget',make:'Toyota',model:'Camry',year:1997,marketPrice:1500,miles:'175,000',engine:'2.2L 4-Cyl',trans:'Automatic',drivetrain:'FWD',mpg:'26/32',features:['Spacious','Comfortable','Reliable'],emoji:'🚗'},
+            {id:'b003',tier:'budget',make:'Honda',model:'Civic',year:1999,marketPrice:1400,miles:'165,000',engine:'1.6L 4-Cyl',trans:'Manual',drivetrain:'FWD',mpg:'30/38',features:['Sporty','Fuel Efficient','Easy to Work On'],emoji:'🚗'},
+            {id:'b004',tier:'budget',make:'Honda',model:'Accord',year:1996,marketPrice:1600,miles:'190,000',engine:'2.2L 4-Cyl',trans:'Automatic',drivetrain:'FWD',mpg:'25/31',features:['Reliable','Spacious','Good Resale'],emoji:'🚗'},
+            {id:'b005',tier:'budget',make:'Nissan',model:'Sentra',year:2000,marketPrice:1100,miles:'155,000',engine:'1.8L 4-Cyl',trans:'Automatic',drivetrain:'FWD',mpg:'27/34',features:['Compact','Easy Parking','Reliable'],emoji:'🚗'},
+            {id:'b006',tier:'budget',make:'Nissan',model:'Altima',year:1999,marketPrice:1300,miles:'170,000',engine:'2.4L 4-Cyl',trans:'Automatic',drivetrain:'FWD',mpg:'24/30',features:['Mid-size','Comfortable','Good Value'],emoji:'🚗'},
+            {id:'b007',tier:'budget',make:'Mazda',model:'Protege',year:2001,marketPrice:1000,miles:'145,000',engine:'1.6L 4-Cyl',trans:'Manual',drivetrain:'FWD',mpg:'29/36',features:['Sporty Handling','Reliable','Fun to Drive'],emoji:'🚗'},
+            {id:'b008',tier:'budget',make:'Mazda',model:'626',year:1998,marketPrice:900,miles:'185,000',engine:'2.0L 4-Cyl',trans:'Automatic',drivetrain:'FWD',mpg:'25/31',features:['Comfortable','Reliable','Affordable'],emoji:'🚗'},
+            {id:'b009',tier:'budget',make:'Subaru',model:'Legacy',year:1997,marketPrice:1400,miles:'195,000',engine:'2.2L 4-Cyl',trans:'Automatic',drivetrain:'AWD',mpg:'22/28',features:['AWD','Reliable','Winter Ready'],emoji:'🚗'},
+            {id:'b010',tier:'budget',make:'Subaru',model:'Impreza',year:1999,marketPrice:1300,miles:'175,000',engine:'2.2L 4-Cyl',trans:'Manual',drivetrain:'AWD',mpg:'23/29',features:['AWD','Sporty','Reliable'],emoji:'🚗'},
+            {id:'b011',tier:'budget',make:'Mitsubishi',model:'Lancer',year:2002,marketPrice:1100,miles:'140,000',engine:'2.0L 4-Cyl',trans:'Automatic',drivetrain:'FWD',mpg:'26/33',features:['Sporty Look','Reliable','Affordable'],emoji:'🚗'},
+            {id:'b012',tier:'budget',make:'Mitsubishi',model:'Galant',year:1998,marketPrice:950,miles:'180,000',engine:'2.4L 4-Cyl',trans:'Automatic',drivetrain:'FWD',mpg:'24/30',features:['Spacious','Comfortable','Reliable'],emoji:'🚗'},
+            {id:'b013',tier:'budget',make:'Ford',model:'Escort',year:1999,marketPrice:800,miles:'150,000',engine:'2.0L 4-Cyl',trans:'Automatic',drivetrain:'FWD',mpg:'26/33',features:['Basic Transport','Reliable','Cheap Parts'],emoji:'🚗'},
+            {id:'b014',tier:'budget',make:'Ford',model:'Taurus',year:1998,marketPrice:1000,miles:'190,000',engine:'3.0L V6',trans:'Automatic',drivetrain:'FWD',mpg:'20/27',features:['Spacious','Comfortable','Common Parts'],emoji:'🚗'},
+            {id:'b015',tier:'budget',make:'Chevrolet',model:'Cavalier',year:2000,marketPrice:850,miles:'145,000',engine:'2.2L 4-Cyl',trans:'Automatic',drivetrain:'FWD',mpg:'25/32',features:['Basic','Reliable','Easy to Fix'],emoji:'🚗'},
+            {id:'b016',tier:'budget',make:'Chevrolet',model:'Malibu',year:1999,marketPrice:1100,miles:'175,000',engine:'3.1L V6',trans:'Automatic',drivetrain:'FWD',mpg:'22/29',features:['Comfortable','Spacious','Reliable'],emoji:'🚗'},
+            {id:'b017',tier:'budget',make:'Pontiac',model:'Sunfire',year:2001,marketPrice:900,miles:'140,000',engine:'2.2L 4-Cyl',trans:'Automatic',drivetrain:'FWD',mpg:'25/32',features:['Sporty Look','Reliable','Affordable'],emoji:'🚗'},
+            {id:'b018',tier:'budget',make:'Pontiac',model:'Grand Am',year:1998,marketPrice:1050,miles:'165,000',engine:'2.4L 4-Cyl',trans:'Automatic',drivetrain:'FWD',mpg:'23/30',features:['Sporty','Comfortable','Reliable'],emoji:'🚗'},
+            {id:'b019',tier:'budget',make:'Dodge',model:'Neon',year:2000,marketPrice:800,miles:'155,000',engine:'2.0L 4-Cyl',trans:'Automatic',drivetrain:'FWD',mpg:'26/33',features:['Compact','Affordable','Easy to Work On'],emoji:'🚗'},
+            {id:'b020',tier:'budget',make:'Dodge',model:'Stratus',year:1999,marketPrice:950,miles:'180,000',engine:'2.4L 4-Cyl',trans:'Automatic',drivetrain:'FWD',mpg:'23/29',features:['Mid-size','Comfortable','Reliable'],emoji:'🚗'},
+            {id:'b021',tier:'budget',make:'Chrysler',model:'Cirrus',year:1998,marketPrice:1000,miles:'170,000',engine:'2.4L 4-Cyl',trans:'Automatic',drivetrain:'FWD',mpg:'22/28',features:['Comfortable','Spacious','Reliable'],emoji:'🚗'},
+            {id:'b022',tier:'budget',make:'Plymouth',model:'Breeze',year:1999,marketPrice:850,miles:'160,000',engine:'2.0L 4-Cyl',trans:'Automatic',drivetrain:'FWD',mpg:'25/32',features:['Basic','Reliable','Affordable'],emoji:'🚗'},
+            {id:'b023',tier:'budget',make:'Volkswagen',model:'Jetta',year:1999,marketPrice:1400,miles:'155,000',engine:'2.0L 4-Cyl',trans:'Manual',drivetrain:'FWD',mpg:'26/34',features:['Solid Build','Fun to Drive','Reliable'],emoji:'🚗'},
+            {id:'b024',tier:'budget',make:'Volkswagen',model:'Golf',year:1998,marketPrice:1300,miles:'150,000',engine:'2.0L 4-Cyl',trans:'Manual',drivetrain:'FWD',mpg:'27/35',features:['Hatchback','Practical','Fun'],emoji:'🚗'},
+            {id:'b025',tier:'budget',make:'Volvo',model:'850',year:1996,marketPrice:1200,miles:'200,000',engine:'2.4L 5-Cyl',trans:'Automatic',drivetrain:'FWD',mpg:'21/27',features:['Safe','Reliable','Comfortable'],emoji:'🚗'},
+            {id:'b026',tier:'budget',make:'Volvo',model:'S70',year:1999,marketPrice:1500,miles:'185,000',engine:'2.4L 5-Cyl',trans:'Automatic',drivetrain:'FWD',mpg:'22/28',features:['Safe','Comfortable','Reliable'],emoji:'🚗'},
+            {id:'b027',tier:'budget',make:'Saab',model:'900',year:1997,marketPrice:1100,miles:'175,000',engine:'2.3L 4-Cyl',trans:'Manual',drivetrain:'FWD',mpg:'23/29',features:['Unique','Turbo','Comfortable'],emoji:'🚗'},
+            {id:'b028',tier:'budget',make:'Saab',model:'9-3',year:2000,marketPrice:1400,miles:'160,000',engine:'2.0L Turbo',trans:'Automatic',drivetrain:'FWD',mpg:'24/30',features:['Turbo','Comfortable','Unique'],emoji:'🚗'},
+            {id:'b029',tier:'budget',make:'Toyota',model:'Echo',year:2002,marketPrice:1300,miles:'140,000',engine:'1.5L 4-Cyl',trans:'Automatic',drivetrain:'FWD',mpg:'34/41',features:['Great MPG','Reliable','Compact'],emoji:'🚗'},
+            {id:'b030',tier:'budget',make:'Toyota',model:'Matrix',year:2003,marketPrice:1600,miles:'165,000',engine:'1.8L 4-Cyl',trans:'Automatic',drivetrain:'FWD',mpg:'29/36',features:['Hatchback','Versatile','Reliable'],emoji:'🚗'},
+            {id:'b031',tier:'budget',make:'Honda',model:'Fit',year:2007,marketPrice:1800,miles:'155,000',engine:'1.5L 4-Cyl',trans:'Manual',drivetrain:'FWD',mpg:'33/38',features:['Magic Seats','Spacious','Reliable'],emoji:'🚗'},
+            {id:'b032',tier:'budget',make:'Honda',model:'Insight',year:2002,marketPrice:1500,miles:'180,000',engine:'1.0L Hybrid',trans:'Manual',drivetrain:'FWD',mpg:'61/68',features:['Hybrid','Amazing MPG','Unique'],emoji:'🚗'},
+            {id:'b033',tier:'budget',make:'Nissan',model:'Versa',year:2008,marketPrice:1700,miles:'145,000',engine:'1.6L 4-Cyl',trans:'Automatic',drivetrain:'FWD',mpg:'30/36',features:['Spacious','Affordable','Reliable'],emoji:'🚗'},
+            {id:'b034',tier:'budget',make:'Hyundai',model:'Accent',year:2006,marketPrice:1400,miles:'140,000',engine:'1.6L 4-Cyl',trans:'Automatic',drivetrain:'FWD',mpg:'29/36',features:['Warranty','Reliable','Affordable'],emoji:'🚗'},
+            {id:'b035',tier:'budget',make:'Hyundai',model:'Elantra',year:2005,marketPrice:1300,miles:'150,000',engine:'2.0L 4-Cyl',trans:'Automatic',drivetrain:'FWD',mpg:'27/34',features:['Reliable','Spacious','Good Value'],emoji:'🚗'},
+            {id:'b036',tier:'budget',make:'Kia',model:'Rio',year:2007,marketPrice:1350,miles:'135,000',engine:'1.6L 4-Cyl',trans:'Automatic',drivetrain:'FWD',mpg:'29/36',features:['Affordable','Reliable','Compact'],emoji:'🚗'},
+            {id:'b037',tier:'budget',make:'Kia',model:'Spectra',year:2006,marketPrice:1200,miles:'145,000',engine:'2.0L 4-Cyl',trans:'Automatic',drivetrain:'FWD',mpg:'27/34',features:['Reliable','Spacious','Good Value'],emoji:'🚗'},
+            {id:'b038',tier:'budget',make:'Scion',model:'xA',year:2005,marketPrice:1600,miles:'150,000',engine:'1.5L 4-Cyl',trans:'Automatic',drivetrain:'FWD',mpg:'32/38',features:['Toyota Reliability','Stylish','Efficient'],emoji:'🚗'},
+            {id:'b039',tier:'budget',make:'Scion',model:'xB',year:2006,marketPrice:1900,miles:'155,000',engine:'1.5L 4-Cyl',trans:'Automatic',drivetrain:'FWD',mpg:'30/34',features:['Spacious','Unique','Reliable'],emoji:'🚗'},
+            {id:'b040',tier:'budget',make:'Ford',model:'Focus',year:2003,marketPrice:1100,miles:'155,000',engine:'2.0L 4-Cyl',trans:'Automatic',drivetrain:'FWD',mpg:'26/32',features:['Fun to Drive','Reliable','Affordable'],emoji:'🚗'},
+            {id:'b041',tier:'budget',make:'Ford',model:'Fusion',year:2006,marketPrice:1800,miles:'165,000',engine:'2.3L 4-Cyl',trans:'Automatic',drivetrain:'FWD',mpg:'24/32',features:['Stylish','Comfortable','Reliable'],emoji:'🚗'},
+            {id:'b042',tier:'budget',make:'Chevrolet',model:'Cobalt',year:2006,marketPrice:1300,miles:'150,000',engine:'2.2L 4-Cyl',trans:'Automatic',drivetrain:'FWD',mpg:'25/32',features:['Sporty','Reliable','Affordable'],emoji:'🚗'},
+            {id:'b043',tier:'budget',make:'Chevrolet',model:'HHR',year:2007,marketPrice:1600,miles:'160,000',engine:'2.2L 4-Cyl',trans:'Automatic',drivetrain:'FWD',mpg:'23/30',features:['Unique Style','Spacious','Versatile'],emoji:'🚗'},
+            {id:'b044',tier:'budget',make:'Pontiac',model:'Vibe',year:2005,marketPrice:1700,miles:'155,000',engine:'1.8L 4-Cyl',trans:'Automatic',drivetrain:'FWD',mpg:'29/36',features:['Toyota Engine','Reliable','Versatile'],emoji:'🚗'},
+            {id:'b045',tier:'budget',make:'Saturn',model:'Ion',year:2006,marketPrice:1100,miles:'145,000',engine:'2.2L 4-Cyl',trans:'Automatic',drivetrain:'FWD',mpg:'26/34',features:['Plastic Panels','Reliable','Affordable'],emoji:'🚗'},
+            {id:'b046',tier:'budget',make:'Saturn',model:'Vue',year:2005,marketPrice:1400,miles:'165,000',engine:'2.2L 4-Cyl',trans:'Automatic',drivetrain:'FWD',mpg:'24/30',features:['SUV','Reliable','Spacious'],emoji:'🚐'},
+            {id:'b047',tier:'budget',make:'Toyota',model:'Yaris',year:2010,marketPrice:1900,miles:'140,000',engine:'1.5L 4-Cyl',trans:'Automatic',drivetrain:'FWD',mpg:'30/36',features:['Reliable','Efficient','Compact'],emoji:'🚗'},
+            {id:'b048',tier:'budget',make:'Honda',model:'Civic',year:2009,marketPrice:1950,miles:'155,000',engine:'1.8L 4-Cyl',trans:'Automatic',drivetrain:'FWD',mpg:'28/36',features:['Reliable','Sporty','Efficient'],emoji:'🚗'},
+            {id:'b049',tier:'budget',make:'Nissan',model:'Cube',year:2010,marketPrice:1700,miles:'145,000',engine:'1.8L 4-Cyl',trans:'Automatic',drivetrain:'FWD',mpg:'27/31',features:['Unique','Spacious','Reliable'],emoji:'🚗'},
+            {id:'b050',tier:'budget',make:'Hyundai',model:'Sonata',year:2009,marketPrice:1850,miles:'160,000',engine:'2.4L 4-Cyl',trans:'Automatic',drivetrain:'FWD',mpg:'24/33',features:['Stylish','Spacious','Reliable'],emoji:'🚗'},
+            {id:'e001',tier:'economy',make:'Toyota',model:'Corolla',year:2008,marketPrice:3200,miles:'125,000',engine:'1.8L 4-Cyl',trans:'Automatic',drivetrain:'FWD',mpg:'27/35',features:['Ultra Reliable','Great MPG','Low Maintenance'],emoji:'🚗'},
+            {id:'e002',tier:'economy',make:'Toyota',model:'Camry',year:2007,marketPrice:3800,miles:'130,000',engine:'2.4L 4-Cyl',trans:'Automatic',drivetrain:'FWD',mpg:'24/33',features:['Comfortable','Spacious','Reliable'],emoji:'🚗'},
+            {id:'e003',tier:'economy',make:'Honda',model:'Civic',year:2009,marketPrice:3500,miles:'120,000',engine:'1.8L 4-Cyl',trans:'Automatic',drivetrain:'FWD',mpg:'25/36',features:['Fuel Efficient','Sporty','Reliable'],emoji:'🚗'},
+            {id:'e004',tier:'economy',make:'Honda',model:'Accord',year:2008,marketPrice:4000,miles:'135,000',engine:'2.4L 4-Cyl',trans:'Automatic',drivetrain:'FWD',mpg:'23/31',features:['Spacious','Reliable','Comfortable'],emoji:'🚗'},
+            {id:'e005',tier:'economy',make:'Nissan',model:'Altima',year:2010,marketPrice:4200,miles:'115,000',engine:'2.5L 4-Cyl',trans:'Automatic',drivetrain:'FWD',mpg:'23/32',features:['Stylish','Comfortable','Good Value'],emoji:'🚗'},
+            {id:'e006',tier:'economy',make:'Nissan',model:'Sentra',year:2011,marketPrice:3400,miles:'110,000',engine:'2.0L 4-Cyl',trans:'Automatic',drivetrain:'FWD',mpg:'27/34',features:['Compact','Efficient','Reliable'],emoji:'🚗'},
+            {id:'e007',tier:'economy',make:'Mazda',model:'3',year:2009,marketPrice:3600,miles:'125,000',engine:'2.0L 4-Cyl',trans:'Automatic',drivetrain:'FWD',mpg:'24/32',features:['Sporty','Fun to Drive','Reliable'],emoji:'🚗'},
+            {id:'e008',tier:'economy',make:'Mazda',model:'6',year:2008,marketPrice:3400,miles:'140,000',engine:'2.3L 4-Cyl',trans:'Automatic',drivetrain:'FWD',mpg:'22/29',features:['Stylish','Spacious','Sporty'],emoji:'🚗'},
+            {id:'e009',tier:'economy',make:'Subaru',model:'Impreza',year:2010,marketPrice:4200,miles:'130,000',engine:'2.5L 4-Cyl',trans:'Automatic',drivetrain:'AWD',mpg:'20/27',features:['AWD','Reliable','Winter Ready'],emoji:'🚗'},
+            {id:'e010',tier:'economy',make:'Subaru',model:'Legacy',year:2009,marketPrice:4000,miles:'135,000',engine:'2.5L 4-Cyl',trans:'Automatic',drivetrain:'AWD',mpg:'20/26',features:['AWD','Comfortable','Reliable'],emoji:'🚗'},
+            {id:'e011',tier:'economy',make:'Mitsubishi',model:'Lancer',year:2011,marketPrice:3200,miles:'120,000',engine:'2.0L 4-Cyl',trans:'Automatic',drivetrain:'FWD',mpg:'25/34',features:['Sporty','Affordable','Reliable'],emoji:'🚗'},
+            {id:'e012',tier:'economy',make:'Hyundai',model:'Elantra',year:2010,marketPrice:3100,miles:'115,000',engine:'2.0L 4-Cyl',trans:'Automatic',drivetrain:'FWD',mpg:'26/35',features:['Great Warranty','Reliable','Efficient'],emoji:'🚗'},
+            {id:'e013',tier:'economy',make:'Hyundai',model:'Sonata',year:2009,marketPrice:3600,miles:'125,000',engine:'2.4L 4-Cyl',trans:'Automatic',drivetrain:'FWD',mpg:'22/32',features:['Spacious','Comfortable','Stylish'],emoji:'🚗'},
+            {id:'e014',tier:'economy',make:'Kia',model:'Forte',year:2011,marketPrice:3000,miles:'110,000',engine:'2.0L 4-Cyl',trans:'Automatic',drivetrain:'FWD',mpg:'26/36',features:['Affordable','Reliable','Efficient'],emoji:'🚗'},
+            {id:'e015',tier:'economy',make:'Kia',model:'Optima',year:2010,marketPrice:3400,miles:'120,000',engine:'2.4L 4-Cyl',trans:'Automatic',drivetrain:'FWD',mpg:'24/34',features:['Stylish','Spacious','Value'],emoji:'🚗'},
+            {id:'e016',tier:'economy',make:'Ford',model:'Focus',year:2010,marketPrice:2800,miles:'125,000',engine:'2.0L 4-Cyl',trans:'Automatic',drivetrain:'FWD',mpg:'24/35',features:['Fun to Drive','Affordable','Reliable'],emoji:'🚗'},
+            {id:'e017',tier:'economy',make:'Ford',model:'Fusion',year:2009,marketPrice:3800,miles:'130,000',engine:'2.3L 4-Cyl',trans:'Automatic',drivetrain:'FWD',mpg:'23/31',features:['Stylish','Comfortable','Reliable'],emoji:'🚗'},
+            {id:'e018',tier:'economy',make:'Chevrolet',model:'Cruze',year:2011,marketPrice:3400,miles:'115,000',engine:'1.8L 4-Cyl',trans:'Automatic',drivetrain:'FWD',mpg:'24/36',features:['Modern','Efficient','Comfortable'],emoji:'🚗'},
+            {id:'e019',tier:'economy',make:'Chevrolet',model:'Malibu',year:2010,marketPrice:3600,miles:'125,000',engine:'2.4L 4-Cyl',trans:'Automatic',drivetrain:'FWD',mpg:'22/33',features:['Spacious','Comfortable','Reliable'],emoji:'🚗'},
+            {id:'e020',tier:'economy',make:'Chrysler',model:'200',year:2011,marketPrice:3200,miles:'120,000',engine:'2.4L 4-Cyl',trans:'Automatic',drivetrain:'FWD',mpg:'21/30',features:['Stylish','Comfortable','Affordable'],emoji:'🚗'},
+            {id:'e021',tier:'economy',make:'Dodge',model:'Avenger',year:2010,marketPrice:3000,miles:'125,000',engine:'2.4L 4-Cyl',trans:'Automatic',drivetrain:'FWD',mpg:'21/30',features:['Sporty','Spacious','Affordable'],emoji:'🚗'},
+            {id:'e022',tier:'economy',make:'Volkswagen',model:'Jetta',year:2009,marketPrice:3800,miles:'130,000',engine:'2.5L 5-Cyl',trans:'Automatic',drivetrain:'FWD',mpg:'24/31',features:['German Quality','Solid','Comfortable'],emoji:'🚗'},
+            {id:'e023',tier:'economy',make:'Volkswagen',model:'Passat',year:2008,marketPrice:4000,miles:'140,000',engine:'2.0L Turbo',trans:'Automatic',drivetrain:'FWD',mpg:'22/28',features:['Luxury Feel','Spacious','Turbo'],emoji:'🚗'},
+            {id:'e024',tier:'economy',make:'Volvo',model:'S40',year:2009,marketPrice:3800,miles:'135,000',engine:'2.4L 5-Cyl',trans:'Automatic',drivetrain:'FWD',mpg:'20/28',features:['Safe','Comfortable','Reliable'],emoji:'🚗'},
+            {id:'e025',tier:'economy',make:'Toyota',model:'Yaris',year:2009,marketPrice:2800,miles:'110,000',engine:'1.5L 4-Cyl',trans:'Automatic',drivetrain:'FWD',mpg:'29/35',features:['Great MPG','Reliable','Easy to Park'],emoji:'🚗'},
+            {id:'e026',tier:'economy',make:'Honda',model:'Fit',year:2010,marketPrice:3400,miles:'115,000',engine:'1.5L 4-Cyl',trans:'Automatic',drivetrain:'FWD',mpg:'28/35',features:['Magic Seats','Versatile','Reliable'],emoji:'🚗'},
+            {id:'e027',tier:'economy',make:'Nissan',model:'Versa',year:2011,marketPrice:2600,miles:'105,000',engine:'1.8L 4-Cyl',trans:'Automatic',drivetrain:'FWD',mpg:'28/34',features:['Spacious','Affordable','Efficient'],emoji:'🚗'},
+            {id:'e028',tier:'economy',make:'Hyundai',model:'Accent',year:2011,marketPrice:2600,miles:'110,000',engine:'1.6L 4-Cyl',trans:'Automatic',drivetrain:'FWD',mpg:'28/37',features:['Great Warranty','Reliable','Efficient'],emoji:'🚗'},
+            {id:'e029',tier:'economy',make:'Kia',model:'Rio',year:2011,marketPrice:2500,miles:'105,000',engine:'1.6L 4-Cyl',trans:'Automatic',drivetrain:'FWD',mpg:'28/36',features:['Affordable','Reliable','Efficient'],emoji:'🚗'},
+            {id:'e030',tier:'economy',make:'Ford',model:'Fiesta',year:2011,marketPrice:3000,miles:'115,000',engine:'1.6L 4-Cyl',trans:'Automatic',drivetrain:'FWD',mpg:'29/38',features:['Fun','Stylish','Efficient'],emoji:'🚗'},
+            {id:'e031',tier:'economy',make:'Chevrolet',model:'Sonic',year:2012,marketPrice:3200,miles:'105,000',engine:'1.8L 4-Cyl',trans:'Automatic',drivetrain:'FWD',mpg:'25/35',features:['Modern','Turbo Available','Fun'],emoji:'🚗'},
+            {id:'e032',tier:'economy',make:'Mazda',model:'2',year:2011,marketPrice:2800,miles:'110,000',engine:'1.5L 4-Cyl',trans:'Automatic',drivetrain:'FWD',mpg:'29/35',features:['Fun','Light','Efficient'],emoji:'🚗'},
+            {id:'e033',tier:'economy',make:'Scion',model:'xD',year:2009,marketPrice:3000,miles:'120,000',engine:'1.8L 4-Cyl',trans:'Automatic',drivetrain:'FWD',mpg:'27/33',features:['Toyota Reliable','Spacious','Unique'],emoji:'🚗'},
+            {id:'e034',tier:'economy',make:'Toyota',model:'Matrix',year:2009,marketPrice:3400,miles:'125,000',engine:'1.8L 4-Cyl',trans:'Automatic',drivetrain:'FWD',mpg:'26/32',features:['Versatile','Reliable','Practical'],emoji:'🚗'},
+            {id:'e035',tier:'economy',make:'Honda',model:'Insight',year:2010,marketPrice:3600,miles:'130,000',engine:'1.3L Hybrid',trans:'Automatic',drivetrain:'FWD',mpg:'40/43',features:['Hybrid','Great MPG','Reliable'],emoji:'🚗'},
+            {id:'e036',tier:'economy',make:'Ford',model:'C-Max',year:2013,marketPrice:4000,miles:'125,000',engine:'2.0L Hybrid',trans:'Automatic',drivetrain:'FWD',mpg:'42/37',features:['Hybrid','Spacious','Efficient'],emoji:'🚗'},
+            {id:'e037',tier:'economy',make:'Toyota',model:'Prius',year:2008,marketPrice:4200,miles:'140,000',engine:'1.5L Hybrid',trans:'Automatic',drivetrain:'FWD',mpg:'48/45',features:['Iconic Hybrid','Great MPG','Reliable'],emoji:'🚗'},
+            {id:'e038',tier:'economy',make:'Honda',model:'Civic Hybrid',year:2009,marketPrice:3800,miles:'135,000',engine:'1.3L Hybrid',trans:'Automatic',drivetrain:'FWD',mpg:'40/45',features:['Hybrid','Efficient','Reliable'],emoji:'🚗'},
+            {id:'e039',tier:'economy',make:'Nissan',model:'Leaf',year:2011,marketPrice:4500,miles:'80000',engine:'Electric Motor',trans:'Automatic',drivetrain:'FWD',mpg:'99/102',features:['Electric','Zero Emissions','Modern'],emoji:'🚗'},
+            {id:'e040',tier:'economy',make:'Chevrolet',model:'Volt',year:2012,marketPrice:4800,miles:'115,000',engine:'1.4L Plug-in Hybrid',trans:'Automatic',drivetrain:'FWD',mpg:'35/40',features:['Plug-in Hybrid','Electric Range','Modern'],emoji:'🚗'},
+            {id:'e041',tier:'economy',make:'Toyota',model:'RAV4',year:2007,marketPrice:4500,miles:'145,000',engine:'2.4L 4-Cyl',trans:'Automatic',drivetrain:'AWD',mpg:'21/27',features:['SUV','AWD','Reliable'],emoji:'🚐'},
+            {id:'e042',tier:'economy',make:'Honda',model:'CR-V',year:2008,marketPrice:4800,miles:'140,000',engine:'2.4L 4-Cyl',trans:'Automatic',drivetrain:'AWD',mpg:'20/26',features:['SUV','AWD','Spacious'],emoji:'🚐'},
+            {id:'e043',tier:'economy',make:'Nissan',model:'Rogue',year:2009,marketPrice:4200,miles:'135,000',engine:'2.5L 4-Cyl',trans:'Automatic',drivetrain:'AWD',mpg:'22/27',features:['Crossover','AWD','Comfortable'],emoji:'🚐'},
+            {id:'e044',tier:'economy',make:'Mazda',model:'CX-5',year:2013,marketPrice:6800,miles:'115,000',engine:'2.0L 4-Cyl',trans:'Automatic',drivetrain:'AWD',mpg:'25/31',features:['Sporty SUV','AWD','Efficient'],emoji:'🚐'},
+            {id:'e045',tier:'economy',make:'Subaru',model:'Forester',year:2010,marketPrice:5200,miles:'130,000',engine:'2.5L 4-Cyl',trans:'Automatic',drivetrain:'AWD',mpg:'20/26',features:['AWD','Spacious','Reliable'],emoji:'🚐'},
+            {id:'e046',tier:'economy',make:'Mitsubishi',model:'Outlander',year:2010,marketPrice:4000,miles:'140,000',engine:'2.4L 4-Cyl',trans:'Automatic',drivetrain:'AWD',mpg:'21/27',features:['AWD','Spacious','Value'],emoji:'🚐'},
+            {id:'e047',tier:'economy',make:'Hyundai',model:'Tucson',year:2010,marketPrice:4200,miles:'135,000',engine:'2.4L 4-Cyl',trans:'Automatic',drivetrain:'AWD',mpg:'21/28',features:['AWD','Stylish','Warranty'],emoji:'🚐'},
+            {id:'e048',tier:'economy',make:'Kia',model:'Sportage',year:2011,marketPrice:4000,miles:'130,000',engine:'2.4L 4-Cyl',trans:'Automatic',drivetrain:'AWD',mpg:'21/29',features:['AWD','Stylish','Value'],emoji:'🚐'},
+            {id:'e049',tier:'economy',make:'Ford',model:'Escape',year:2010,marketPrice:4200,miles:'135,000',engine:'2.5L 4-Cyl',trans:'Automatic',drivetrain:'AWD',mpg:'21/28',features:['AWD','Practical','Reliable'],emoji:'🚐'},
+            {id:'e050',tier:'economy',make:'Chevrolet',model:'Equinox',year:2010,marketPrice:4000,miles:'140,000',engine:'2.4L 4-Cyl',trans:'Automatic',drivetrain:'AWD',mpg:'20/27',features:['Spacious','AWD','Comfortable'],emoji:'🚐'},
+            {id:'s001',tier:'standard',make:'Toyota',model:'Camry',year:2015,marketPrice:12500,miles:'85,000',engine:'2.5L 4-Cyl',trans:'Automatic',drivetrain:'FWD',mpg:'25/35',features:['Modern Design','Reliable','Comfortable'],emoji:'🚗'},
+            {id:'s002',tier:'standard',make:'Toyota',model:'Corolla',year:2016,marketPrice:11500,miles:'75,000',engine:'1.8L 4-Cyl',trans:'Automatic',drivetrain:'FWD',mpg:'28/37',features:['Great MPG','Reliable','Modern'],emoji:'🚗'},
+            {id:'s003',tier:'standard',make:'Toyota',model:'RAV4',year:2015,marketPrice:13500,miles:'90,000',engine:'2.5L 4-Cyl',trans:'Automatic',drivetrain:'AWD',mpg:'22/29',features:['AWD SUV','Reliable','Spacious'],emoji:'🚐'},
+            {id:'s004',tier:'standard',make:'Toyota',model:'Highlander',year:2014,marketPrice:14500,miles:'95,000',engine:'3.5L V6',trans:'Automatic',drivetrain:'AWD',mpg:'18/24',features:['3rd Row','AWD','Family'],emoji:'🚐'},
+            {id:'s005',tier:'standard',make:'Toyota',model:'4Runner',year:2013,marketPrice:16500,miles:'110,000',engine:'4.0L V6',trans:'Automatic',drivetrain:'4WD',mpg:'17/21',features:['Off-Road','4WD','Tough'],emoji:'🚐'},
+            {id:'s006',tier:'standard',make:'Toyota',model:'Tacoma',year:2014,marketPrice:15500,miles:'95,000',engine:'4.0L V6',trans:'Automatic',drivetrain:'4WD',mpg:'16/21',features:['Truck','4WD','Reliable'],emoji:'🚚'},
+            {id:'s007',tier:'standard',make:'Toyota',model:'Tundra',year:2013,marketPrice:17500,miles:'105,000',engine:'5.7L V8',trans:'Automatic',drivetrain:'4WD',mpg:'13/17',features:['Full-Size Truck','Powerful','4WD'],emoji:'🚚'},
+            {id:'s008',tier:'standard',make:'Toyota',model:'Sienna',year:2015,marketPrice:13500,miles:'85,000',engine:'3.5L V6',trans:'Automatic',drivetrain:'FWD',mpg:'18/25',features:['Minivan','Spacious','Family'],emoji:'🚐'},
+            {id:'s009',tier:'standard',make:'Toyota',model:'Avalon',year:2014,marketPrice:14000,miles:'80,000',engine:'3.5L V6',trans:'Automatic',drivetrain:'FWD',mpg:'21/31',features:['Full-Size','Luxury','Comfortable'],emoji:'🚗'},
+            {id:'s010',tier:'standard',make:'Toyota',model:'Prius',year:2015,marketPrice:12500,miles:'95,000',engine:'1.8L Hybrid',trans:'Automatic',drivetrain:'FWD',mpg:'51/48',features:['Hybrid','Great MPG','Eco-Friendly'],emoji:'🚗'},
+            {id:'s011',tier:'standard',make:'Honda',model:'Accord',year:2016,marketPrice:13000,miles:'80,000',engine:'2.4L 4-Cyl',trans:'Automatic',drivetrain:'FWD',mpg:'27/37',features:['Spacious','Reliable','Modern'],emoji:'🚗'},
+            {id:'s012',tier:'standard',make:'Honda',model:'Civic',year:2017,marketPrice:12000,miles:'70,000',engine:'2.0L 4-Cyl',trans:'Automatic',drivetrain:'FWD',mpg:'28/40',features:['Sporty','Efficient','Modern'],emoji:'🚗'},
+            {id:'s013',tier:'standard',make:'Honda',model:'CR-V',year:2015,marketPrice:14000,miles:'85,000',engine:'2.4L 4-Cyl',trans:'Automatic',drivetrain:'AWD',mpg:'25/31',features:['AWD SUV','Spacious','Reliable'],emoji:'🚐'},
+            {id:'s014',tier:'standard',make:'Honda',model:'Pilot',year:2014,marketPrice:15000,miles:'90,000',engine:'3.5L V6',trans:'Automatic',drivetrain:'AWD',mpg:'18/26',features:['3rd Row','AWD','Family'],emoji:'🚐'},
+            {id:'s015',tier:'standard',make:'Honda',model:'Odyssey',year:2015,marketPrice:14500,miles:'85,000',engine:'3.5L V6',trans:'Automatic',drivetrain:'FWD',mpg:'19/28',features:['Minivan','Honda Quality','Spacious'],emoji:'🚐'},
+            {id:'s016',tier:'standard',make:'Honda',model:'Ridgeline',year:2014,marketPrice:15500,miles:'95,000',engine:'3.5L V6',trans:'Automatic',drivetrain:'AWD',mpg:'18/25',features:['Unique Truck','AWD','Comfortable'],emoji:'🚚'},
+            {id:'s017',tier:'standard',make:'Honda',model:'Fit',year:2016,marketPrice:10500,miles:'65,000',engine:'1.5L 4-Cyl',trans:'Automatic',drivetrain:'FWD',mpg:'29/37',features:['Versatile','Magic Seats','Efficient'],emoji:'🚗'},
+            {id:'s018',tier:'standard',make:'Nissan',model:'Altima',year:2016,marketPrice:11500,miles:'85,000',engine:'2.5L 4-Cyl',trans:'Automatic',drivetrain:'FWD',mpg:'27/39',features:['Stylish','Comfortable','Efficient'],emoji:'🚗'},
+            {id:'s019',tier:'standard',make:'Nissan',model:'Rogue',year:2015,marketPrice:12500,miles:'90,000',engine:'2.5L 4-Cyl',trans:'Automatic',drivetrain:'AWD',mpg:'25/32',features:['Crossover','AWD','Popular'],emoji:'🚐'},
+            {id:'s020',tier:'standard',make:'Nissan',model:'Pathfinder',year:2014,marketPrice:13500,miles:'95,000',engine:'3.5L V6',trans:'Automatic',drivetrain:'4WD',mpg:'19/26',features:['3rd Row','4WD','Family'],emoji:'🚐'},
+            {id:'s021',tier:'standard',make:'Nissan',model:'Murano',year:2015,marketPrice:13000,miles:'85,000',engine:'3.5L V6',trans:'Automatic',drivetrain:'AWD',mpg:'21/28',features:['Luxury Crossover','AWD','Stylish'],emoji:'🚐'},
+            {id:'s022',tier:'standard',make:'Nissan',model:'Frontier',year:2015,marketPrice:14500,miles:'90,000',engine:'4.0L V6',trans:'Automatic',drivetrain:'4WD',mpg:'16/21',features:['Truck','4WD','Reliable'],emoji:'🚚'},
+            {id:'s023',tier:'standard',make:'Nissan',model:'Titan',year:2014,marketPrice:16500,miles:'100,000',engine:'5.6L V8',trans:'Automatic',drivetrain:'4WD',mpg:'13/18',features:['Full-Size Truck','Powerful','4WD'],emoji:'🚚'},
+            {id:'s024',tier:'standard',make:'Nissan',model:'Maxima',year:2014,marketPrice:13500,miles:'80,000',engine:'3.5L V6',trans:'Automatic',drivetrain:'FWD',mpg:'19/26',features:['Sport Sedan','V6','Luxury'],emoji:'🚗'},
+            {id:'s025',tier:'standard',make:'Nissan',model:'Sentra',year:2017,marketPrice:10500,miles:'75,000',engine:'1.8L 4-Cyl',trans:'Automatic',drivetrain:'FWD',mpg:'29/37',features:['Compact','Efficient','Modern'],emoji:'🚗'},
+            {id:'s026',tier:'standard',make:'Ford',model:'Fusion',year:2016,marketPrice:12000,miles:'85,000',engine:'2.5L 4-Cyl',trans:'Automatic',drivetrain:'FWD',mpg:'22/34',features:['Stylish','Comfortable','Modern'],emoji:'🚗'},
+            {id:'s027',tier:'standard',make:'Ford',model:'Escape',year:2015,marketPrice:12500,miles:'90,000',engine:'2.5L 4-Cyl',trans:'Automatic',drivetrain:'AWD',mpg:'22/30',features:['Compact SUV','AWD','Popular'],emoji:'🚐'},
+            {id:'s028',tier:'standard',make:'Ford',model:'Explorer',year:2014,marketPrice:14500,miles:'95,000',engine:'3.5L V6',trans:'Automatic',drivetrain:'4WD',mpg:'17/23',features:['3rd Row','4WD','Iconic'],emoji:'🚐'},
+            {id:'s029',tier:'standard',make:'Ford',model:'F-150',year:2014,marketPrice:17500,miles:'95,000',engine:'5.0L V8',trans:'Automatic',drivetrain:'4WD',mpg:'15/21',features:['Best-Selling Truck','4WD','Powerful'],emoji:'🚚'},
+            {id:'s030',tier:'standard',make:'Ford',model:'Focus',year:2016,marketPrice:10500,miles:'80,000',engine:'2.0L 4-Cyl',trans:'Automatic',drivetrain:'FWD',mpg:'26/36',features:['Compact','Fun','Efficient'],emoji:'🚗'},
+            {id:'s031',tier:'standard',make:'Ford',model:'Mustang',year:2014,marketPrice:16500,miles:'75,000',engine:'3.7L V6',trans:'Automatic',drivetrain:'RWD',mpg:'19/28',features:['Iconic','RWD','Powerful'],emoji:'🏎️'},
+            {id:'s032',tier:'standard',make:'Ford',model:'Edge',year:2015,marketPrice:14000,miles:'85,000',engine:'2.0L Turbo',trans:'Automatic',drivetrain:'AWD',mpg:'20/28',features:['Crossover','Turbo','Comfortable'],emoji:'🚐'},
+            {id:'s033',tier:'standard',make:'Chevrolet',model:'Malibu',year:2016,marketPrice:11500,miles:'80,000',engine:'2.5L 4-Cyl',trans:'Automatic',drivetrain:'FWD',mpg:'25/37',features:['Mid-Size','Efficient','Modern'],emoji:'🚗'},
+            {id:'s034',tier:'standard',make:'Chevrolet',model:'Equinox',year:2015,marketPrice:12500,miles:'90,000',engine:'2.4L 4-Cyl',trans:'Automatic',drivetrain:'AWD',mpg:'20/29',features:['Compact SUV','AWD','Comfortable'],emoji:'🚐'},
+            {id:'s035',tier:'standard',make:'Chevrolet',model:'Traverse',year:2014,marketPrice:14500,miles:'95,000',engine:'3.6L V6',trans:'Automatic',drivetrain:'AWD',mpg:'17/24',features:['3rd Row','AWD','Spacious'],emoji:'🚐'},
+            {id:'s036',tier:'standard',make:'Chevrolet',model:'Silverado',year:2014,marketPrice:17500,miles:'90,000',engine:'5.3L V8',trans:'Automatic',drivetrain:'4WD',mpg:'16/23',features:['Full-Size Truck','4WD','Powerful'],emoji:'🚚'},
+            {id:'s037',tier:'standard',make:'Chevrolet',model:'Camaro',year:2014,marketPrice:17000,miles:'70,000',engine:'3.6L V6',trans:'Automatic',drivetrain:'RWD',mpg:'19/30',features:['Muscle Car','RWD','Stylish'],emoji:'🏎️'},
+            {id:'s038',tier:'standard',make:'Chevrolet',model:'Cruze',year:2016,marketPrice:10500,miles:'75,000',engine:'1.4L Turbo',trans:'Automatic',drivetrain:'FWD',mpg:'28/42',features:['Compact','Turbo','Efficient'],emoji:'🚗'},
+            {id:'s039',tier:'standard',make:'Chevrolet',model:'Colorado',year:2015,marketPrice:15500,miles:'85,000',engine:'3.6L V6',trans:'Automatic',drivetrain:'4WD',mpg:'18/26',features:['Mid-Size Truck','4WD','Modern'],emoji:'🚚'},
+            {id:'s040',tier:'standard',make:'Chevrolet',model:'Impala',year:2015,marketPrice:13500,miles:'80,000',engine:'3.6L V6',trans:'Automatic',drivetrain:'FWD',mpg:'19/29',features:['Full-Size','Spacious','Comfortable'],emoji:'🚗'},
+            {id:'s041',tier:'standard',make:'BMW',model:'3 Series',year:2014,marketPrice:15500,miles:'85,000',engine:'2.0L Turbo',trans:'Automatic',drivetrain:'RWD',mpg:'24/36',features:['Luxury','Sporty','RWD'],emoji:'🚗'},
+            {id:'s042',tier:'standard',make:'BMW',model:'X3',year:2014,marketPrice:16500,miles:'90,000',engine:'2.0L Turbo',trans:'Automatic',drivetrain:'AWD',mpg:'21/28',features:['Luxury SUV','AWD','Sporty'],emoji:'🚐'},
+            {id:'s043',tier:'standard',make:'Mercedes-Benz',model:'C-Class',year:2014,marketPrice:16000,miles:'80,000',engine:'2.0L Turbo',trans:'Automatic',drivetrain:'RWD',mpg:'24/31',features:['Luxury','Prestige','Comfortable'],emoji:'🚗'},
+            {id:'s044',tier:'standard',make:'Mercedes-Benz',model:'GLK',year:2014,marketPrice:17000,miles:'85,000',engine:'3.5L V6',trans:'Automatic',drivetrain:'AWD',mpg:'19/26',features:['Luxury SUV','AWD','Comfortable'],emoji:'🚐'},
+            {id:'s045',tier:'standard',make:'Audi',model:'A4',year:2014,marketPrice:15800,miles:'82,000',engine:'2.0L Turbo',trans:'Automatic',drivetrain:'AWD',mpg:'24/32',features:['Luxury','AWD','Turbo'],emoji:'🚗'},
+            {id:'s046',tier:'standard',make:'Audi',model:'Q5',year:2014,marketPrice:17500,miles:'88,000',engine:'2.0L Turbo',trans:'Automatic',drivetrain:'AWD',mpg:'20/28',features:['Luxury SUV','AWD','Sporty'],emoji:'🚐'},
+            {id:'s047',tier:'standard',make:'Lexus',model:'ES 350',year:2014,marketPrice:16500,miles:'75,000',engine:'3.5L V6',trans:'Automatic',drivetrain:'FWD',mpg:'21/31',features:['Luxury','Reliable','Comfortable'],emoji:'🚗'},
+            {id:'s048',tier:'standard',make:'Lexus',model:'RX 350',year:2014,marketPrice:18500,miles:'85,000',engine:'3.5L V6',trans:'Automatic',drivetrain:'AWD',mpg:'18/25',features:['Luxury SUV','AWD','Reliable'],emoji:'🚐'},
+            {id:'s049',tier:'standard',make:'Acura',model:'TLX',year:2015,marketPrice:15500,miles:'78,000',engine:'2.4L 4-Cyl',trans:'Automatic',drivetrain:'FWD',mpg:'24/35',features:['Luxury','Performance','Reliable'],emoji:'🚗'},
+            {id:'s050',tier:'standard',make:'Acura',model:'MDX',year:2014,marketPrice:17500,miles:'92,000',engine:'3.5L V6',trans:'Automatic',drivetrain:'AWD',mpg:'18/27',features:['Luxury SUV','3rd Row','AWD'],emoji:'🚐'}
         ];
 
-        let currentCars = [...carDatabase];
-        let currentFilter = 'all';
-        let currentUser = null;
-        let favorites = JSON.parse(localStorage.getItem('libertyFavorites')) || [];
-
-        document.addEventListener('DOMContentLoaded', function() {
-            displayCars(currentCars);
-            checkAuthStatus();
-            updateFavoritesCount();
-        });
-
-        function openAuthModal() {
-            document.getElementById('authModal').classList.add('active');
+        function init() {
+            renderCars(carDatabase);
+            updateFavCount();
         }
 
-        function closeAuthModal() {
-            document.getElementById('authModal').classList.remove('active');
+        function renderCars(cars) {
+            const grid = document.getElementById('carGrid');
+            grid.innerHTML = '';
+            cars.forEach(car => {
+                const discountedPrice = Math.round(car.marketPrice * 0.7);
+                const savings = car.marketPrice - discountedPrice;
+                const isFav = favorites.includes(car.id);
+                const card = document.createElement('div');
+                card.className = 'car-card';
+                card.onclick = (e) => {
+                    if(!e.target.closest('.favorite-btn')) openCarModal(car);
+                };
+                card.innerHTML = `
+                    <div class="car-image">
+                        ${car.emoji}
+                        <div class="discount-badge">-30%</div>
+                        <button class="favorite-btn ${isFav ? 'active' : ''}" onclick="toggleFavorite('${car.id}')">❤️</button>
+                    </div>
+                    <div class="car-info">
+                        <div class="car-title">${car.year} ${car.make} ${car.model}</div>
+                        <div class="car-details">${car.miles} mi · ${car.trans} · ${car.drivetrain}</div>
+                        <div class="car-price">
+                            <span class="price-current">$${discountedPrice.toLocaleString()}</span>
+                            <span class="price-original">$${car.marketPrice.toLocaleString()}</span>
+                        </div>
+                        <div class="price-savings">Save $${savings.toLocaleString()}</div>
+                        <div class="car-features">
+                            ${car.features.slice(0,3).map(f => `<span class="feature-tag">${f}</span>`).join('')}
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
         }
 
-        function switchAuthTab(tab) {
-            document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('active'));
+        function filterCars(tier) {
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
             event.target.classList.add('active');
-            if (tab === 'login') {
-                document.getElementById('loginForm').style.display = 'block';
-                document.getElementById('registerForm').style.display = 'none';
+            
+            if(tier === 'all') {
+                renderCars(carDatabase);
+            } else if(tier === 'favorites') {
+                const favCars = carDatabase.filter(c => favorites.includes(c.id));
+                renderCars(favCars);
             } else {
-                document.getElementById('loginForm').style.display = 'none';
-                document.getElementById('registerForm').style.display = 'block';
-            }
-        }
-
-        function handleLogin(e) {
-            e.preventDefault();
-            const email = document.getElementById('loginEmail').value;
-            const password = document.getElementById('loginPassword').value;
-            const users = JSON.parse(localStorage.getItem('libertyUsers')) || [];
-            const user = users.find(u => u.email === email && u.password === password);
-            if (user) {
-                currentUser = user;
-                localStorage.setItem('libertyCurrentUser', JSON.stringify(user));
-                closeAuthModal();
-                updateUIForLoggedInUser();
-                showToast('Welcome back, ' + user.name + '!');
-            } else {
-                document.getElementById('loginError').style.display = 'block';
-                document.getElementById('loginError').textContent = 'Invalid email or password';
-            }
-        }
-
-        function handleRegister(e) {
-            e.preventDefault();
-            const name = document.getElementById('regName').value;
-            const email = document.getElementById('regEmail').value;
-            const phone = document.getElementById('regPhone').value;
-            const password = document.getElementById('regPassword').value;
-            const confirmPassword = document.getElementById('regConfirmPassword').value;
-            if (password !== confirmPassword) {
-                document.getElementById('registerError').style.display = 'block';
-                document.getElementById('registerError').textContent = 'Passwords do not match';
-                return;
-            }
-            const users = JSON.parse(localStorage.getItem('libertyUsers')) || [];
-            if (users.find(u => u.email === email)) {
-                document.getElementById('registerError').style.display = 'block';
-                document.getElementById('registerError').textContent = 'Email already registered';
-                return;
-            }
-            const newUser = {id: Date.now(), name, email, phone, password, createdAt: new Date().toISOString()};
-            users.push(newUser);
-            localStorage.setItem('libertyUsers', JSON.stringify(users));
-            localStorage.setItem('libertyCurrentUser', JSON.stringify(newUser));
-            currentUser = newUser;
-            closeAuthModal();
-            updateUIForLoggedInUser();
-            showToast('Account created successfully!');
-        }
-
-        function checkAuthStatus() {
-            const savedUser = localStorage.getItem('libertyCurrentUser');
-            if (savedUser) {
-                currentUser = JSON.parse(savedUser);
-                updateUIForLoggedInUser();
-            }
-        }
-
-        function updateUIForLoggedInUser() {
-            if (currentUser) {
-                document.getElementById('loginBtn').style.display = 'none';
-                document.getElementById('userMenu').classList.add('active');
-                document.getElementById('userName').textContent = currentUser.name.split(' ')[0];
-            }
-        }
-
-        function toggleUserMenu() {
-            document.getElementById('userDropdown').classList.toggle('active');
-        }
-
-        function logout() {
-            currentUser = null;
-            localStorage.removeItem('libertyCurrentUser');
-            document.getElementById('loginBtn').style.display = 'block';
-            document.getElementById('userMenu').classList.remove('active');
-            document.getElementById('userDropdown').classList.remove('active');
-            showToast('Logged out successfully');
-        }
-
-        function toggleFavorite(btn, carId) {
-            event.stopPropagation();
-            if (!currentUser) {
-                openAuthModal();
-                return;
-            }
-            const index = favorites.indexOf(carId);
-            if (index > -1) {
-                favorites.splice(index, 1);
-                btn.classList.remove('active');
-                showToast('Removed from favorites');
-            } else {
-                favorites.push(carId);
-                btn.classList.add('active');
-                showToast('Added to favorites!');
-            }
-            localStorage.setItem('libertyFavorites', JSON.stringify(favorites));
-            updateFavoritesCount();
-        }
-
-        function updateFavoritesCount() {
-            const count = favorites.length;
-            const badge = document.getElementById('favCount');
-            if (count > 0) {
-                badge.textContent = count;
-                badge.style.display = 'flex';
-            } else {
-                badge.style.display = 'none';
+                const filtered = carDatabase.filter(c => c.tier === tier);
+                renderCars(filtered);
             }
         }
 
         function showFavorites() {
-            if (!currentUser) {
-                openAuthModal();
-                return;
+            const favCars = carDatabase.filter(c => favorites.includes(c.id));
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+            renderCars(favCars);
+        }
+
+        function toggleFavorite(carId) {
+            const idx = favorites.indexOf(carId);
+            if(idx > -1) favorites.splice(idx, 1);
+            else favorites.push(carId);
+            localStorage.setItem('libertyFavorites', JSON.stringify(favorites));
+            updateFavCount();
+            renderCars(carDatabase);
+        }
+
+        function updateFavCount() {
+            const count = document.getElementById('favCount');
+            if(favorites.length > 0) {
+                count.textContent = favorites.length;
+                count.style.display = 'flex';
+            } else {
+                count.style.display = 'none';
             }
-            filterByType('favorites');
         }
 
-        function showSavedCars() {
-            const savedCars = carDatabase.filter(c => favorites.includes(c.id));
-            currentCars = savedCars;
-            displayCars(savedCars);
-            document.getElementById('inventory').scrollIntoView({behavior: 'smooth'});
+        function openCarModal(car) {
+            currentCar = car;
+            const discountedPrice = Math.round(car.marketPrice * 0.7);
+            const savings = car.marketPrice - discountedPrice;
+            
+            document.getElementById('modalTitle').textContent = `${car.year} ${car.make} ${car.model}`;
+            document.getElementById('modalSubtitle').textContent = `${car.miles} miles · ${car.engine} · ${car.trans} · ${car.drivetrain}`;
+            document.getElementById('modalMarketPrice').textContent = `$${car.marketPrice.toLocaleString()}`;
+            document.getElementById('modalYourPrice').textContent = `$${discountedPrice.toLocaleString()}`;
+            document.getElementById('modalSavings').textContent = `$${savings.toLocaleString()} (30% off)`;
+            
+            const specs = document.getElementById('modalSpecs');
+            specs.innerHTML = `
+                <div class="spec-item"><div class="spec-label">Year</div><div class="spec-value">${car.year}</div></div>
+                <div class="spec-item"><div class="spec-label">Mileage</div><div class="spec-value">${car.miles}</div></div>
+                <div class="spec-item"><div class="spec-label">Engine</div><div class="spec-value">${car.engine}</div></div>
+                <div class="spec-item"><div class="spec-label">Transmission</div><div class="spec-value">${car.trans}</div></div>
+                <div class="spec-item"><div class="spec-label">Drivetrain</div><div class="spec-value">${car.drivetrain}</div></div>
+                <div class="spec-item"><div class="spec-label">MPG</div><div class="spec-value">${car.mpg}</div></div>
+            `;
+            
+            document.getElementById('modalFeatures').innerHTML = car.features.map(f => 
+                `<span class="feature-tag">${f}</span>`
+            ).join('');
+            
+            document.getElementById('carModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
         }
 
-        function showApplications() {
-            showToast('No active applications. Apply for financing to get started!');
+        function closeModal() {
+            document.getElementById('carModal').classList.remove('active');
+            document.body.style.overflow = '';
         }
 
-        function showTestDrives() {
-            showToast('No upcoming test drives. Schedule one today!');
+        function proceedToPayment() {
+            closeModal();
+            const discountedPrice = Math.round(currentCar.marketPrice * 0.7);
+            const btcAmount = (discountedPrice / BTC_PRICE).toFixed(8);
+            document.getElementById('btcAmount').textContent = `${btcAmount} BTC`;
+            document.getElementById('btcUsd').textContent = `$${discountedPrice.toLocaleString()} USD`;
+            document.getElementById('paymentModal').classList.add('active');
         }
 
-        function openCalcModal(price = 25000) {
+        function closePayment() {
+            document.getElementById('paymentModal').classList.remove('active');
+        }
+
+        function selectPayment(type) {
+            if(type === 'crypto') {
+                document.getElementById('cryptoSection').classList.add('active');
+            }
+        }
+
+        function copyBTC() {
+            navigator.clipboard.writeText(STATIC_BTC_ADDRESS);
+            alert('BTC address copied!');
+        }
+
+        function confirmPayment() {
+            closePayment();
+            document.getElementById('loadingScreen').classList.add('active');
+            
+            const statuses = [
+                'Waiting for blockchain confirmation...',
+                'Transaction detected in mempool...',
+                'Awaiting miner confirmation...',
+                'Confirming transaction...',
+                'Payment confirmed! Redirecting...'
+            ];
+            
+            let i = 0;
+            const interval = setInterval(() => {
+                i++;
+                if(i < statuses.length) {
+                    document.getElementById('loadingStatus').textContent = statuses[i];
+                }
+                if(i >= 5) {
+                    clearInterval(interval);
+                    setTimeout(() => {
+                        document.getElementById('loadingScreen').classList.remove('active');
+                        alert('Payment confirmed! We will contact you at management01098@gmail.com with next steps.');
+                    }, 1000);
+                }
+            }, 2000);
+        }
+
+        function openAuth() {
+            document.getElementById('authModal').classList.add('active');
+        }
+
+        function closeAuth() {
+            document.getElementById('authModal').classList.remove('active');
+        }
+
+        function handleAuth(e) {
+            e.preventDefault();
+            alert('Sign in functionality would connect to backend');
+            closeAuth();
+        }
+
+        function openCalculator() {
             document.getElementById('calcModal').classList.add('active');
-            document.getElementById('calcPrice').value = price;
             updateCalc();
         }
 
-        function closeCalcModal() {
+        function closeCalculator() {
             document.getElementById('calcModal').classList.remove('active');
         }
 
         function updateCalc() {
             const price = parseInt(document.getElementById('calcPrice').value);
-            const downPayment = parseInt(document.getElementById('calcDown').value);
-            const rate = parseFloat(document.getElementById('calcRate').value);
-            const months = parseInt(document.getElementById('calcTerm').value);
-            const credit = document.getElementById('calcCredit').value;
-            let adjustedRate = rate;
-            switch(credit) {
-                case 'excellent': adjustedRate -= 1.5; break;
-                case 'fair': adjustedRate += 2; break;
-                case 'poor': adjustedRate += 5; break;
-                case 'bad': adjustedRate += 8; break;
-            }
-            const principal = price - downPayment;
-            const monthlyRate = adjustedRate / 100 / 12;
-            let monthlyPayment;
-            if (adjustedRate === 0) {
-                monthlyPayment = principal / months;
-            } else {
-                monthlyPayment = principal * (monthlyRate * Math.pow(1 + monthlyRate, months)) / (Math.pow(1 + monthlyRate, months) - 1);
-            }
-            const totalCost = monthlyPayment * months + downPayment;
-            const totalInterest = totalCost - price;
-            document.getElementById('calcPriceDisplay').textContent = price.toLocaleString();
-            document.getElementById('calcDownDisplay').textContent = downPayment.toLocaleString();
-            document.getElementById('calcRateDisplay').textContent = adjustedRate.toFixed(1);
-            document.getElementById('calcTermDisplay').textContent = months;
-            document.getElementById('monthlyPayment').textContent = Math.round(monthlyPayment).toLocaleString();
-            document.getElementById('totalInterest').textContent = Math.round(totalInterest).toLocaleString();
-            document.getElementById('totalCost').textContent = Math.round(totalCost).toLocaleString();
+            const down = parseInt(document.getElementById('calcDown').value);
+            const term = parseInt(document.getElementById('calcTerm').value);
+            
+            document.getElementById('calcPriceVal').textContent = `$${price.toLocaleString()}`;
+            document.getElementById('calcDownVal').textContent = `$${down.toLocaleString()}`;
+            document.getElementById('calcTermVal').textContent = `${term} months`;
+            
+            const loan = price - down;
+            const rate = 0.05 / 12;
+            const monthly = (loan * rate * Math.pow(1 + rate, term)) / (Math.pow(1 + rate, term) - 1);
+            
+            document.getElementById('calcMonthly').textContent = `$${Math.round(monthly).toLocaleString()}`;
         }
 
-        function applyForFinancing() {
-            if (!currentUser) {
-                closeCalcModal();
-                openAuthModal();
-                showToast('Please sign in to apply for financing');
-                return;
-            }
-            showToast('Financing application submitted! Check your email.');
-            closeCalcModal();
-        }
+        window.onclick = (e) => {
+            if(e.target.classList.contains('modal-overlay')) closeModal();
+            if(e.target.classList.contains('payment-modal')) closePayment();
+            if(e.target.classList.contains('auth-modal')) closeAuth();
+            if(e.target.classList.contains('calc-modal')) closeCalculator();
+        };
 
-        function displayCars(cars) {
-            const grid = document.getElementById('carsGrid');
-            const loading = document.getElementById('loading');
-            const noResults = document.getElementById('noResults');
-            loading.classList.add('active');
-            grid.innerHTML = '';
-            setTimeout(() => {
-                loading.classList.remove('active');
-                if (cars.length === 0) {
-                    noResults.classList.add('active');
-                    return;
-                }
-                noResults.classList.remove('active');
-                cars.forEach(car => {
-                    grid.innerHTML += createCarCard(car);
-                });
-            }, 300);
-        }
-
-        function createCarCard(car) {
-            const monthlyPayment = Math.round(car.price * 0.015);
-            const badgeClass = car.condition === 'new' ? 'badge-new' : (car.price < 7000 ? 'badge-budget' : 'badge-used');
-            const priceClass = car.price < 7000 ? 'budget' : '';
-            const isFavorite = favorites.includes(car.id);
-            return `
-                <div class="car-card" onclick="openCarModal(${car.id})">
-                    <span class="car-badge ${badgeClass}">${car.condition === 'new' ? 'New' : (car.price < 7000 ? 'Budget' : 'Used')}</span>
-                    <div class="car-favorite ${isFavorite ? 'active' : ''}" onclick="toggleFavorite(this, ${car.id})">
-                        <i class="${isFavorite ? 'fas' : 'far'} fa-heart"></i>
-                    </div>
-                    <div class="car-image">
-                        <img src="${car.image}" alt="${car.year} ${car.brand} ${car.model}" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22220%22><rect fill=%22%23e2e8f0%22 width=%22400%22 height=%22220%22/><text fill=%22%23718096%22 x=%2250%%22 y=%2250%%22 text-anchor=%22middle%22 font-size=%2220%22>${car.brand}</text></svg>'">
-                    </div>
-                    <div class="car-info">
-                        <h3 class="car-title">${car.year} ${car.brand} ${car.model}</h3>
-                        <div class="car-meta">
-                            <span><i class="fas fa-road"></i> ${car.mileage.toLocaleString()} mi</span>
-                            <span><i class="fas fa-gas-pump"></i> ${car.fuel}</span>
-                        </div>
-                        <div class="car-features">
-                            ${car.features.slice(0, 3).map(f => `<span class="feature-tag">${f}</span>`).join('')}
-                        </div>
-                        <div class="car-price-section">
-                            <div>
-                                <div class="car-price ${priceClass}">$${car.price.toLocaleString()}</div>
-                                <div class="car-payment">$${monthlyPayment}/mo</div>
-                            </div>
-                        </div>
-                        <div class="car-actions">
-                            <button class="btn btn-primary btn-small" onclick="event.stopPropagation(); openCarModal(${car.id})">
-                                <i class="fas fa-info-circle"></i> Details
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            `;
-        }
-
-        function handleSearch(e) {
-            e.preventDefault();
-            const keyword = document.getElementById('keywordSearch').value.toLowerCase();
-            const brand = document.getElementById('brandFilter').value;
-            const priceRange = document.getElementById('priceFilter').value;
-            const bodyType = document.getElementById('bodyFilter').value;
-            let filtered = carDatabase.filter(car => {
-                const matchesKeyword = !keyword || 
-                    car.brand.toLowerCase().includes(keyword) ||
-                    car.model.toLowerCase().includes(keyword) ||
-                    car.year.toString().includes(keyword);
-                const matchesBrand = !brand || car.brand === brand;
-                let matchesPrice = true;
-                if (priceRange) {
-                    const [min, max] = priceRange.split('-').map(p => p.replace('+', ''));
-                    if (max) {
-                        matchesPrice = car.price >= parseInt(min) && car.price <= parseInt(max);
-                    } else {
-                        matchesPrice = car.price >= parseInt(min);
-                    }
-                }
-                const matchesBody = !bodyType || car.bodyType === bodyType;
-                let matchesCondition = true;
-                if (currentFilter !== 'all') {
-                    if (currentFilter === 'budget') {
-                        matchesCondition = car.price < 7000;
-                    } else if (currentFilter === 'favorites') {
-                        matchesCondition = favorites.includes(car.id);
-                    } else {
-                        matchesCondition = car.condition === currentFilter;
-                    }
-                }
-                return matchesKeyword && matchesBrand && matchesPrice && matchesBody && matchesCondition;
-            });
-            currentCars = filtered;
-            displayCars(currentCars);
-        }
-
-        function filterByType(type) {
-            currentFilter = type;
-            document.querySelectorAll('.filter-tag').forEach(tag => tag.classList.remove('active'));
-            event.target.classList.add('active');
-            handleSearch({preventDefault: () => {}});
-        }
-
-        function filterByBrand() {
-            handleSearch({preventDefault: () => {}});
-        }
-
-        function switchTab(type) {
-            currentFilter = type;
-            document.querySelectorAll('.search-tab').forEach(tab => tab.classList.remove('active'));
-            event.target.classList.add('active');
-            handleSearch({preventDefault: () => {}});
-        }
-
-        function sortCars(sortType) {
-            let sorted = [...currentCars];
-            switch(sortType) {
-                case 'price-low': sorted.sort((a, b) => a.price - b.price); break;
-                case 'price-high': sorted.sort((a, b) => b.price - a.price); break;
-            }
-            displayCars(sorted);
-        }
-
-        function openCarModal(carId) {
-            const car = carDatabase.find(c => c.id === carId);
-            if (!car) return;
-            const modal = document.getElementById('carModal');
-            const content = document.getElementById('modalContent');
-            const monthlyPayment = Math.round(car.price * 0.015);
-            const isFavorite = favorites.includes(carId);
-            content.innerHTML = `
-                <div style="display:grid;grid-template-columns:1fr 1fr;gap:0">
-                    <div style="height:400px">
-                        <img src="${car.image}" style="width:100%;height:100%;object-fit:cover" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22400%22><rect fill=%22%23e2e8f0%22 width=%22400%22 height=%22400%22/><text fill=%22%23718096%22 x=%2250%%22 y=%2250%%22 text-anchor=%22middle%22 font-size=%2224%22>${car.brand} ${car.model}</text></svg>'">
-                    </div>
-                    <div style="padding:40px;max-height:400px;overflow-y:auto">
-                        <div style="display:flex;justify-content:space-between;align-items:start;margin-bottom:15px">
-                            <span style="display:inline-block;padding:6px 16px;background:${car.condition === 'new' ? '#38a169' : (car.price < 7000 ? '#2d3748' : '#ed8936')};color:white;border-radius:20px;font-size:.75rem;font-weight:700;text-transform:uppercase">${car.condition === 'new' ? 'New' : (car.price < 7000 ? 'Budget Special' : 'Used')}</span>
-                            <div class="modal-close" onclick="closeCarModal()"><i class="fas fa-times"></i></div>
-                        </div>
-                        <h2 style="font-size:1.8rem;margin-bottom:10px;color:var(--primary)">${car.year} ${car.brand} ${car.model}</h2>
-                        <div style="font-size:2.2rem;font-weight:800;color:${car.price < 7000 ? '#2d3748' : '#c53030'};margin-bottom:5px">$${car.price.toLocaleString()}</div>
-                        <div style="color:var(--gray);margin-bottom:20px;text-decoration:line-through;font-size:1.1rem">Was: $${Math.round(car.price / 0.7).toLocaleString()}</div>
-                        <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:15px;margin-bottom:25px">
-                            <div style="padding:15px;background:#f7fafc;border-radius:8px">
-                                <div style="font-size:.8rem;color:var(--gray)">Mileage</div>
-                                <div style="font-weight:600">${car.mileage.toLocaleString()} mi</div>
-                            </div>
-                            <div style="padding:15px;background:#f7fafc;border-radius:8px">
-                                <div style="font-size:.8rem;color:var(--gray)">Fuel Type</div>
-                                <div style="font-weight:600">${car.fuel}</div>
-                            </div>
-                            <div style="padding:15px;background:#f7fafc;border-radius:8px">
-                                <div style="font-size:.8rem;color:var(--gray)">Transmission</div>
-                                <div style="font-weight:600">${car.transmission}</div>
-                            </div>
-                            <div style="padding:15px;background:#f7fafc;border-radius:8px">
-                                <div style="font-size:.8rem;color:var(--gray)">Est. Payment</div>
-                                <div style="font-weight:600;color:var(--secondary)">$${monthlyPayment}/mo</div>
-                            </div>
-                        </div>
-                        <div style="margin-bottom:25px">
-                            <h4 style="margin-bottom:10px;color:var(--primary)">Key Features</h4>
-                            <div style="display:flex;flex-wrap:wrap;gap:8px">
-                                ${car.features.map(f => `<span style="padding:6px 14px;background:#edf2f7;border-radius:15px;font-size:.85rem">${f}</span>`).join('')}
-                            </div>
-                        </div>
-                        <div style="display:flex;gap:15px;margin-bottom:20px">
-                            <button class="btn btn-primary" style="flex:1;justify-content:center" onclick="openCalcModal(${car.price})">
-                                <i class="fas fa-calculator"></i> Calculate Payment
-                            </button>
-                            <button class="btn btn-outline" style="flex:1;justify-content:center;${isFavorite ? 'background:#c53030;color:white' : ''}" onclick="toggleFavoriteFromModal(${car.id})">
-                                <i class="${isFavorite ? 'fas' : 'far'} fa-heart"></i> ${isFavorite ? 'Saved' : 'Save'}
-                            </button>
-                        </div>
-                        <div class="lead-form">
-                            <h4><i class="fas fa-envelope"></i> Interested? Let us know!</h4>
-                            <form onsubmit="submitLead(event, ${car.id})">
-                                <input type="text" placeholder="Your Name" required style="width:100%;padding:10px;margin-bottom:10px;border:1px solid #e2e8f0;border-radius:8px">
-                                <input type="tel" placeholder="Phone Number" required style="width:100%;padding:10px;margin-bottom:10px;border:1px solid #e2e8f0;border-radius:8px">
-                                <input type="email" placeholder="Email Address" required style="width:100%;padding:10px;margin-bottom:10px;border:1px solid #e2e8f0;border-radius:8px">
-                                <select style="width:100%;padding:10px;margin-bottom:10px;border:1px solid #e2e8f0;border-radius:8px">
-                                    <option>I'm interested in buying</option>
-                                    <option>I'd like to test drive</option>
-                                    <option>I have questions</option>
-                                </select>
-                                <button type="submit" class="btn btn-primary" style="width:100%">Submit Inquiry</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            `;
-            modal.classList.add('active');
-        }
-
-        function toggleFavoriteFromModal(carId) {
-            const btn = document.querySelector('.car-favorite');
-            toggleFavorite(btn, carId);
-            openCarModal(carId);
-        }
-
-        function closeCarModal() {
-            document.getElementById('carModal').classList.remove('active');
-        }
-
-        function submitLead(e, carId) {
-            e.preventDefault();
-            showToast('Thank you! A representative will contact you shortly.');
-            e.target.reset();
-        }
-
-        function showToast(message, isError = false) {
-            const toast = document.getElementById('toast');
-            toast.textContent = message;
-            toast.className = 'toast' + (isError ? ' error' : '');
-            toast.classList.add('active');
-            setTimeout(() => toast.classList.remove('active'), 3000);
-        }
-
-        function showForgotPassword() {
-            const email = prompt('Enter your email address:');
-            if (email) showToast('Password reset instructions sent to ' + email);
-        }
-
-        window.onclick = function(event) {
-            if (event.target === document.getElementById('carModal')) closeCarModal();
-            if (event.target === document.getElementById('authModal')) closeAuthModal();
-            if (event.target === document.getElementById('calcModal')) closeCalcModal();
-        }
-
-        document.addEventListener('click', function(e) {
-            const userMenu = document.getElementById('userMenu');
-            const userDropdown = document.getElementById('userDropdown');
-            if (userMenu && !userMenu.contains(e.target)) {
-                userDropdown.classList.remove('active');
-            }
-        });
+        init();
     </script>
 </body>
 </html>
