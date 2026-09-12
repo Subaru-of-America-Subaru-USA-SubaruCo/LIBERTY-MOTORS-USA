@@ -1,0 +1,1965 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liberty Motors USA - Premium New & Used Cars</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #1a365d;
+            --secondary: #c53030;
+            --accent: #ed8936;
+            --light: #f7fafc;
+            --dark: #1a202c;
+            --gray: #718096;
+            --success: #38a169;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        /* Header & Navigation */
+        header {
+            background: linear-gradient(135deg, var(--primary) 0%, #2c5282 100%);
+            color: white;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .top-bar {
+            background: rgba(0,0,0,0.2);
+            padding: 8px 0;
+            font-size: 0.85rem;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .top-bar-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .contact-info span {
+            margin-right: 25px;
+        }
+
+        .contact-info i {
+            margin-right: 5px;
+            color: var(--accent);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.8rem;
+            font-weight: 800;
+            text-decoration: none;
+            color: white;
+        }
+
+        .logo i {
+            font-size: 2.2rem;
+            color: var(--accent);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 35px;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-actions {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .btn {
+            padding: 10px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: var(--secondary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #9b2c2c;
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-outline:hover {
+            background: white;
+            color: var(--primary);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(26, 54, 93, 0.85), rgba(26, 54, 93, 0.9)),
+                        url('images/hero-bg.jpg') center/cover;
+            padding: 100px 0;
+            text-align: center;
+            color: white;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 40px;
+            opacity: 0.9;
+        }
+
+        /* Search Section */
+        .search-section {
+            background: white;
+            padding: 40px 0;
+            margin-top: -50px;
+            position: relative;
+            z-index: 100;
+        }
+
+        .search-container {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            padding: 30px;
+        }
+
+        .search-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 25px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        .search-tab {
+            padding: 12px 30px;
+            background: none;
+            border: none;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            color: var(--gray);
+            position: relative;
+            transition: color 0.3s;
+        }
+
+        .search-tab.active {
+            color: var(--primary);
+        }
+
+        .search-tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--secondary);
+        }
+
+        .search-form {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr auto;
+            gap: 15px;
+            align-items: end;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--gray);
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .form-group input,
+        .form-group select {
+            padding: 14px 18px;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .search-btn {
+            padding: 14px 35px;
+            background: var(--secondary);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .search-btn:hover {
+            background: #9b2c2c;
+            transform: translateY(-2px);
+        }
+
+        /* Stats Section */
+        .stats {
+            padding: 60px 0;
+            background: var(--light);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 30px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        .stat-card i {
+            font-size: 2.5rem;
+            color: var(--secondary);
+            margin-bottom: 15px;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--primary);
+        }
+
+        .stat-label {
+            color: var(--gray);
+            font-weight: 500;
+        }
+
+        /* Featured Brands */
+        .brands {
+            padding: 80px 0;
+            background: white;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .section-header p {
+            color: var(--gray);
+            font-size: 1.1rem;
+        }
+
+        .brands-grid {
+            display: grid;
+            grid-template-columns: repeat(8, 1fr);
+            gap: 25px;
+        }
+
+        .brand-card {
+            background: var(--light);
+            padding: 25px;
+            border-radius: 12px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .brand-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border-color: var(--secondary);
+        }
+
+        .brand-card img {
+            width: 60px;
+            height: 60px;
+            object-fit: contain;
+            margin-bottom: 10px;
+        }
+
+        .brand-card span {
+            display: block;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        /* Inventory Section */
+        .inventory {
+            padding: 80px 0;
+            background: var(--light);
+        }
+
+        .inventory-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .filter-tags {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .filter-tag {
+            padding: 8px 20px;
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+
+        .filter-tag:hover,
+        .filter-tag.active {
+            background: var(--secondary);
+            color: white;
+            border-color: var(--secondary);
+        }
+
+        .sort-dropdown {
+            padding: 10px 20px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            background: white;
+            cursor: pointer;
+        }
+
+        .cars-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        .car-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .car-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .car-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            z-index: 10;
+        }
+
+        .badge-new {
+            background: var(--success);
+            color: white;
+        }
+
+        .badge-used {
+            background: var(--accent);
+            color: white;
+        }
+
+        .car-image {
+            position: relative;
+            height: 220px;
+            overflow: hidden;
+        }
+
+        .car-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .car-card:hover .car-image img {
+            transform: scale(1.1);
+        }
+
+        .car-favorite {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 40px;
+            height: 40px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+
+        .car-favorite:hover {
+            background: var(--secondary);
+            color: white;
+        }
+
+        .car-info {
+            padding: 25px;
+        }
+
+        .car-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+
+        .car-meta {
+            display: flex;
+            gap: 15px;
+            color: var(--gray);
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+
+        .car-meta span {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .car-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .feature-tag {
+            padding: 4px 12px;
+            background: #edf2f7;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            color: var(--gray);
+        }
+
+        .car-price-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 15px;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .car-price {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--secondary);
+        }
+
+        .car-price .original {
+            font-size: 1rem;
+            color: var(--gray);
+            text-decoration: line-through;
+            font-weight: 500;
+            margin-left: 10px;
+        }
+
+        .car-payment {
+            font-size: 0.85rem;
+            color: var(--gray);
+        }
+
+        .car-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .btn-small {
+            padding: 10px 20px;
+            font-size: 0.9rem;
+            flex: 1;
+            justify-content: center;
+        }
+
+        /* Services Section */
+        .services {
+            padding: 80px 0;
+            background: white;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+        }
+
+        .service-card {
+            padding: 40px 30px;
+            text-align: center;
+            border-radius: 16px;
+            background: var(--light);
+            transition: all 0.3s;
+        }
+
+        .service-card:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-5px);
+        }
+
+        .service-card:hover h3,
+        .service-card:hover p {
+            color: white;
+        }
+
+        .service-card i {
+            font-size: 3rem;
+            color: var(--secondary);
+            margin-bottom: 20px;
+            transition: color 0.3s;
+        }
+
+        .service-card:hover i {
+            color: var(--accent);
+        }
+
+        .service-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+
+        .service-card p {
+            color: var(--gray);
+            line-height: 1.7;
+        }
+
+        /* Testimonials */
+        .testimonials {
+            padding: 80px 0;
+            background: linear-gradient(135deg, var(--primary) 0%, #2c5282 100%);
+            color: white;
+        }
+
+        .testimonials .section-header h2 {
+            color: white;
+        }
+
+        .testimonials .section-header p {
+            color: rgba(255,255,255,0.8);
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .testimonial-card {
+            background: rgba(255,255,255,0.1);
+            padding: 35px;
+            border-radius: 16px;
+            backdrop-filter: blur(10px);
+        }
+
+        .testimonial-stars {
+            color: var(--accent);
+            margin-bottom: 20px;
+        }
+
+        .testimonial-text {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            margin-bottom: 25px;
+            font-style: italic;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .testimonial-author img {
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .author-info h4 {
+            font-weight: 600;
+        }
+
+        .author-info span {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 70px 0 30px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 50px;
+            margin-bottom: 50px;
+        }
+
+        .footer-brand .logo {
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        .footer-brand p {
+            color: #a0aec0;
+            line-height: 1.8;
+            margin-bottom: 25px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-links a {
+            width: 45px;
+            height: 45px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            background: var(--secondary);
+            transform: translateY(-3px);
+        }
+
+        .footer-column h4 {
+            font-size: 1.2rem;
+            margin-bottom: 25px;
+            color: white;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column li {
+            margin-bottom: 12px;
+        }
+
+        .footer-column a {
+            color: #a0aec0;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-column a:hover {
+            color: var(--accent);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .footer-bottom p {
+            color: #a0aec0;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 20px;
+            max-width: 900px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            background: var(--light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: all 0.3s;
+        }
+
+        .modal-close:hover {
+            background: var(--secondary);
+            color: white;
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .brands-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+            .services-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            .hero h1 {
+                font-size: 2rem;
+            }
+            .search-form {
+                grid-template-columns: 1fr;
+            }
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .brands-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Loading Animation */
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 50px;
+        }
+
+        .loading.active {
+            display: block;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid #e2e8f0;
+            border-top-color: var(--secondary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* No Results */
+        .no-results {
+            text-align: center;
+            padding: 60px;
+            display: none;
+        }
+
+        .no-results.active {
+            display: block;
+        }
+
+        .no-results i {
+            font-size: 4rem;
+            color: var(--gray);
+            margin-bottom: 20px;
+        }
+
+        /* Pagination */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 50px;
+        }
+
+        .page-btn {
+            padding: 12px 20px;
+            border: 2px solid #e2e8f0;
+            background: white;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+
+        .page-btn:hover,
+        .page-btn.active {
+            background: var(--secondary);
+            color: white;
+            border-color: var(--secondary);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="top-bar">
+            <div class="container">
+                <div class="top-bar-content">
+                    <div class="contact-info">
+                        <span><i class="fas fa-phone"></i> 1-800-LIBERTY</span>
+                        <span><i class="fas fa-envelope"></i> sales@libertymotorsusa.com</span>
+                        <span><i class="fas fa-map-marker-alt"></i> Nationwide Delivery Available</span>
+                    </div>
+                    <div class="hours">
+                        <i class="fas fa-clock"></i> Open Today: 9AM - 8PM
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <nav>
+                <a href="#" class="logo">
+                    <i class="fas fa-flag-usa"></i>
+                    Liberty Motors USA
+                </a>
+                <ul class="nav-links">
+                    <li><a href="#new">New Cars</a></li>
+                    <li><a href="#used">Used Cars</a></li>
+                    <li><a href="#brands">Brands</a></li>
+                    <li><a href="#financing">Financing</a></li>
+                    <li><a href="#trade">Trade-In</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+                <div class="nav-actions">
+                    <a href="#" class="btn btn-outline"><i class="fas fa-heart"></i> Saved</a>
+                    <a href="#" class="btn btn-primary"><i class="fas fa-user"></i> Sign In</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Find Your Perfect American Ride</h1>
+            <p>Over 50,000 new and used vehicles nationwide with guaranteed best prices</p>
+        </div>
+    </section>
+
+    <!-- Search Section -->
+    <section class="search-section">
+        <div class="container">
+            <div class="search-container">
+                <div class="search-tabs">
+                    <button class="search-tab active" onclick="switchTab('all')">All Vehicles</button>
+                    <button class="search-tab" onclick="switchTab('new')">New Cars</button>
+                    <button class="search-tab" onclick="switchTab('used')">Used Cars</button>
+                    <button class="search-tab" onclick="switchTab('certified')">Certified Pre-Owned</button>
+                </div>
+                <form class="search-form" onsubmit="handleSearch(event)">
+                    <div class="form-group">
+                        <label>Search by Keyword</label>
+                        <input type="text" id="keywordSearch" placeholder="e.g., Ford F-150, SUV, Red...">
+                    </div>
+                    <div class="form-group">
+                        <label>Make</label>
+                        <select id="brandFilter" onchange="filterByBrand()">
+                            <option value="">All Brands</option>
+                            <option value="Acura">Acura</option>
+                            <option value="Audi">Audi</option>
+                            <option value="BMW">BMW</option>
+                            <option value="Buick">Buick</option>
+                            <option value="Cadillac">Cadillac</option>
+                            <option value="Chevrolet">Chevrolet</option>
+                            <option value="Chrysler">Chrysler</option>
+                            <option value="Dodge">Dodge</option>
+                            <option value="Ford">Ford</option>
+                            <option value="GMC">GMC</option>
+                            <option value="Honda">Honda</option>
+                            <option value="Hyundai">Hyundai</option>
+                            <option value="Infiniti">Infiniti</option>
+                            <option value="Jaguar">Jaguar</option>
+                            <option value="Jeep">Jeep</option>
+                            <option value="Kia">Kia</option>
+                            <option value="Land Rover">Land Rover</option>
+                            <option value="Lexus">Lexus</option>
+                            <option value="Lincoln">Lincoln</option>
+                            <option value="Mazda">Mazda</option>
+                            <option value="Mercedes-Benz">Mercedes-Benz</option>
+                            <option value="Mitsubishi">Mitsubishi</option>
+                            <option value="Nissan">Nissan</option>
+                            <option value="Porsche">Porsche</option>
+                            <option value="Ram">Ram</option>
+                            <option value="Subaru">Subaru</option>
+                            <option value="Tesla">Tesla</option>
+                            <option value="Toyota">Toyota</option>
+                            <option value="Volkswagen">Volkswagen</option>
+                            <option value="Volvo">Volvo</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Price Range</label>
+                        <select id="priceFilter">
+                            <option value="">Any Price</option>
+                            <option value="0-15000">Under $15,000</option>
+                            <option value="15000-25000">$15,000 - $25,000</option>
+                            <option value="25000-35000">$25,000 - $35,000</option>
+                            <option value="35000-50000">$35,000 - $50,000</option>
+                            <option value="50000-75000">$50,000 - $75,000</option>
+                            <option value="75000+">$75,000+</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Body Type</label>
+                        <select id="bodyFilter">
+                            <option value="">All Types</option>
+                            <option value="Sedan">Sedan</option>
+                            <option value="SUV">SUV</option>
+                            <option value="Truck">Truck</option>
+                            <option value="Coupe">Coupe</option>
+                            <option value="Convertible">Convertible</option>
+                            <option value="Wagon">Wagon</option>
+                            <option value="Minivan">Minivan</option>
+                            <option value="Hatchback">Hatchback</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="search-btn">
+                        <i class="fas fa-search"></i> Search
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <i class="fas fa-car"></i>
+                    <div class="stat-number">50,000+</div>
+                    <div class="stat-label">Vehicles Available</div>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-dollar-sign"></i>
+                    <div class="stat-number">$500M+</div>
+                    <div class="stat-label">Financing Provided</div>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-users"></i>
+                    <div class="stat-number">100K+</div>
+                    <div class="stat-label">Happy Customers</div>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-award"></i>
+                    <div class="stat-number">#1</div>
+                    <div class="stat-label">Rated Dealer</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Brands Section -->
+    <section class="brands" id="brands">
+        <div class="container">
+            <div class="section-header">
+                <h2>Popular Brands</h2>
+                <p>Browse vehicles from America's most trusted manufacturers</p>
+            </div>
+            <div class="brands-grid">
+                <div class="brand-card" onclick="filterByBrandName('Ford')">
+                    <i class="fas fa-car-side" style="font-size: 2.5rem; color: var(--primary);"></i>
+                    <span>Ford</span>
+                </div>
+                <div class="brand-card" onclick="filterByBrandName('Chevrolet')">
+                    <i class="fas fa-car-side" style="font-size: 2.5rem; color: var(--primary);"></i>
+                    <span>Chevrolet</span>
+                </div>
+                <div class="brand-card" onclick="filterByBrandName('Toyota')">
+                    <i class="fas fa-car-side" style="font-size: 2.5rem; color: var(--primary);"></i>
+                    <span>Toyota</span>
+                </div>
+                <div class="brand-card" onclick="filterByBrandName('Honda')">
+                    <i class="fas fa-car-side" style="font-size: 2.5rem; color: var(--primary);"></i>
+                    <span>Honda</span>
+                </div>
+                <div class="brand-card" onclick="filterByBrandName('Jeep')">
+                    <i class="fas fa-truck-monster" style="font-size: 2.5rem; color: var(--primary);"></i>
+                    <span>Jeep</span>
+                </div>
+                <div class="brand-card" onclick="filterByBrandName('Ram')">
+                    <i class="fas fa-truck-pickup" style="font-size: 2.5rem; color: var(--primary);"></i>
+                    <span>Ram</span>
+                </div>
+                <div class="brand-card" onclick="filterByBrandName('BMW')">
+                    <i class="fas fa-car-side" style="font-size: 2.5rem; color: var(--primary);"></i>
+                    <span>BMW</span>
+                </div>
+                <div class="brand-card" onclick="filterByBrandName('Mercedes-Benz')">
+                    <i class="fas fa-car-side" style="font-size: 2.5rem; color: var(--primary);"></i>
+                    <span>Mercedes</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Inventory Section -->
+    <section class="inventory" id="inventory">
+        <div class="container">
+            <div class="section-header">
+                <h2>Featured Inventory</h2>
+                <p>Hand-picked vehicles with the best value</p>
+            </div>
+            
+            <div class="inventory-header">
+                <div class="filter-tags">
+                    <span class="filter-tag active" onclick="filterByType('all')">All Vehicles</span>
+                    <span class="filter-tag" onclick="filterByType('new')">New</span>
+                    <span class="filter-tag" onclick="filterByType('used')">Used</span>
+                    <span class="filter-tag" onclick="filterByType('certified')">Certified</span>
+                    <span class="filter-tag" onclick="filterByType('truck')">Trucks</span>
+                    <span class="filter-tag" onclick="filterByType('suv')">SUVs</span>
+                    <span class="filter-tag" onclick="filterByType('sedan')">Sedans</span>
+                    <span class="filter-tag" onclick="filterByType('electric')">Electric</span>
+                </div>
+                <select class="sort-dropdown" onchange="sortCars(this.value)">
+                    <option value="featured">Sort by: Featured</option>
+                    <option value="price-low">Price: Low to High</option>
+                    <option value="price-high">Price: High to Low</option>
+                    <option value="year-new">Year: Newest First</option>
+                    <option value="year-old">Year: Oldest First</option>
+                    <option value="mileage">Mileage: Low to High</option>
+                </select>
+            </div>
+
+            <div class="loading" id="loading">
+                <div class="spinner"></div>
+                <p>Loading inventory...</p>
+            </div>
+
+            <div class="no-results" id="noResults">
+                <i class="fas fa-search"></i>
+                <h3>No vehicles found</h3>
+                <p>Try adjusting your search criteria</p>
+            </div>
+
+            <div class="cars-grid" id="carsGrid">
+                <!-- Cars will be populated by JavaScript -->
+            </div>
+
+            <div class="pagination" id="pagination">
+                <button class="page-btn active">1</button>
+                <button class="page-btn">2</button>
+                <button class="page-btn">3</button>
+                <button class="page-btn">4</button>
+                <button class="page-btn"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services">
+        <div class="container">
+            <div class="section-header">
+                <h2>Why Choose Liberty Motors</h2>
+                <p>We make car buying simple, transparent, and enjoyable</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <i class="fas fa-shield-alt"></i>
+                    <h3>Lifetime Warranty</h3>
+                    <p>Every vehicle comes with our exclusive lifetime powertrain warranty for complete peace of mind.</p>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-undo"></i>
+                    <h3>7-Day Return</h3>
+                    <p>Not satisfied? Return any vehicle within 7 days for a full refund, no questions asked.</p>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-hand-holding-usd"></i>
+                    <h3>Best Price Guarantee</h3>
+                    <p>Find a better price elsewhere? We'll match it and beat it by $500.</p>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-truck"></i>
+                    <h3>Nationwide Delivery</h3>
+                    <p>We deliver to your doorstep anywhere in the continental USA within 48 hours.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <h2>What Our Customers Say</h2>
+                <p>Join thousands of satisfied Liberty Motors customers</p>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">"Best car buying experience ever! Found my dream F-150 at an incredible price. The online process was seamless and the truck was delivered right to my driveway in Texas."</p>
+                    <div class="testimonial-author">
+                        <img src="images/testimonial-1.jpg" alt="Customer">
+                        <div class="author-info">
+                            <h4>Michael Rodriguez</h4>
+                            <span>Austin, TX</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">"Traded in my old Honda and got way more than expected. The financing team got me approved in minutes with a rate lower than my credit union. Highly recommend!"</p>
+                    <div class="testimonial-author">
+                        <img src="images/testimonial-2.jpg" alt="Customer">
+                        <div class="author-info">
+                            <h4>Sarah Johnson</h4>
+                            <span>Denver, CO</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">"Third car I've bought from Liberty Motors. Their certified pre-owned program is unbeatable. My BMW looks and drives like new but saved me $15,000."</p>
+                    <div class="testimonial-author">
+                        <img src="images/testimonial-3.jpg" alt="Customer">
+                        <div class="author-info">
+                            <h4>David Chen</h4>
+                            <span>Seattle, WA</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="#" class="logo">
+                        <i class="fas fa-flag-usa"></i>
+                        Liberty Motors USA
+                    </a>
+                    <p>America's trusted destination for new and used vehicles. With over 20 years of experience, we've helped over 100,000 customers find their perfect ride. Quality cars, transparent pricing, exceptional service.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#">New Vehicles</a></li>
+                        <li><a href="#">Used Vehicles</a></li>
+                        <li><a href="#">Certified Pre-Owned</a></li>
+                        <li><a href="#">Sell Your Car</a></li>
+                        <li><a href="#">Value Your Trade</a></li>
+                        <li><a href="#">Schedule Test Drive</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="#">Auto Financing</a></li>
+                        <li><a href="#">Lease Options</a></li>
+                        <li><a href="#">Vehicle Protection</a></li>
+                        <li><a href="#">Service Center</a></li>
+                        <li><a href="#">Parts & Accessories</a></li>
+                        <li><a href="#">Body Shop</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Contact Us</h4>
+                    <ul>
+                        <li><i class="fas fa-phone"></i> 1-800-LIBERTY</li>
+                        <li><i class="fas fa-envelope"></i> sales@libertymotorsusa.com</li>
+                        <li><i class="fas fa-map-marker-alt"></i> 1776 Freedom Drive<br>Detroit, MI 48201</li>
+                        <li><i class="fas fa-clock"></i> Mon-Sat: 9AM - 8PM<br>Sun: 11AM - 6PM</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Liberty Motors USA. All rights reserved.</p>
+                <p>Privacy Policy | Terms of Service | Accessibility | Sitemap</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Car Detail Modal -->
+    <div class="modal" id="carModal">
+        <div class="modal-content">
+            <div class="modal-close" onclick="closeModal()">
+                <i class="fas fa-times"></i>
+            </div>
+            <div id="modalContent">
+                <!-- Modal content populated by JS -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Comprehensive Car Database - Popular US Vehicles
+        const carDatabase = [
+            // Ford Vehicles
+            { id: 1, brand: "Ford", model: "F-150", year: 2026, price: 45995, mileage: 0, condition: "new", bodyType: "Truck", fuel: "Gasoline", transmission: "Automatic", color: "Agate Black", features: ["4x4", "V6 EcoBoost", "Sync 4", "Trailer Tow Package"], image: "images/cars/ford-f150.jpg", mpg: "20/24" },
+            { id: 2, brand: "Ford", model: "F-150 Lightning", year: 2026, price: 63995, mileage: 0, condition: "new", bodyType: "Truck", fuel: "Electric", transmission: "Automatic", color: "Star White", features: ["Extended Range", "BlueCruise", "Pro Power", "Mega Power Frunk"], image: "images/cars/ford-f150-lightning.jpg", mpg: "300 mi range" },
+            { id: 3, brand: "Ford", model: "Mustang", year: 2026, price: 32995, mileage: 0, condition: "new", bodyType: "Coupe", fuel: "Gasoline", transmission: "Manual", color: "Race Red", features: ["5.0L V8", "Track Pack", "Brembo Brakes", "Recaro Seats"], image: "images/cars/ford-mustang.jpg", mpg: "15/24" },
+            { id: 4, brand: "Ford", model: "Mustang Mach-E", year: 2026, price: 48995, mileage: 0, condition: "new", bodyType: "SUV", fuel: "Electric", transmission: "Automatic", color: "Carbonized Gray", features: ["AWD", "Extended Range", "BlueCruise", "B&O Sound"], image: "images/cars/ford-mach-e.jpg", mpg: "270 mi range" },
+            { id: 5, brand: "Ford", model: "Explorer", year: 2026, price: 38995, mileage: 0, condition: "new", bodyType: "SUV", fuel: "Gasoline", transmission: "Automatic", color: "Atlas Blue", features: ["3-Row", "4WD", "Co-Pilot360", "Power Liftgate"], image: "images/cars/ford-explorer.jpg", mpg: "21/28" },
+            { id: 6, brand: "Ford", model: "Escape", year: 2026, price: 29995, mileage: 0, condition: "new", bodyType: "SUV", fuel: "Hybrid", transmission: "Automatic", color: "Iconic Silver", features: ["AWD", "Hybrid", "SYNC 4", "Wireless Charging"], image: "images/cars/ford-escape.jpg", mpg: "44/37" },
+            { id: 7, brand: "Ford", model: "Bronco", year: 2026, price: 41995, mileage: 0, condition: "new", bodyType: "SUV", fuel: "Gasoline", transmission: "Automatic", color: "Eruption Green", features: ["4x4", "Sasquatch", "Hard Top", "Trail Control"], image: "images/cars/ford-bronco.jpg", mpg: "17/17" },
+            { id: 8, brand: "Ford", model: "Ranger", year: 2026, price: 35995, mileage: 0, condition: "new", bodyType: "Truck", fuel: "Gasoline", transmission: "Automatic", color: "Cactus Gray", features: ["4x4", "FX4 Off-Road", "Towing Package", "Bed Liner"], image: "images/cars/ford-ranger.jpg", mpg: "20/24" },
+            { id: 9, brand: "Ford", model: "Edge", year: 2025, price: 28995, mileage: 15000, condition: "used", bodyType: "SUV", fuel: "Gasoline", transmission: "Automatic", color: "Burgundy Velvet", features: ["AWD", "SEL", "Panoramic Roof", "Heated Seats"], image: "images/cars/ford-edge.jpg", mpg: "21/28" },
+            { id: 10, brand: "Ford", model: "Fusion", year: 2020, price: 18995, mileage: 45000, condition: "used", bodyType: "Sedan", fuel: "Gasoline", transmission: "Automatic", color: "Oxford White", features: ["SE", "Backup Camera", "Bluetooth", "Cruise Control"], image: "images/cars/ford-fusion.jpg", mpg: "23/34" },
+
+            // Chevrolet Vehicles
+            { id: 11, brand: "Chevrolet", model: "Silverado 1500", year: 2026, price: 43995, mileage: 0, condition: "new", bodyType: "Truck", fuel: "Gasoline", transmission: "Automatic", color: "Summit White", features: ["4x4", "Crew Cab", "TurboMax", "Multi-Flex Tailgate"], image: "images/cars/chevy-silverado.jpg", mpg: "18/21" },
+            { id: 12, brand: "Chevrolet", model: "Silverado EV", year: 2026, price: 79995, mileage: 0, condition: "new", bodyType: "Truck", fuel: "Electric", transmission: "Automatic", color: "Riptide Blue", features: ["RST", "400 mi range", "Super Cruise", "Multi-Flex Midgate"], image: "images/cars/chevy-silverado-ev.jpg", mpg: "400 mi range" },
+            { id: 13, brand: "Chevrolet", model: "Equinox", year: 2026, price: 28995, mileage: 0, condition: "new", bodyType: "SUV", fuel: "Gasoline", transmission: "Automatic", color: "Mosaic Black", features: ["AWD", "RS", "Wireless CarPlay", "Hands-Free Liftgate"], image: "images/cars/chevy-equinox.jpg", mpg: "26/31" },
+            { id: 14, brand: "Chevrolet", model: "Equinox EV", year: 2026, price: 41995, mileage: 0, condition: "new", bodyType: "SUV", fuel: "Electric", transmission: "Automatic", color: "Galaxy Gray", features: ["3RS", "300 mi range", "Super Cruise", "Fixed Glass Roof"], image: "images/cars/chevy-equinox-ev.jpg", mpg: "300 mi range" },
+            { id: 15, brand: "Chevrolet", model: "Tahoe", year: 2026, price: 61995, mileage: 0, condition: "new", bodyType: "SUV", fuel: "Gasoline", transmission: "Automatic", color: "Empire Beige", features: ["4WD", "Z71", "Magnetic Ride", "Bose Audio"], image: "images/cars/chevy-tahoe.jpg", mpg: "15/20" },
+            { id: 16, brand: "Chevrolet", model: "Suburban", year: 2026, price: 65995, mileage: 0, condition: "new", bodyType: "SUV", fuel: "Gasoline", transmission: "Automatic", color: "Black", features: ["High Country", "4WD", "Rear Media", "Panoramic Roof"], image: "images/cars/chevy-suburban.jpg", mpg: "14/19" },
+            { id: 17, brand: "Chevrolet", model: "Camaro", year: 2024, price: 32995, mileage: 5000, condition: "used", bodyType: "Coupe", fuel: "Gasoline", transmission: "Manual", color: "Rapid Blue", features: ["SS", "6.2L V8", "1LE Track Pack", "Recaro"], image: "images/cars/chevy-camaro.jpg", mpg: "16/24" },
+            { id: 18, brand: "Chevrolet", model: "Corvette", year: 2026, price: 69995, mileage: 0, condition: "new", bodyType: "Coupe", fuel: "Gasoline", transmission: "Automatic", color: "Torch Red", features: ["Stingray", "Z51", "3LT", "Front Lift"], image: "images/cars/chevy-corvette.jpg", mpg: "16/24" },
+            { id: 19, brand: "Chevrolet", model: "Traverse", year: 2026, price: 37995, mileage: 0, condition: "new", bodyType: "SUV", fuel: "Gasoline", transmission: "Automatic", color: "Lakeshore Blue", features: ["3-Row", "AWD", "Super Cruise", "Power Folding Seats"], image: "images/cars/chevy-traverse.jpg", mpg: "20/27" },
+            { id: 20, brand: "Chevrolet", model: "Blazer", year: 2026, price: 36995, mileage: 0, condition: "new", bodyType: "SUV", fuel: "Gasoline", transmission: "Automatic", color: "Copper Bronze", features: ["RS", "AWD", "Nightshift Blue Interior", "Adaptive Cruise"], image: "images/cars/chevy-blazer.jpg", mpg: "22/29" },
+            { id: 21, brand: "Chevrolet", model: "Malibu", year: 2025, price: 25995, mileage: 8000, condition: "used", bodyType: "Sedan", fuel: "Gasoline", transmission: "Automatic", color: "Cherry Red", features: ["Premier", "Leather", "Bose", "Sunroof"], image: "images/cars/chevy-malibu.jpg", mpg: "27/35" },
+            { id: 22, brand: "Chevrolet", model: "Trailblazer", year: 2026, price: 24995, mileage: 0, condition: "new", bodyType: "SUV", fuel: "Gasoline", transmission: "Automatic", color: "Nitro Yellow", features: ["Activ", "AWD", "Roof Rails", "Wireless Charging"], image: "images/cars/chevy-trailblazer.jpg", mpg: "26/30" },
+            { id: 23, brand: "Chevrolet", model: "Colorado", year: 2026, price: 33995, mileage: 0, condition: "new", bodyType: "Truck", fuel: "Gasoline", transmission: "Automatic", color: "Sand Dune", features: ["ZR2", "Multimatic DSSV", "Underbody Cameras", "Winch"], image: "images/cars/chevy-colorado.jpg", mpg: "16/18" },
+            { id: 24, brand: "Chevrolet", model: "Bolt EUV", year: 2023, price: 24995, mileage: 12000, condition: "used", bodyType: "SUV", fuel: "Electric", transmission: "Automatic", color: "Summit White", features: ["Super Cruise", "250 mi range", "One Pedal Driving"], image: "images/cars/chevy-bolt-euv.jpg", mpg: "250 mi range" },
+
+            // Toyota Vehicles
+            { id: 25, brand: "Toyota", model: "Camry", year: 2026, price: 28995, mileage: 0, condition: "new", bodyType: "Sedan", fuel: "Gasoline", transmission: "Automatic", color: "Midnight Black", features: ["XSE", "AWD", "JBL Audio", "Panoramic Roof"], image: "images/cars/toyota-camry.jpg", mpg: "28/39" },
+            { id: 26, brand: "Toyota", model: "Corolla", year: 2026, price: 23995, mileage: 0, condition: "new", bodyType: "Sedan", fuel: "Hybrid", transmission: "Automatic", color: "Celestite Gray", features: ["Hybrid", "LE", "Toyota Safety Sense", "Wireless CarPlay"], image: "images/cars/toyota-corolla.jpg", mpg: "53/46" },
+            { id: 27, brand: "Toyota", model: "RAV4", year: 2026, price: 31995, mileage: 0, condition: "new", bodyType: "SUV", fuel: "Hybrid", transmission: "Automatic", color: "Ruby Flare Pearl", features: ["Hybrid", "XSE", "AWD", "Digital Rearview Mirror"], image: "images/cars/toyota-rav4.jpg", mpg: "41/38" },
+            { id: 28, brand: "Toyota", model: "Highlander", year: 2026, price: 42995, mileage: 0, condition: "new", bodyType: "SUV", fuel: "Hybrid", transmission: "Automatic", color: "Blueprint", features: ["Hybrid", "Platinum", "AWD", "Head-Up Display"], image: "images/cars/toyota-highlander.jpg", mpg: "36/35" },
+            { id: 29, brand: "Toyota", model: "Tundra", year: 2026, price: 43995, mileage: 0, condition: "new", bodyType: "Truck", fuel: "Hybrid", transmission: "Automatic", color: "Lunar Rock", features: ["i-FORCE MAX", "Capstone", "Air Suspension", "14" Screen"], image: "images/cars/toyota-tundra.jpg", mpg: "20/24" },
+            { id: 30, brand: "Toyota", model: "Tacoma", year: 2026, price: 34995, mileage: 0, condition: "new", bodyType: "Truck", fuel: "Gasoline", transmission: "Automatic", color: "Bronze Oxide", features: ["TRD Pro", "IsoDynamic Seats", "Crawl Control", "FOX Shocks"], image: "images/cars/toyota-tacoma.jpg", mpg: "20/24" },
+            { id: 31, brand: "Toyota", model: "4Runner", year: 2026, price: 45995, mileage: 0, condition: "new", bodyType: "SUV", fuel: "Hybrid", transmission: "Automatic", color: "Terra", features: ["Hybrid", "TRD Pro", "Stabilizer Disconnect", "Crawl Control"], image: "images/cars/toyota-4runner.jpg", mpg: "23/24" },
+            { id: 32, brand: "Toyota", model: "Land Cruiser", year: 2026, price: 59995, mileage: 0, condition: "new", bodyType: "SUV", fuel: "Hybrid", transmission: "Automatic", color: "1958 Heritage", features: ["First Edition", "Hybrid", "Locking Diffs", "Roof Rack"], image: "images/cars/toyota-land-cruiser.jpg", mpg: "22/25" },
+            { id: 33, brand: "Toyota", model: "Sequoia", year: 2026, price: 64995, mileage: 0, condition: "new", bodyType: "SUV", fuel: "Hybrid", transmission: "Automatic", color: "Supersonic Red", features: ["TRD Pro", "Hybrid", "i-FORCE MAX", "Air Suspension"], image: "images/cars/toyota-sequoia.jpg", mpg: "22/24" },
+            { id: 34, brand: "Toyota", model: "Prius", year: 2026, price: 28995, mileage: 0, condition: "new", bodyType: "Hatchback", fuel: "Hybrid", transmission: "Automatic", color: "Guardian Gray", features: ["Prime", "PHEV", "Solar Roof", "AWD"], image: "images/cars/toyota-prius.jpg", mpg: "127 MPGe" },
+            { id: 35, brand: "Toyota", model: "GR Supra", year: 2026, price: 58995, mileage: 0, condition: "new", bodyType: "Coupe", fuel: "Gasoline", transmission: "Manual", color: "Stratosphere Blue", features: ["3.0", "6MT", "JBL", "Heads-Up Display"], image: "images/cars/toyota-supra.jpg", mpg: "19/27" },
+            { id: 36, brand: "Toyota", model: "Venza", year: 2025, price: 35995, mileage: 6000, condition: "used", bodyType: "SUV", fuel: "Hybrid", transmission: "Automatic", color: "Titanium Glow", features: ["Limited", "Hybrid", "AWD", "Star Gaze Roof"], image: "images/cars/toyota-venza.jpg", mpg: "40/37" },
+            { id: 37, brand: "Toyota", model: "Crown", year: 2026, price: 43995, mileage: 0, condition: "new", bodyType: "Sedan", fuel: "Hybrid", transmission: "Automatic", color: "Precious Bronze", features: ["Platinum", "Hybrid Max", "AVS", "Advanced Park"], image: "images/cars/toyota-crown.jpg", mpg: "29/32" },
+            { id: 38, brand: "Toyota", model: "bZ4X", year: 2026, price: 44995, mileage: 0, condition: "new", bodyType: "SUV", fuel: "Electric", transmission: "Automatic", color: "Elemental Silver", features: ["XLE", "AWD", "252 mi range", "Solar Charging"], image: "images/cars/toyota-bz4x.jpg", mpg: "252 mi range" },
+            { id: 39, brand: "Toyota", model: "Sienna", year: 2026, price: 39995, mileage: 0, condition: "new", bodyType: "Minivan", fuel: "Hybrid", transmission: "Automatic", color: "Cypress Green", features: ["XSE", "AWD", "Rear Entertainment", "Kick Sensor"], image: "images/cars/toyota-sienna.jpg", mpg: "36/36" },
+            { id: 40, brand: "Toyota", model: "GR86", year: 2026, price: 31995, mileage: 0, condition: "new", bodyType: "Coupe", fuel: "Gasoline", transmission: "Manual", color: "Track Red", features: ["Premium", "6MT", "Brembo", "Sachs Dampers"], image: "images/cars/toyota-gr86.jpg", mpg: "20/27" },
+
+            // Honda Vehicles
+            { id: 41, brand: "Honda", model: "Accord", year: 2026, price: 29995, mileage: 0, condition: "new", bodyType: "Sedan", fuel: "Hybrid", transmission: "Automatic", color: "Lunar Silver", features: ["Hybrid", "Touring", "Google Built-In", "Bose"], image: "images/cars/honda-accord.jpg", mpg: "51/44" },
+            { id: 42, brand: "Honda", model: "Civic", year: 2026, price: 25995, mileage: 0, condition: "new", bodyType: "Sedan", fuel: "Gasoline", transmission: "Automatic", color: "Rallye Red", features: ["Si", "6MT", "Brembo", "Heated Seats"], image: "images/cars/honda-civic.jpg", mpg: "27/37" },
+            { id: 43, brand: "Honda", model: "Civic Type R", year: 2026, price: 46995, mileage: 0, condition: "new", bodyType: "Hatchback", fuel: "Gasoline", transmission: "Manual", color: "Championship White", features: ["Type R", "6MT", "LSD", "Brembo"], image: "images/cars/honda-civic-type-r.jpg", mpg: "22/28" },
+            { id: 44, brand: "Honda", model: "CR-V", year: 2026, price: 32995, mileage: 0, condition: "new", bodyType: "SUV", fuel: "Hybrid", transmission: "Automatic", color: "Urban Gray", features: ["Hybrid", "Sport Touring", "AWD", "Bose"], image: "images/cars/honda-crv.jpg", mpg: "43/36" },
+            { id: 45, brand: "Honda", model: "Pilot", year: 2026, price: 41995, mileage: 0, condition: "new", bodyType: "SUV", fuel: "Gasoline", transmission: "Automatic", color: "Obsidian Blue", features: ["TrailSport", "AWD", "Trail Torque Logic", "Roof Rails"], image: "images/cars/honda-pilot.jpg", mpg: "19/26" },
+            { id: 46, brand: "Honda", model: "Passport", year: 2026, price: 43995, mileage: 0, condition: "new", bodyType: "SUV", fuel: "Gasoline", transmission: "Automatic", color: "Sunset Orange", features: ["TrailSport", "AWD", "TrailWatch", "All-Terrain Tires"], image: "images/cars/honda-passport.jpg", mpg: "19/24" },
+            { id: 47, brand: "Honda", model: "Odyssey", year: 2026, price: 42995, mileage: 0, condition: "new", bodyType: "Minivan", fuel: "Gasoline", transmission: "Automatic", color: "Pacific Pewter", features: ["Elite", "CabinWatch", "Vacuum", "Rear Entertainment"], image: "images/cars/honda-odyssey.jpg", mpg: "19/28" },
+            { id: 48, brand: "Honda", model: "Ridgeline", year: 2026, price: 41995, mileage: 0, condition: "new", bodyType: "Truck", fuel: "Gasoline", transmission: "Automatic", color: "White Diamond", features: ["Black Edition", "AWD", "In-Bed Trunk", "Dual-Action Tailgate"], image: "images/cars/honda-ridgeline.jpg", mpg: "18/24" },
+            { id: 49, brand: "Honda", model: "HR-V", year: 2026, price: 26995, mileage: 0, condition: "new", bodyType: "SUV", fuel: "Gasoline", transmission: "Automatic", color: "Nordic Forest", features: ["EX-L", "AWD", "Sunroof", "Wireless Charging"], image: "images/cars/honda-hrv.jpg", mpg: "25/30" },
+            { id: 50, brand: "Honda", model: "Prologue", year: 2026, price: 48995, mileage: 0, condition: "new", bodyType: "SUV", fuel: "Electric", transmission: "Automatic", color: "North Shore Pearl", features: ["Elite", "AWD", "296 mi range", "Ultium"], image: "images/cars/honda-prologue.jpg", mpg: "296 mi range" },
+
+            // Jeep Vehicles
+            { id: 51, brand: "Jeep", model: "Wrangler", year: 2026, price: 39995, mileage: 0, condition: "new", bodyType: "SUV", fuel: "Gasoline", transmission: "Automatic", color: "Firecracker Red", features: ["Rubicon", "4x4", "Xtreme 35", "Disconnecting Sway Bar"], image: "images/cars/jeep-wrangler.jpg", mpg: "17/23" },
+            { id: 52, brand: "Jeep", model: "Wrangler 4xe", year: 2026, price: 54995, mileage: 0, condition: "new", bodyType: "SUV", fuel: "Plug-in Hybrid", transmission: "Automatic", color: "Sarge Green", features: ["Rubicon 4xe", "21 mi EV", "4x4", "Trail Rated"], image: "images/cars/jeep-wrangler-4xe.jpg", mpg: "49 MPGe" },
+            { id: 53, brand: "Jeep", model: "Grand Cherokee", year: 2026, price: 43995, mileage: 0, condition: "new", bodyType: "SUV", fuel: "Gasoline", transmission: "Automatic", color: "Rocky Mountain", features: ["Overland", "4x4", "Air Suspension", "McIntosh Audio"], image: "images/cars/jeep-grand-cherokee.jpg", mpg: "19/26" },
+            { id: 54, brand: "Jeep", model: "Grand Cherokee 4xe", year: 2026, price: 61995, mileage: 0, condition: "new", bodyType: "SUV", fuel: "Plug-in Hybrid", transmission: "Automatic", color: "Silver Zynith", features: ["Summit 4xe", "25 mi EV", "4x4", "Night Vision"], image: "images/cars/jeep-grand-cherokee-4xe.jpg", mpg: "56 MPGe" },
+            { id: 55, brand: "Jeep", model: "Compass", year: 2026, price: 29995, mileage: 0, condition: "new", bodyType: "SUV", fuel: "Gasoline", transmission: "Automatic", color: "Hydro Blue", features: ["Trailhawk", "4x4", "Off-Road Pages", "Selec-Terrain"], image: "images/cars/jeep-compass.jpg", mpg: "24/32" },
+            { id: 56, brand: "Jeep", model: "Cherokee", year: 2023, price: 24995, mileage: 18000, condition: "used", bodyType: "SUV", fuel: "Gasoline", transmission: "Automatic", color: "Diamond Black", features: ["Trailhawk", "4x4", "Towing Package", "Heated Seats"], image: "images/cars/jeep-cherokee.jpg", mpg: "21/29" },
+            { id: 57, brand: "Jeep", model: "Renegade", year: 2023, price: 22995, mileage: 22000, condition: "used", bodyType: "SUV", fuel: "Gasoline", transmission: "Automatic", color: "Alpine White", features: ["Trailhawk", "4x4", "My Sky", "Beats Audio"], image: "images/cars/jeep-renegade.jpg", mpg: "23/29" },
+            { id: 58, brand: "Jeep", model: "Gladiator", year: 2026, price: 43995, mileage: 0, condition: "new", bodyType: "Truck", fuel: "Gasoline", transmission: "Automatic", color: "Gator Green", features: ["Mojave", "4x4", "FOX Shocks", "Off-Road Plus"], image: "images/cars/jeep-gladiator.jpg", mpg: "16/23" },
+            { id: 59, brand: "Jeep", model: "Wagoneer", year: 2026, price: 64995, mileage: 0, condition: "new", bodyType: "SUV", fuel: "Gasoline", transmission: "Automatic", color: "River Rock Blue", features: ["Series II", "4x4", "Rear Entertainment", "McIntosh"], image: "images/cars/jeep-wagoneer.jpg", mpg: "15/20" },
+            { id: 60, brand: "Jeep", model: "Grand Wagoneer", year: 2026, price: 94995, mileage: 0, condition: "new", bodyType: "SUV", fuel: "Gasoline", transmission: "Automatic", color: "Midnight Black", features: ["Obsidian", "4x4", "Rear Seat Monitoring", "Amazon Fire"], image: "images/cars/jeep-grand-wagoneer.jpg", mpg: "14/20" },
+
+            // Ram Vehicles
+            { id: 61, brand: "Ram", model: "1500", year: 2026, price: 42995, mileage: 0, condition: "new", bodyType: "Truck", fuel: "Gasoline", transmission: "Automatic", color: "Patriot Blue", features: ["Laramie", "4x4", "Air Suspension", "12" Uconnect"], image: "images/cars/ram-1500.jpg", mpg: "19/24" },
+            { id: 62, brand: "Ram", model: "1500 TRX", year: 2026, price: 84995, mileage: 0, condition: "new", bodyType: "Truck", fuel: "Gasoline", transmission: "Automatic", color: "Diamond Black", features: ["TRX", "702 HP", "Supercharged", "Launch Control"], image: "images/cars/ram-1500-trx.jpg", mpg: "10/14" },
+            { id: 63, brand: "Ram", model: "1500 Ramcharger", year: 2026, price: 69995, mileage: 0, condition: "new", bodyType: "Truck", fuel: "Hybrid", transmission: "Automatic", color: "Ceramic Gray", features: ["Ramcharger", "PHEV", "690 mi range", "4x4"], image: "images/cars/ram-1500-ramcharger.jpg", mpg: "690 mi total" },
+            { id: 64, brand: "Ram", model: "2500", year: 2026, price: 49995, mileage: 0, condition: "new", bodyType: "Truck", fuel: "Diesel", transmission: "Automatic", color: "Bright White", features: ["Power Wagon", "Cummins", "12k Winch", "Disconnecting Sway Bar"], image: "images/cars/ram-2500.jpg", mpg: "N/A" },
+            { id: 65, brand: "Ram", model: "3500", year: 2026, price: 56995, mileage: 0, condition: "new", bodyType: "Truck", fuel: "Diesel", transmission: "Automatic", color: "Delmonico Red", features: ["Limited", "HO Cummins", "Aisin", "37k Towing"], image: "images/cars/ram-3500.jpg", mpg: "N/A" },
+            { id: 66, brand: "Ram", model: "ProMaster", year: 2026, price: 42995, mileage: 0, condition: "new", bodyType: "Van", fuel: "Gasoline", transmission: "Automatic", color: "Stone Gray", features: ["3500", "High Roof", "Extended", "Cargo"], image: "images/cars/ram-promaster.jpg", mpg: "N/A" },
+            { id: 67, brand: "Ram", model: "ProMaster City", year: 2022, price: 24995, mileage: 35000, condition: "used", bodyType: "Van", fuel: "Gasoline", transmission: "Automatic", color: "Bright Silver", features: ["Tradesman", "Cargo", "Backup Camera", "Bluetooth"], image: "images/cars/ram-promaster-city.jpg", mpg: "21/28" },
+
+            // Dodge Vehicles
+            { id: 68, brand: "Dodge", model: "Charger", year: 2023, price: 38995, mileage: 8000, condition: "used", bodyType: "Sedan", fuel: "Gasoline", transmission: "Automatic", color: "Pitch Black", features: ["Scat Pack", "6.4L Hemi", "Widebody", "Brembo"], image: "images/cars/dodge-charger.jpg", mpg: "15/24" },
+            { id: 69, brand: "Dodge", model: "Challenger", year: 2023, price: 42995, mileage: 5000, condition: "used", bodyType: "Coupe", fuel: "Gasoline", transmission: "Manual", color: "Plum Crazy", features: ["Scat Pack", "6.4L", "Shaker", "Widebody"], image: "images/cars/dodge-challenger.jpg", mpg: "15/23" },
+            { id: 70, brand: "Dodge", model: "Durango", year: 2025, price: 45995, mileage: 12000, condition: "used", bodyType: "SUV", fuel: "Gasoline", transmission: "Automatic", color: "Octane Red", features: ["R/T", "Hemi", "Tow Package", "Third Row"], image: "images/cars/dodge-durango.jpg", mpg: "14/22" },
+            { id: 71, brand: "Dodge", model: "Hornet", year: 2026, price: 32995, mileage: 0, condition: "new", bodyType: "SUV", fuel: "Hybrid", transmission: "Automatic", color: "Acapulco Orange", features: ["R/T", "PHEV", "30 mi EV", "Track Mode"], image: "images/cars/dodge-hornet.jpg", mpg: "77 MPGe" },
+            { id: 72, brand: "Dodge", model: "Charger Daytona", year: 2026, price: 61995, mileage: 0, condition: "new", bodyType: "Sedan", fuel: "Electric", transmission: "Automatic", color: "Triple Nickel", features: ["Daytona R/T", "496 HP", "AWD", "Fratzonic"], image: "images/cars/dodge-charger-daytona.jpg", mpg: "317 mi range" },
+
+            // Chrysler Vehicles
+            { id: 73, brand: "Chrysler", model: "Pacifica", year: 2026, price: 41995, mileage: 0, condition: "new", bodyType: "Minivan", fuel: "Hybrid", transmission: "Automatic", color: "Brilliant Black", features: ["Pinnacle", "PHEV", "32 mi EV", "FamCam"], image: "images/cars/chrysler-pacifica.jpg", mpg: "82 MPGe" },
+            { id: 74, brand: "Chrysler", model: "Pacifica", year: 2026, price: 38995, mileage: 0, condition: "new", bodyType: "Minivan", fuel: "Gasoline", transmission: "Automatic", color: "Ceramic Gray", features: ["Limited", "AWD", "Stow n Go", "Uconnect Theater"], image: "images/cars/chrysler-pacifica-gas.jpg", mpg: "19/28" },
+            { id: 75, brand: "Chrysler", model: "300", year: 2023, price: 34995, mileage: 15000, condition: "used", bodyType: "Sedan", fuel: "Gasoline", transmission: "Automatic", color: "Gloss Black", features: ["300S", "5.7L Hemi", "AWD", "Beats Audio"], image: "images/cars/chrysler-300.jpg", mpg: "16/25" },
+
+            // GMC Vehicles
+            { id: 76, brand: "GMC", model: "Sierra 1500", year: 2026, price: 46995, mileage: 0, condition: "new", bodyType: "Truck", fuel: "Gasoline", transmission: "Automatic", color: "Onyx Black", features: ["Denali", "4x4", "Super Cruise", "MultiPro Tailgate"], image: "images/cars/gmc-sierra-1500.jpg", mpg: "16/20" },
+            { id: 77, brand: "GMC", model: "Sierra 2500 HD", year: 2026, price: 54995, mileage: 0, condition: "new", bodyType: "Truck", fuel: "Diesel", transmission: "Automatic", color: "Summit White", features: ["Denali", "Duramax", "Allison", "20k Towing"], image: "images/cars/gmc-sierra-2500.jpg", mpg: "N/A" },
+            { id: 78, brand: "GMC", model: "Sierra EV", year: 2026, price: 99995, mileage: 0, condition: "new", bodyType: "Truck", fuel: "Electric", transmission: "Automatic", color: "Solar Red", features: ["Denali Edition 1", "754 HP", "400 mi range", "CrabWalk"], image: "images/cars/gmc-sierra-ev.jpg", mpg: "400 mi range" },
+            { id: 79, brand: "GMC", model: "Canyon", year: 2026, price: 38995, mileage: 0, condition: "new", bodyType: "Truck", fuel: "Gasoline", transmission: "Automatic", color: "Thunderstorm Gray", features: ["AT4X", "TurboMax", "Multimatic", "Winch"], image: "images/cars/gmc-canyon.jpg", mpg: "17/21" },
+            { id: 80, brand: "GMC", model: "Acadia", year: 2026, price: 42995, mileage: 0, condition: "new", bodyType: "SUV", fuel: "Gasoline", transmission: "Automatic", color: "Frosted Pine", features: ["Denali", "3-Row", "Super Cruise", "Bose"], image: "images/cars/gmc-acadia.jpg", mpg: "19/25" },
+            { id: 81, brand: "GMC", model: "Terrain", year: 2026, price: 31995, mileage: 0, condition: "new", bodyType: "SUV", fuel: "Gasoline", transmission: "Automatic", color: "Riptide Metallic", features: ["AT4", "AWD", "Flat-Folding Seats", "Hands-Free Liftgate"], image: "images/cars/gmc-terrain.jpg", mpg: "24/29" },
+            { id: 82, brand: "GMC", model: "Yukon", year: 2026, price: 66995, mileage: 0, condition: "new", bodyType: "SUV", fuel: "Gasoline", transmission: "Automatic", color: "Titanium Rush", features: ["Denali Ultimate", "4WD", "Power Steps", "Rear Media"], image: "images/cars/gmc-yukon.jpg", mpg: "15/19" },
+            { id: 83, brand: "GMC", model: "Hummer EV", year: 2026, price: 110295, mileage: 0, condition: "new", bodyType: "Truck", fuel: "Electric", transmission: "Automatic", color: "Interstellar White", features: ["Edition 1", "1000 HP", "Watts to Freedom", "CrabWalk"], image: "images/cars/gmc-hummer-ev-truck.jpg", mpg: "329 mi range" },
+            { id: 84, brand: "GMC", model: "Hummer EV SUV", year: 2026, price: 108295, mileage: 0, condition: "new", bodyType: "SUV", fuel: "Electric", transmission: "Automatic", color: "Moonshot Green", features: ["Edition 1", "830 HP", "Air Suspension", "Open-Air"], image: "images/cars/gmc-hummer-ev-suv.jpg", mpg: "314 mi range" },
+
+            // Buick Vehicles
+            { id: 85, brand: "Buick", model: "Enclave", year: 2026, price: 48995, mileage: 0, condition: "new", bodyType: "SUV", fuel: "Gasoline", transmission: "Automatic", color: "White Frost", features: ["Avenir", "3-Row", "Super Cruise", "Massaging Seats"], image: "images/cars/buick-enclave.jpg", mpg: "18/26" },
+            { id: 86, brand: "Buick", model: "Envision", year: 2026, price: 37995, mileage: 0, condition: "new", bodyType: "SUV", fuel: "Gasoline", transmission: "Automatic", color: "Cinnabar Metallic", features: ["Avenir", "AWD", "Head-Up Display", "Massage Seats"], image: "images/cars/buick-envision.jpg", mpg: "22/29" },
+            { id: 87, brand: "Buick", model: "Encore GX", year: 2026, price: 28995, mileage: 0, condition: "new", bodyType: "SUV", fuel: "Gasoline", transmission: "Automatic", color: "Moonstone Gray", features: ["Avenir", "AWD", "Wireless CarPlay", "WiFi"], image: "images/cars/buick-encore-gx.jpg", mpg: "29/31" },
+
+            // Cadillac Vehicles
+            { id: 88, brand: "Cadillac", model: "Escalade", year: 2026, price: 84995, mileage: 0, condition: "new", bodyType: "SUV", fuel: "Gasoline", transmission: "Automatic", color: "Black Raven", features: ["Platinum", "4WD", "Super Cruise", "AKG 36 Speakers"], image: "images/cars/cadillac-escalade.jpg", mpg: "14/19" },
+            { id: 89, brand: "Cadillac", model: "Escalade IQ", year: 2026, price: 134995, mileage: 0, condition: "new", bodyType: "SUV", fuel: "Electric", transmission: "Automatic", color: "Makalu Copper", features: ["First Edition", "750 HP", "450 mi range", "Executive Level 2"], image: "images/cars/cadillac-escalade-iq.jpg", mpg: "450 mi range" },
+            { id: 90, brand: "Cadillac", model: "Lyriq", year: 2026, price: 58995, mileage: 0, condition: "new", bodyType: "SUV", fuel: "Electric", transmission: "Automatic", color: "Nimbus Metallic", features: ["Luxury 3", "AWD", "33" Screen", "AKG"], image: "images/cars/cadillac-lyriq.jpg", mpg: "307 mi range" },
+            { id: 91, brand: "Cadillac", model: "CT5", year: 2026, price: 48995, mileage: 0, condition: "new", bodyType: "Sedan", fuel: "Gasoline", transmission: "Automatic", color: "Wave Metallic", features: ["V-Series", "6.2L SC", "Manual", "MRC"], image: "images/cars/cadillac-ct5-v.jpg", mpg: "13/22" },
+            { id: 92, brand: "Cadillac", model: "XT5", year: 2025, price: 42995, mileage: 10000, condition: "used", bodyType: "SUV", fuel: "Gasoline", transmission: "Automatic", color: "Radiant Silver", features: ["Sport", "AWD", "Night Vision", "Bose"], image: "images/cars/cadillac-xt5.jpg", mpg: "21/27" },
+            { id: 93, brand: "Cadillac", model: "XT6", year: 2025, price: 49995, mileage: 8000, condition: "used", bodyType: "SUV", fuel: "Gasoline", transmission: "Automatic", color: "Stellar Black", features: ["Premium Luxury", "AWD", "Night Vision", "Bose"], image: "images/cars/cadillac-xt6.jpg", mpg: "18/25" },
+
+            // Lincoln Vehicles
+            { id: 94, brand: "Lincoln", model: "Navigator", year: 2026, price: 82995, mileage: 0, condition: "new", bodyType: "SUV", fuel: "Gasoline", transmission: "Automatic", color: "Infinite Black", features: ["Black Label", "4x4", "Rejuvenate Seats", "Rear Entertainment"], image: "images/cars/lincoln-navigator.jpg", mpg: "16/22" },
+            { id: 95, brand: "Lincoln", model: "Aviator", year: 2026, price: 58995, mileage: 0, condition: "new", bodyType: "SUV", fuel: "Hybrid", transmission: "Automatic", color: "Flight Blue", features: ["Grand Touring", "PHEV", "Air Glide", "Revel"], image: "images/cars/lincoln-aviator.jpg", mpg: "56 MPGe" },
+            { id: 96, brand: "Lincoln", model: "Nautilus", year: 2026, price: 51995, mileage: 0, condition: "new", bodyType: "SUV", fuel: "Hybrid", transmission: "Automatic", color: "Red Carpet", features: ["Black Label", "Hybrid", "Lincoln Rejuvenate", "24" Screen"], image: "images/cars/lincoln-nautilus.jpg", mpg: "43/41" },
+            { id: 97, brand: "Lincoln", model: "Corsair", year: 2026, price: 40995, mileage: 0, condition: "new", bodyType: "SUV", fuel: "Hybrid", transmission: "Automatic", color: "Ceramic Pearl", features: ["Grand Touring", "PHEV", "Co-Pilot360", "Revel"], image: "images/cars/lincoln-corsair.jpg", mpg: "78 MPGe" },
+            { id: 98, brand: "Lincoln", model: "Zephyr", year: 2026, price: 55995, mileage: 0, condition: "new", bodyType: "Sedan", fuel: "Hybrid", transmission: "Automatic", color: "Iced Dune", features: ["Reserve", "Hybrid", "Lincoln Embrace", "ActiveGlide"], image: "images/cars/lincoln-zephyr.jpg", mpg: "41/38" },
+
+            // Nissan Vehicles
+            { id: 99, brand: "Nissan", model: "Rogue", year: 2026, price: 29995, mileage: 0, condition: "new", bodyType: "SUV", fuel: "Gasoline", transmission: "Automatic", color: "Super Black", features: ["Platinum", "AWD", "ProPILOT", "Bose"], image: "images/cars/nissan-rogue.jpg", mpg: "28/35" },
+            { id: 100, brand: "Nissan", model: "Altima", year: 2026, price: 27995, mileage: 0, condition: "new", bodyType: "Sedan", fuel: "Gasoline", transmission: "Automatic", color: "Deep Blue Pearl", features: ["SR VC-Turbo", "AWD", "ProPILOT", "Sunroof"], image: "images/cars/nissan-altima.jpg", mpg: "25/34" },
+            { id: 101, brand: "Nissan", model: "Sentra", year: 2026, price: 21995, mileage: 0, condition: "new", bodyType: "Sedan", fuel: "Gasoline", transmission: "Automatic", color: "Electric Blue", features: ["SR", "Moonroof", "Bose", "WiFi"], image: "images/cars/nissan-sentra.jpg", mpg: "29/39" },
+            { id: 102, brand: "Nissan", model: "Pathfinder", year: 2026, price: 37995, mileage: 0, condition: "new", bodyType: "SUV", fuel: "Gasoline", transmission: "Automatic", color: "Scarlet Ember", features: ["Rock Creek", "4WD", "ProPILOT", "Tow Package"], image: "images/cars/nissan-pathfinder.jpg", mpg: "20/27" },
+            { id: 103, brand: "Nissan", model: "Armada", year: 2026, price: 57995, mileage: 0, condition: "new", bodyType: "SUV", fuel: "Gasoline", transmission: "Automatic", color: "Gun Metallic", features: ["Platinum", "4WD", "ProPILOT 2", "Klipsch"], image: "images/cars/nissan-armada.jpg", mpg: "14/19" },
+            { id: 104, brand: "Nissan", model: "Frontier", year: 2026, price: 32995, mileage: 0, condition: "new", bodyType: "Truck", fuel: "Gasoline", transmission: "Automatic", color: "Tactical Green", features: ["Pro-4X", "4x4", "9" Screen", "Fender Audio"], image: "images/cars/nissan-frontier.jpg", mpg: "17/24" },
+            { id: 105, brand: "Nissan", model: "Titan", year: 2025, price: 44995, mileage: 12000, condition: "used", bodyType: "Truck", fuel: "Gasoline", transmission: "Automatic", color: "Cardinal Red", features: ["Platinum Reserve", "4x4", "V8", "Fender"], image: "images/cars/nissan-titan.jpg", mpg: "15/21" },
+            { id: 106, brand: "Nissan", model: "Murano", year: 2026, price: 39995, mileage: 0, condition: "new", bodyType: "SUV", fuel: "Gasoline", transmission: "Automatic", color: "Sunset Drift", features: ["Platinum", "AWD", "ProPILOT", "Dual Panel Moonroof"], image: "images/cars/nissan-murano.jpg", mpg: "20/28" },
+            { id: 107, brand: "Nissan", model: "Kicks", year: 2026, price: 22995, mileage: 0, condition: "new", bodyType: "SUV", fuel: "Gasoline", transmission: "Automatic", color: "Monarch Orange", features: ["SR", "AWD", "Bose", "Safety Shield"], image: "images/cars/nissan-kicks.jpg", mpg: "31/36" },
+            { id: 108, brand: "Nissan", model: "Ariya", year: 2026, price: 48995, mileage: 0, condition: "new", bodyType: "SUV", fuel: "Electric", transmission: "Automatic", color: "Aurora Green", features: ["Platinum+", "e-4ORCE", "304 mi range", "ProPILOT 2"], image: "images/cars/nissan-ariya.jpg", mpg: "304 mi range" },
+            { id: 109, brand: "Nissan", model: "Leaf", year: 2026, price: 29995, mileage: 0, condition: "new", bodyType: "Hatchback", fuel: "Electric", transmission: "Automatic", color: "Pearl White", features: ["SV Plus", "212 mi range", "ProPILOT", "e-Pedal"], image: "images/cars/nissan-leaf.jpg", mpg: "212 mi range" },
+            { id: 110, brand: "Nissan", model: "Z", year: 2026, price: 43995, mileage: 0, condition: "new", bodyType: "Coupe", fuel: "Gasoline", transmission: "Manual", color: "Ikazuchi Yellow", features: ["Performance", "6MT", "Brembo", "Launch Control"], image: "images/cars/nissan-z.jpg", mpg: "18/24" },
+            { id: 111, brand: "Nissan", model: "GT-R", year: 2024, price: 121995, mileage: 3000, condition: "used", bodyType: "Coupe", fuel: "Gasoline", transmission: "Automatic", color: "Bayside Blue", features: ["Nismo", "600 HP", "Track Edition", "Recaro"], image: "images/cars/nissan-gtr.jpg", mpg: "16/22" },
+
+            // Hyundai Vehicles
+            { id: 112, brand: "Hyundai", model: "Tucson", year: 2026, price: 29995, mileage: 0, condition: "new", bodyType: "SUV", fuel: "Hybrid", transmission: "Automatic", color: "Amazon Gray", features: ["Hybrid", "Limited", "AWD", "Bose"], image: "images/cars/hyundai-tucson.jpg", mpg: "38/38" },
+            { id: 113, brand: "Hyundai", model: "Santa Fe", year: 2026, price: 34995, mileage: 0, condition: "new", bodyType: "SUV", fuel: "Hybrid", transmission: "Automatic", color: "Olive Green", features: ["Hybrid", "Calligraphy", "AWD", "Relaxation Seats"], image: "images/cars/hyundai-santa-fe.jpg", mpg: "34/35" },
+            { id: 114, brand: "Hyundai", model: "Palisade", year: 2026, price: 38995, mileage: 0, condition: "new", bodyType: "SUV", fuel: "Gasoline", transmission: "Automatic", color: "Moonlight Cloud", features: ["Calligraphy", "AWD", "Massage Seats", "Blind View"], image: "images/cars/hyundai-palisade.jpg", mpg: "19/26" },
+            { id: 115, brand: "Hyundai", model: "Sonata", year: 2026, price: 28995, mileage: 0, condition: "new", bodyType: "Sedan", fuel: "Hybrid", transmission: "Automatic", color: "Curated Silver", features: ["Hybrid", "Limited", "Solar Roof", "Bose"], image: "images/cars/hyundai-sonata.jpg", mpg: "47/44" },
+            { id: 116, brand: "Hyundai", model: "Elantra", year: 2026, price: 22995, mileage: 0, condition: "new", bodyType: "Sedan", fuel: "Hybrid", transmission: "Automatic", color: "Fluid Metal", features: ["Hybrid", "Limited", "Digital Key", "Bose"], image: "images/cars/hyundai-elantra.jpg", mpg: "53/56" },
+            { id: 117, brand: "Hyundai", model: "Kona", year: 2026, price: 26995, mileage: 0, condition: "new", bodyType: "SUV", fuel: "Electric", transmission: "Automatic", color: "Atlas White", features: ["Electric", "Limited", "260 mi range", "V2L"], image: "images/cars/hyundai-kona-ev.jpg", mpg: "260 mi range" },
+            { id: 118, brand: "Hyundai", model: "Ioniq 5", year: 2026, price: 48995, mileage: 0, condition: "new", bodyType: "SUV", fuel: "Electric", transmission: "Automatic", color: "Shooting Star", features: ["N", "641 HP", "220 mi range", "NGB"], image: "images/cars/hyundai-ioniq5.jpg", mpg: "220 mi range" },
+            { id: 119, brand: "Hyundai", model: "Ioniq 6", year: 2026, price: 42995, mileage: 0, condition: "new", bodyType: "Sedan", fuel: "Electric", transmission: "Automatic", color: "Biophilic Blue", features: ["Limited", "AWD", "320 mi range", "Digital Mirror"], image: "images/cars/hyundai-ioniq6.jpg", mpg: "320 mi range" },
+            { id: 120, brand: "Hyundai", model: "Venue", year: 2026, price: 21995, mileage: 0, condition: "new", bodyType: "SUV", fuel: "Gasoline", transmission: "Automatic", color: "Intense Blue", features: ["Limited", "Safety Package", "Sunroof", "Wireless"], image: "images/cars/hyundai-venue.jpg", mpg: "29/33" },
+            { id: 121, brand: "Hyundai", model: "Santa Cruz", year: 2026, price: 27995, mileage: 0, condition: "new", bodyType: "Truck", fuel: "Gasoline", transmission: "Automatic", color: "Blue Stone", features: ["Night", "AWD", "Activity Bed", "Towing"], image: "images/cars/hyundai-santa-cruz.jpg", mpg: "21/27" },
+
+            // Kia Vehicles
+            { id: 122, brand: "Kia", model: "Telluride", year: 2026, price: 37995, mileage: 0, condition: "new", bodyType: "SUV", fuel: "Gasoline", transmission: "Automatic", color: "Glacial White", features: ["SX Prestige", "AWD", "Nightfall", "Harman Kardon"], image: "images/cars/kia-telluride.jpg", mpg: "20/26" },
+            { id: 123, brand: "Kia", model: "Sorento", year: 2026, price: 32995, mileage: 0, condition: "new", bodyType: "SUV", fuel: "Hybrid", transmission: "Automatic", color: "Wolf Gray", features: ["Hybrid", "SX Prestige", "AWD", "Bose"], image: "images/cars/kia-sorento.jpg", mpg: "39/35" },
+            { id: 124, brand: "Kia", model: "Sportage", year: 2026, price: 29995, mileage: 0, condition: "new", bodyType: "SUV", fuel: "Hybrid", transmission: "Automatic", color: "Jungle Green", features: ["Hybrid", "X-Pro", "AWD", "Terrain Mode"], image: "images/cars/kia-sportage.jpg", mpg: "42/44" },
+            { id: 125, brand: "Kia", model: "Carnival", year: 2026, price: 37995, mileage: 0, condition: "new", bodyType: "Minivan", fuel: "Gasoline", transmission: "Automatic", color: "Astra Blue", features: ["SX Prestige", "VIP Lounge", "Dual Screen", "BOSE"], image: "images/cars/kia-carnival.jpg", mpg: "19/26" },
+            { id: 126, brand: "Kia", model: "EV6", year: 2026, price: 43995, mileage: 0, condition: "new", bodyType: "SUV", fuel: "Electric", transmission: "Automatic", color: "Yacht Blue", features: ["GT", "576 HP", "206 mi range", "Drift Mode"], image: "images/cars/kia-ev6.jpg", mpg: "206 mi range" },
+            { id: 127, brand: "Kia", model: "EV9", year: 2026, price: 56995, mileage: 0, condition: "new", bodyType: "SUV", fuel: "Electric", transmission: "Automatic", color: "Ocean Blue", features: ["GT-Line", "AWD", "270 mi range", "Swivel Seats"], image: "images/cars/kia-ev9.jpg", mpg: "270 mi range" },
+            { id: 128, brand: "Kia", model: "Forte", year: 2026, price: 20995, mileage: 0, condition: "new", bodyType: "Sedan", fuel: "Gasoline", transmission: "Automatic", color: "Gravity Gray", features: ["GT", "Turbo", "6MT", "Brembo"], image: "images/cars/kia-forte.jpg", mpg: "27/35" },
+            { id: 129, brand: "Kia", model: "K5", year: 2026, price: 28995, mileage: 0, condition: "new", bodyType: "Sedan", fuel: "Gasoline", transmission: "Automatic", color: "Sapphire Blue", features: ["GT", "AWD", "Turbo", "Panoramic"], image: "images/cars/kia-k5.jpg", mpg: "27/37" },
+            { id: 130, brand: "Kia", model: "Stinger", year: 2023, price: 41995, mileage: 8000, condition: "used", bodyType: "Sedan", fuel: "Gasoline", transmission: "Automatic", color: "Ascot Green", features: ["GT2", "3.3T", "AWD", "Brembo"], image: "images/cars/kia-stinger.jpg", mpg: "18/25" },
+            { id: 131, brand: "Kia", model: "Seltos", year: 2026, price: 26995, mileage: 0, condition: "new", bodyType: "SUV", fuel: "Gasoline", transmission: "Automatic", color: "Starbright Yellow", features: ["SX", "AWD", "Turbo", "Bose"], image: "images/cars/kia-seltos.jpg", mpg: "25/30" },
+            { id: 132, brand: "Kia", model: "Niro", year: 2026, price: 27995, mileage: 0, condition: "new", bodyType: "SUV", fuel: "Hybrid", transmission: "Automatic", color: "Cityscape Green", features: ["EV", "Wind", "253 mi range", "V2L"], image: "images/cars/kia-niro-ev.jpg", mpg: "253 mi range" },
+
+            // Subaru Vehicles
+            { id: 133, brand: "Subaru", model: "Outback", year: 2026, price: 30995, mileage: 0, condition: "new", bodyType: "SUV", fuel: "Gasoline", transmission: "Automatic", color: "Wilderness Green", features: ["Wilderness", "AWD", "Turbo", "X-MODE"], image: "images/cars/subaru-outback.jpg", mpg: "22/26" },
+            { id: 134, brand: "Subaru", model: "Forester", year: 2026, price: 29995, mileage: 0, condition: "new", bodyType: "SUV", fuel: "Gasoline", transmission: "Automatic", color: "Cascade Green", features: ["Wilderness", "AWD", "X-MODE", "StarTex"], image: "images/cars/subaru-forester.jpg", mpg: "25/28" },
+            { id: 135, brand: "Subaru", model: "Crosstrek", year: 2026, price: 26995, mileage: 0, condition: "new", bodyType: "SUV", fuel: "Hybrid", transmission: "Automatic", color: "Oasis Blue", features: ["Hybrid", "Wilderness", "AWD", "X-MODE"], image: "images/cars/subaru-crosstrek.jpg", mpg: "50/43" },
+            { id: 136, brand: "Subaru", model: "Ascent", year: 2026, price: 38995, mileage: 0, condition: "new", bodyType: "SUV", fuel: "Gasoline", transmission: "Automatic", color: "Brilliant Bronze", features: ["Touring", "AWD", "3-Row", "Harman Kardon"], image: "images/cars/subaru-ascent.jpg", mpg: "20/26" },
+            { id: 137, brand: "Subaru", model: "Impreza", year: 2026, price: 23995, mileage: 0, condition: "new", bodyType: "Sedan", fuel: "Gasoline", transmission: "Automatic", color: "Ignition Red", features: ["RS", "AWD", "2.5L", "EyeSight"], image: "images/cars/subaru-impreza.jpg", mpg: "27/35" },
+            { id: 138, brand: "Subaru", model: "WRX", year: 2026, price: 33995, mileage: 0, condition: "new", bodyType: "Sedan", fuel: "Gasoline", transmission: "Manual", color: "Solar Orange", features: ["TR", "6MT", "Turbo", "Recaro"], image: "images/cars/subaru-wrx.jpg", mpg: "19/26" },
+            { id: 139, brand: "Subaru", model: "BRZ", year: 2026, price: 31995, mileage: 0, condition: "new", bodyType: "Coupe", fuel: "Gasoline", transmission: "Manual", color: "Sapphire Blue", features: ["tS", "6MT", "STI", "Brembo"], image: "images/cars/subaru-brz.jpg", mpg: "20/27" },
+            { id: 140, brand: "Subaru", model: "Legacy", year: 2025, price: 24995, mileage: 10000, condition: "used", bodyType: "Sedan", fuel: "Gasoline", transmission: "Automatic", color: "Magnetite Gray", features: ["XT", "AWD", "Turbo", "Harman Kardon"], image: "images/cars/subaru-legacy.jpg", mpg: "24/32" },
+            { id: 141, brand: "Subaru", model: "Solterra", year: 2026, price: 46995, mileage: 0, condition: "new", bodyType: "SUV", fuel: "Electric", transmission: "Automatic", color: "Elemental Red", features: ["Touring", "AWD", "228 mi range", "X-MODE"], image: "images/cars/subaru-solterra.jpg", mpg: "228 mi range" },
+
+            // Mazda Vehicles
+            { id: 142, brand: "Mazda", model: "CX-5", year: 2026, price: 29995, mileage: 0, condition: "new", bodyType: "SUV", fuel: "Gasoline", transmission: "Automatic", color: "Soul Red Crystal", features: ["Carbon Turbo", "AWD", "Turbo", "Bose"], image: "images/cars/mazda-cx5.jpg", mpg: "22/27" },
+            { id: 143, brand: "Mazda", model: "CX-50", year: 2026, price: 31995, mileage: 0, condition: "new", bodyType: "SUV", fuel: "Gasoline", transmission: "Automatic", color: "Zircon Sand", features: ["Meridian", "AWD", "Turbo", "Off-Road"], image: "images/cars/mazda-cx50.jpg", mpg: "23/29" },
+            { id: 144, brand: "Mazda", model: "CX-90", year: 2026, price: 42995, mileage: 0, condition: "new", bodyType: "SUV", fuel: "Hybrid", transmission: "Automatic", color: "Artisan Red", features: ["PHEV", "AWD", "3-Row", "Nappa"], image: "images/cars/mazda-cx90.jpg", mpg: "56 MPGe" },
+            { id: 145, brand: "Mazda", model: "CX-70", year: 2026, price: 41995, mileage: 0, condition: "new", bodyType: "SUV", fuel: "Hybrid", transmission: "Automatic", color: "Rhodium White", features: ["PHEV", "AWD", "2-Row", "Premium"], image: "images/cars/mazda-cx70.jpg", mpg: "56 MPGe" },
+            { id: 146, brand: "Mazda", model: "CX-30", year: 2026, price: 26995, mileage: 0, condition: "new", bodyType: "SUV", fuel: "Gasoline", transmission: "Automatic", color: "Polymetal Gray", features: ["Turbo Premium", "AWD", "Turbo", "Bose"], image: "images/cars/mazda-cx30.jpg", mpg: "22/30" },
+            { id: 147, brand: "Mazda", model: "Mazda3", year: 2026, price: 27995, mileage: 0, condition: "new", bodyType: "Sedan", fuel: "Gasoline", transmission: "Automatic", color: "Jet Black", features: ["Turbo", "AWD", "Turbo", "Bose"], image: "images/cars/mazda3.jpg", mpg: "23/32" },
+            { id: 148, brand: "Mazda", model: "Mazda3 Hatch", year: 2026, price: 28995, mileage: 0, condition: "new", bodyType: "Hatchback", fuel: "Gasoline", transmission: "Manual", color: "Snowflake White", features: ["Turbo", "AWD", "6MT", "Bose"], image: "images/cars/mazda3-hatch.jpg", mpg: "22/30" },
+            { id: 149, brand: "Mazda", model: "MX-5 Miata", year: 2026, price: 29995, mileage: 0, condition: "new", bodyType: "Convertible", fuel: "Gasoline", transmission: "Manual", color: "Soul Red", features: ["Club", "6MT", "Bilstein", "BBS"], image: "images/cars/mazda-miata.jpg", mpg: "26/34" },
+            { id: 150, brand: "Mazda", model: "MX-30", year: 2023, price: 33995, mileage: 8000, condition: "used", bodyType: "SUV", fuel: "Electric", transmission: "Automatic", color: "Ceramic Metallic", features: ["100 mi range", "AWD", "Suicide Doors", "Bose"], image: "images/cars/mazda-mx30.jpg", mpg: "100 mi range" },
+
+            // BMW Vehicles
+            { id: 151, brand: "BMW", model: "3 Series", year: 2026, price: 45995, mileage: 0, condition: "new", bodyType: "Sedan", fuel: "Gasoline", transmission: "Automatic", color: "Alpine White", features: ["330i", "M Sport", "xDrive", "Harman Kardon"], image: "images/cars/bmw-3-series.jpg", mpg: "26/36" },
+            { id: 152, brand: "BMW", model: "5 Series", year: 2026, price: 59995, mileage: 0, condition: "new", bodyType: "Sedan", fuel: "Electric", transmission: "Automatic", color: "Carbon Black", features: ["i5", "eDrive40", "295 mi range", "Bowers & Wilkins"], image: "images/cars/bmw-i5.jpg", mpg: "295 mi range" },
+            { id: 153, brand: "BMW", model: "X3", year: 2026, price: 49995, mileage: 0, condition: "new", bodyType: "SUV", fuel: "Gasoline", transmission: "Automatic", color: "Phytonic Blue", features: ["M50", "M Sport", "xDrive", "Harman Kardon"], image: "images/cars/bmw-x3.jpg", mpg: "21/28" },
+            { id: 154, brand: "BMW", model: "X5", year: 2026, price: 66995, mileage: 0, condition: "new", bodyType: "SUV", fuel: "Hybrid", transmission: "Automatic", color: "Manhattan Green", features: ["xDrive50e", "PHEV", "40 mi EV", "Bowers & Wilkins"], image: "images/cars/bmw-x5.jpg", mpg: "50 MPGe" },
+            { id: 155, brand: "BMW", model: "X7", year: 2026, price: 82995, mileage: 0, condition: "new", bodyType: "SUV", fuel: "Gasoline", transmission: "Automatic", color: "Ametrin Metallic", features: ["M60i", "V8", "xDrive", "Executive Lounge"], image: "images/cars/bmw-x7.jpg", mpg: "14/21" },
+            { id: 156, brand: "BMW", model: "iX", year: 2026, price: 88995, mileage: 0, condition: "new", bodyType: "SUV", fuel: "Electric", transmission: "Automatic", color: "Storm Bay", features: ["xDrive50", "324 mi range", "Shy Tech", "Bowers & Wilkins"], image: "images/cars/bmw-ix.jpg", mpg: "324 mi range" },
+            { id: 157, brand: "BMW", model: "i4", year: 2026, price: 53995, mileage: 0, condition: "new", bodyType: "Sedan", fuel: "Electric", transmission: "Automatic", color: "San Remo Green", features: ["eDrive40", "301 mi range", "Curved Display", "Harman Kardon"], image: "images/cars/bmw-i4.jpg", mpg: "301 mi range" },
+            { id: 158, brand: "BMW", model: "7 Series", year: 2026, price: 96995, mileage: 0, condition: "new", bodyType: "Sedan", fuel: "Electric", transmission: "Automatic", color: "Cape York Green", features: ["i7", "xDrive60", "321 mi range", "31" Theater"], image: "images/cars/bmw-i7.jpg", mpg: "321 mi range" },
+            { id: 159, brand: "BMW", model: "M3", year: 2026, price: 78995, mileage: 0, condition: "new", bodyType: "Sedan", fuel: "Gasoline", transmission: "Manual", color: "Isle of Man Green", features: ["Competition", "6MT", "503 HP", "Carbon Brakes"], image: "images/cars/bmw-m3.jpg", mpg: "16/23" },
+            { id: 160, brand: "BMW", model: "M4", year: 2026, price: 80995, mileage: 0, condition: "new", bodyType: "Coupe", fuel: "Gasoline", transmission: "Manual", color: "Sao Paulo Yellow", features: ["CSL", "543 HP", "Carbon", "Track"], image: "images/cars/bmw-m4.jpg", mpg: "16/22" },
+            { id: 161, brand: "BMW", model: "X1", year: 2026, price: 41995, mileage: 0, condition: "new", bodyType: "SUV", fuel: "Gasoline", transmission: "Automatic", color: "Utah Orange", features: ["M35i", "xDrive", "M Sport", "Harman Kardon"], image: "images/cars/bmw-x1.jpg", mpg: "25/34" },
+            { id: 162, brand: "BMW", model: "Z4", year: 2025, price: 55995, mileage: 5000, condition: "used", bodyType: "Convertible", fuel: "Gasoline", transmission: "Automatic", color: "Thundernight", features: ["M40i", "382 HP", "Soft Top", "Harman Kardon"], image: "images/cars/bmw-z4.jpg", mpg: "24/32" },
+
+            // Mercedes-Benz Vehicles
+            { id: 163, brand: "Mercedes-Benz", model: "C-Class", year: 2026, price: 48995, mileage: 0, condition: "new", bodyType: "Sedan", fuel: "Gasoline", transmission: "Automatic", color: "Polar White", features: ["C300", "4MATIC", "MBUX", "Burmester"], image: "images/cars/mercedes-c-class.jpg", mpg: "25/35" },
+            { id: 164, brand: "Mercedes-Benz", model: "E-Class", year: 2026, price: 62995, mileage: 0, condition: "new", bodyType: "Sedan", fuel: "Gasoline", transmission: "Automatic", color: "Obsidian Black", features: ["E450", "4MATIC", "Superscreen", "Burmester"], image: "images/cars/mercedes-e-class.jpg", mpg: "23/31" },
+            { id: 165, brand: "Mercedes-Benz", model: "S-Class", year: 2026, price: 114995, mileage: 0, condition: "new", bodyType: "Sedan", fuel: "Gasoline", transmission: "Automatic", color: "Emerald Green", features: ["S580", "4MATIC", "AR HUD", "4D Burmester"], image: "images/cars/mercedes-s-class.jpg", mpg: "16/25" },
+            { id: 166, brand: "Mercedes-Benz", model: "GLC", year: 2026, price: 48995, mileage: 0, condition: "new", bodyType: "SUV", fuel: "Gasoline", transmission: "Automatic", color: "Selenite Grey", features: ["GLC300", "4MATIC", "MBUX", "Burmester"], image: "images/cars/mercedes-glc.jpg", mpg: "23/29" },
+            { id: 167, brand: "Mercedes-Benz", model: "GLE", year: 2026, price: 64995, mileage: 0, condition: "new", bodyType: "SUV", fuel: "Hybrid", transmission: "Automatic", color: "Cavansite Blue", features: ["GLE450e", "PHEV", "48 mi EV", "E-Active"], image: "images/cars/mercedes-gle.jpg", mpg: "58 MPGe" },
+            { id: 168, brand: "Mercedes-Benz", model: "GLS", year: 2026, price: 82995, mileage: 0, condition: "new", bodyType: "SUV", fuel: "Gasoline", transmission: "Automatic", color: "Hyacinth Red", features: ["GLS580", "4MATIC", "E-Active", "Burmester"], image: "images/cars/mercedes-gls.jpg", mpg: "14/19" },
+            { id: 169, brand: "Mercedes-Benz", model: "G-Class", year: 2026, price: 143995, mileage: 0, condition: "new", bodyType: "SUV", fuel: "Gasoline", transmission: "Automatic", color: "Olive Magno", features: ["G63", "AMG", "V8", "Differential Locks"], image: "images/cars/mercedes-g-class.jpg", mpg: "13/15" },
+            { id: 170, brand: "Mercedes-Benz", model: "EQS", year: 2026, price: 104995, mileage: 0, condition: "new", bodyType: "Sedan", fuel: "Electric", transmission: "Automatic", color: "Twilight Blue", features: ["580 4MATIC", "350 mi range", "Hyperscreen", "Rear Axle Steering"], image: "images/cars/mercedes-eqs.jpg", mpg: "350 mi range" },
+            { id: 171, brand: "Mercedes-Benz", model: "EQE", year: 2026, price: 74995, mileage: 0, condition: "new", bodyType: "SUV", fuel: "Electric", transmission: "Automatic", color: "Cardinal Red", features: ["SUV 500", "4MATIC", "269 mi range", "Hyperscreen"], image: "images/cars/mercedes-eqe-suv.jpg", mpg: "269 mi range" },
+            { id: 172, brand: "Mercedes-Benz", model: "AMG GT", year: 2025, price: 109995, mileage: 3000, condition: "used", bodyType: "Coupe", fuel: "Gasoline", transmission: "Automatic", color: "Sunbeam Yellow", features: ["63", "4MATIC+", "577 HP", "Drift Mode"], image: "images/cars/mercedes-amg-gt.jpg", mpg: "16/21" },
+            { id: 173, brand: "Mercedes-Benz", model: "CLA", year: 2026, price: 42995, mileage: 0, condition: "new", bodyType: "Sedan", fuel: "Gasoline", transmission: "Automatic", color: "Digital White", features: ["CLA250", "4MATIC", "MBUX", "Burmester"], image: "images/cars/mercedes-cla.jpg", mpg: "24/33" },
+
+            // Audi Vehicles
+            { id: 174, brand: "Audi", model: "A4", year: 2025, price: 45995, mileage: 5000, condition: "used", bodyType: "Sedan", fuel: "Gasoline", transmission: "Automatic", color: "Ibis White", features: ["Premium Plus", "quattro", "Virtual Cockpit", "Bang & Olufsen"], image: "images/cars/audi-a4.jpg", mpg: "24/31" },
+            { id: 175, brand: "Audi", model: "A6", year: 2025, price: 59995, mileage: 4000, condition: "used", bodyType: "Sedan", fuel: "Gasoline", transmission: "Automatic", color: "Daytona Gray", features: ["Premium Plus", "quattro", "MMI Touch", "Bang & Olufsen"], image: "images/cars/audi-a6.jpg", mpg: "21/28" },
+            { id: 176, brand: "Audi", model: "A8", year: 2025, price: 89995, mileage: 3000, condition: "used", bodyType: "Sedan", fuel: "Gasoline", transmission: "Automatic", color: "Vesuvius Gray", features: ["L", "quattro", "Executive Rear", "Bang & Olufsen"], image: "images/cars/audi-a8.jpg", mpg: "17/26" },
+            { id: 177, brand: "Audi", model: "Q5", year: 2026, price: 48995, mileage: 0, condition: "new", bodyType: "SUV", fuel: "Gasoline", transmission: "Automatic", color: "Chronos Gray", features: ["Prestige", "quattro", "Matrix LED", "Bang & Olufsen"], image: "images/cars/audi-q5.jpg", mpg: "23/28" },
+            { id: 178, brand: "Audi", model: "Q7", year: 2026, price: 61995, mileage: 0, condition: "new", bodyType: "SUV", fuel: "Gasoline", transmission: "Automatic", color: "Saragossa Blue", features: ["Prestige", "quattro", "Air Suspension", "Bang & Olufsen"], image: "images/cars/audi-q7.jpg", mpg: "19/25" },
+            { id: 179, brand: "Audi", model: "Q8", year: 2026, price: 72995, mileage: 0, condition: "new", bodyType: "SUV", fuel: "Gasoline", transmission: "Automatic", color: "Dragon Orange", features: ["Prestige", "quattro", "HD Matrix", "Bang & Olufsen"], image: "images/cars/audi-q8.jpg", mpg: "17/22" },
+            { id: 180, brand: "Audi", model: "e-tron", year: 2026, price: 66995, mileage: 0, condition: "new", bodyType: "SUV", fuel: "Electric", transmission: "Automatic", color: "Siam Beige", features: ["GT", "quattro", "238 mi range", "Bang & Olufsen"], image: "images/cars/audi-e-tron-gt.jpg", mpg: "238 mi range" },
+            { id: 181, brand: "Audi", model: "Q4 e-tron", year: 2026, price: 52995, mileage: 0, condition: "new", bodyType: "SUV", fuel: "Electric", transmission: "Automatic", color: "Typhoon Gray", features: ["50", "quattro", "241 mi range", "Sonos"], image: "images/cars/audi-q4-etron.jpg", mpg: "241 mi range" },
+            { id: 182, brand: "Audi", model: "RS6 Avant", year: 2025, price: 119995, mileage: 5000, condition: "used", bodyType: "Wagon", fuel: "Gasoline", transmission: "Automatic", color: "Nogaro Blue", features: ["RS6", "591 HP", "Carbon", "DRC"], image: "images/cars/audi-rs6.jpg", mpg: "15/22" },
+            { id: 183, brand: "Audi", model: "TT", year: 2023, price: 54995, mileage: 12000, condition: "used", bodyType: "Coupe", fuel: "Gasoline", transmission: "Automatic", color: "Tango Red", features: ["RS", "394 HP", "quattro", "OLED"], image: "images/cars/audi-tt.jpg", mpg: "19/29" },
+            { id: 184, brand: "Audi", model: "R8", year: 2023, price: 158995, mileage: 8000, condition: "used", bodyType: "Coupe", fuel: "Gasoline", transmission: "Automatic", color: "Vegas Yellow", features: ["V10 Performance", "620 HP", "quattro", "Carbon Ceramic"], image: "images/cars/audi-r8.jpg", mpg: "14/23" },
+
+            // Lexus Vehicles
+            { id: 185, brand: "Lexus", model: "RX", year: 2026, price: 52995, mileage: 0, condition: "new", bodyType: "SUV", fuel: "Hybrid", transmission: "Automatic", color: "Caviar", features: ["RX500h", "F SPORT", "AWD", "Mark Levinson"], image: "images/cars/lexus-rx.jpg", mpg: "27/28" },
+            { id: 186, brand: "Lexus", model: "ES", year: 2026, price: 43995, mileage: 0, condition: "new", bodyType: "Sedan", fuel: "Hybrid", transmission: "Automatic", color: "Ultra White", features: ["ES300h", "Ultra Luxury", "Mark Levinson", "Panorama"], image: "images/cars/lexus-es.jpg", mpg: "44/43" },
+            { id: 187, brand: "Lexus", model: "IS", year: 2026, price: 41995, mileage: 0, condition: "new", bodyType: "Sedan", fuel: "Gasoline", transmission: "Automatic", color: "Infrared", features: ["IS500", "F SPORT", "V8", "AVS"], image: "images/cars/lexus-is.jpg", mpg: "17/25" },
+            { id: 188, brand: "Lexus", model: "NX", year: 2026, price: 45995, mileage: 0, condition: "new", bodyType: "SUV", fuel: "Hybrid", transmission: "Automatic", color: "Grecian Water", features: ["NX450h+", "PHEV", "37 mi EV", "Mark Levinson"], image: "images/cars/lexus-nx.jpg", mpg: "84 MPGe" },
+            { id: 189, brand: "Lexus", model: "UX", year: 2026, price: 37995, mileage: 0, condition: "new", bodyType: "SUV", fuel: "Hybrid", transmission: "Automatic", color: "Nori Green", features: ["UX300h", "F SPORT", "AWD", "Mark Levinson"], image: "images/cars/lexus-ux.jpg", mpg: "43/41" },
+            { id: 190, brand: "Lexus", model: "GX", year: 2026, price: 64995, mileage: 0, condition: "new", bodyType: "SUV", fuel: "Gasoline", transmission: "Automatic", color: "Eminent White", features: ["Overtrail", "AWD", "E-KDSS", "Mark Levinson"], image: "images/cars/lexus-gx.jpg", mpg: "15/19" },
+            { id: 191, brand: "Lexus", model: "LX", year: 2026, price: 104995, mileage: 0, condition: "new", bodyType: "SUV", fuel: "Hybrid", transmission: "Automatic", color: "Manganese Luster", features: ["LX700h", "Overtrail", "Hybrid", "Mark Levinson"], image: "images/cars/lexus-lx.jpg", mpg: "17/22" },
+            { id: 192, brand: "Lexus", model: "LC", year: 2026, price: 98995, mileage: 0, condition: "new", bodyType: "Coupe", fuel: "Gasoline", transmission: "Automatic", color: "Flare Yellow", features: ["LC500", "V8", "10AT", "Mark Levinson"], image: "images/cars/lexus-lc.jpg", mpg: "15/25" },
+            { id: 193, brand: "Lexus", model: "RZ", year: 2026, price: 56995, mileage: 0, condition: "new", bodyType: "SUV", fuel: "Electric", transmission: "Automatic", color: "Ether", features: ["RZ450e", "Direct4", "266 mi range", "Mark Levinson"], image: "images/cars/lexus-rz.jpg", mpg: "266 mi range" },
+            { id: 194, brand: "Lexus", model: "TX", year: 2026, price: 55995, mileage: 0, condition: "new", bodyType: "SUV", fuel: "Hybrid", transmission: "Automatic", color: "Matador Red", features: ["TX550h+", "PHEV", "33 mi EV", "Mark Levinson"], image: "images/cars/lexus-tx.jpg", mpg: "79 MPGe" },
+            { id: 195, brand: "Lexus", model: "LS", year: 2025, price: 78995, mileage: 6000, condition: "used", bodyType: "Sedan", fuel: "Hybrid", transmission: "Automatic", color: "Deep Black", features: ["LS500h", "AWD", "Kiriko Glass", "Mark Levinson"], image: "images/cars/lexus-ls.jpg", mpg: "22/29" },
+
+            // Acura Vehicles
+            { id: 196, brand: "Acura", model: "MDX", year: 2026, price: 51995, mileage: 0, condition: "new", bodyType: "SUV", fuel: "Gasoline", transmission: "Automatic", color: "Platinum White", features: ["Type S", "SH-AWD", "Turbo", "ELS Studio"], image: "images/cars/acura-mdx.jpg", mpg: "17/21" },
+            { id: 197, brand: "Acura", model: "RDX", year: 2026, price: 44995, mileage: 0, condition: "new", bodyType: "SUV", fuel: "Gasoline", transmission: "Automatic", color: "Liquid Carbon", features: ["A-Spec", "SH-AWD", "ELS Studio", "AcuraWatch"], image: "images/cars/acura-rdx.jpg", mpg: "21/27" },
+            { id: 198, brand: "Acura", model: "TLX", year: 2026, price: 45995, mileage: 0, condition: "new", bodyType: "Sedan", fuel: "Gasoline", transmission: "Automatic", color: "Performance Red", features: ["Type S", "SH-AWD", "Turbo", "ELS Studio"], image: "images/cars/acura-tlx.jpg", mpg: "19/25" },
+            { id: 199, brand: "Acura", model: "Integra", year: 2026, price: 33995, mileage: 0, condition: "new", bodyType: "Sedan", fuel: "Gasoline", transmission: "Manual", color: "Apex Blue", features: ["Type S", "6MT", "Turbo", "ELS Studio"], image: "images/cars/acura-integra.jpg", mpg: "21/28" },
+            { id: 200, brand: "Acura", model: "ZDX", year: 2026, price: 66995, mileage: 0, condition: "new", bodyType: "SUV", fuel: "Electric", transmission: "Automatic", color: "Tiger Eye", features: ["Type S", "AWD", "313 mi range", "Bang & Olufsen"], image: "images/cars/acura-zdx.jpg", mpg: "313 mi range" },
+
+            // Infiniti Vehicles
+            { id: 201, brand: "Infiniti", model: "QX60", year: 2026, price: 49995, mileage: 0, condition: "new", bodyType: "SUV", fuel: "Gasoline", transmission: "Automatic", color: "Grand Blue", features: ["Autograph", "AWD", "Massage Seats", "Bose"], image: "images/cars/infiniti-qx60.jpg", mpg: "20/23" },
+            { id: 202, brand: "Infiniti", model: "QX80", year: 2026, price: 84995, mileage: 0, condition: "new", bodyType: "SUV", fuel: "Gasoline", transmission: "Automatic", color: "Dynamic Metal", features: ["Autograph", "4WD", "Klipsch", "Air Suspension"], image: "images/cars/infiniti-qx80.jpg", mpg: "14/19" },
+            { id: 203, brand: "Infiniti", model: "QX50", year: 2025, price: 41995, mileage: 8000, condition: "used", bodyType: "SUV", fuel: "Gasoline", transmission: "Automatic", color: "Majestic White", features: ["Autograph", "AWD", "VC-Turbo", "Bose"], image: "images/cars/infiniti-qx50.jpg", mpg: "22/28" },
+            { id: 204, brand: "Infiniti", model: "QX55", year: 2025, price: 48995, mileage: 6000, condition: "used", bodyType: "SUV", fuel: "Gasoline", transmission: "Automatic", color: "Dynamic Sunstone", features: ["Sensory", "AWD", "Coupe Design", "Bose"], image: "images/cars/infiniti-qx55.jpg", mpg: "22/28" },
+            { id: 205, brand: "Infiniti", model: "Q50", year: 2024, price: 42995, mileage: 12000, condition: "used", bodyType: "Sedan", fuel: "Gasoline", transmission: "Automatic", color: "Slate Gray", features: ["Red Sport", "AWD", "400 HP", "Bose"], image: "images/cars/infiniti-q50.jpg", mpg: "19/26" },
+
+            // Volvo Vehicles
+            { id: 206, brand: "Volvo", model: "XC90", year: 2026, price: 56995, mileage: 0, condition: "new", bodyType: "SUV", fuel: "Hybrid", transmission: "Automatic", color: "Denim Blue", features: ["T8", "PHEV", "33 mi EV", "Bowers & Wilkins"], image: "images/cars/volvo-xc90.jpg", mpg: "58 MPGe" },
+            { id: 207, brand: "Volvo", model: "XC60", year: 2026, price: 48995, mileage: 0, condition: "new", bodyType: "SUV", fuel: "Hybrid", transmission: "Automatic", color: "Pine Grey", features: ["T8", "PHEV", "35 mi EV", "Bowers & Wilkins"], image: "images/cars/volvo-xc60.jpg", mpg: "63 MPGe" },
+            { id: 208, brand: "Volvo", model: "XC40", year: 2026, price: 39995, mileage: 0, condition: "new", bodyType: "SUV", fuel: "Electric", transmission: "Automatic", color: "Crystal White", features: ["Recharge", "Twin", "293 mi range", "Harman Kardon"], image: "images/cars/volvo-xc40.jpg", mpg: "293 mi range" },
+            { id: 209, brand: "Volvo", model: "S90", year: 2026, price: 53995, mileage: 0, condition: "new", bodyType: "Sedan", fuel: "Hybrid", transmission: "Automatic", color: "Platinum Grey", features: ["T8", "PHEV", "38 mi EV", "Bowers & Wilkins"], image: "images/cars/volvo-s90.jpg", mpg: "66 MPGe" },
+            { id: 210, brand: "Volvo", model: "S60", year: 2026, price: 45995, mileage: 0, condition: "new", bodyType: "Sedan", fuel: "Hybrid", transmission: "Automatic", color: "Fusion Red", features: ["T8", "PHEV", "40 mi EV", "Harman Kardon"], image: "images/cars/volvo-s60.jpg", mpg: "69 MPGe" },
+            { id: 211, brand: "Volvo", model: "V60", year: 2025, price: 49995, mileage: 5000, condition: "used", bodyType: "Wagon", fuel: "Hybrid", transmission: "Automatic", color: "Thunder Grey", features: ["T8", "PHEV", "Cross Country", "Harman Kardon"], image: "images/cars/volvo-v60.jpg", mpg: "74 MPGe" },
+            { id: 212, brand: "Volvo", model: "EX90", year: 2026, price: 77995, mileage: 0, condition: "new", bodyType: "SUV", fuel: "Electric", transmission: "Automatic", color: "Sand Dune", features: ["Twin Motor", "300 mi range", "Lidar", "Bowers & Wilkins"], image: "images/cars/volvo-ex90.jpg", mpg: "300 mi range" },
+            { id: 213, brand: "Volvo", model: "C40", year: 2026, price: 54995, mileage: 0, condition: "new", bodyType: "SUV", fuel: "Electric", transmission: "Automatic", color: "Fjord Blue", features: ["Recharge", "Twin", "297 mi range", "Harman Kardon"], image: "images/cars/volvo-c40.jpg", mpg: "297 mi range" },
+            { id: 214, brand: "Volvo", model: "EM90", year: 2026, price: 114995, mileage: 0, condition: "new", bodyType: "Minivan", fuel: "Electric", transmission: "Automatic", color: "Nordic Light", features: ["Twin Motor", "450 mi range", "Lounge", "Bowers & Wilkins"], image: "images/cars/volvo-em90.jpg", mpg: "450 mi range" },
+
+            // Volkswagen Vehicles
+            { id: 215, brand: "Volkswagen", model: "Atlas", year: 2026, price: 38995, mileage: 0, condition: "new", bodyType: "SUV", fuel: "Gasoline", transmission: "Automatic", color: "Tourmaline Blue", features: ["SEL Premium", "4MOTION", "3-Row", "Harman Kardon"], image: "images/cars/vw-atlas.jpg", mpg: "20/27" },
+            { id: 216, brand: "Volkswagen", model: "Atlas Cross Sport", year: 2026, price: 37995, mileage: 0, condition: "new", bodyType: "SUV", fuel: "Gasoline", transmission: "Automatic", color: "Pyrite Silver", features: ["R-Line", "4MOTION", "Coupe", "Harman Kardon"], image: "images/cars/vw-atlas-cross-sport.jpg", mpg: "20/27" },
+            { id: 217, brand: "Volkswagen", model: "Tiguan", year: 2026, price: 29995, mileage: 0, condition: "new", bodyType: "SUV", fuel: "Gasoline", transmission: "Automatic", color: "Oryx White", features: ["SEL R-Line", "4MOTION", "Third Row", "Harman Kardon"], image: "images/cars/vw-tiguan.jpg", mpg: "23/30" },
+            { id: 218, brand: "Volkswagen", model: "Taos", year: 2026, price: 25995, mileage: 0, condition: "new", bodyType: "SUV", fuel: "Gasoline", transmission: "Automatic", color: "Cardinal Red", features: ["SEL", "4MOTION", "BeatsAudio", "Panoramic"], image: "images/cars/vw-taos.jpg", mpg: "24/31" },
+            { id: 219, brand: "Volkswagen", model: "ID.4", year: 2026, price: 41995, mileage: 0, condition: "new", bodyType: "SUV", fuel: "Electric", transmission: "Automatic", color: "Dusk Blue", features: ["Pro S", "AWD", "275 mi range", "ID.Light"], image: "images/cars/vw-id4.jpg", mpg: "275 mi range" },
+            { id: 220, brand: "Volkswagen", model: "ID.Buzz", year: 2026, price: 59995, mileage: 0, condition: "new", bodyType: "Minivan", fuel: "Electric", transmission: "Automatic", color: "Cabana Blue", features: ["Pro S", "AWD", "231 mi range", "Two-Tone"], image: "images/cars/vw-id-buzz.jpg", mpg: "231 mi range" },
+            { id: 221, brand: "Volkswagen", model: "Golf GTI", year: 2026, price: 33995, mileage: 0, condition: "new", bodyType: "Hatchback", fuel: "Gasoline", transmission: "Manual", color: "Kings Red", features: ["Autobahn", "6MT", "241 HP", "DCC"], image: "images/cars/vw-golf-gti.jpg", mpg: "24/34" },
+            { id: 222, brand: "Volkswagen", model: "Golf R", year: 2026, price: 46995, mileage: 0, condition: "new", bodyType: "Hatchback", fuel: "Gasoline", transmission: "Manual", color: "Lapiz Blue", features: ["R", "6MT", "315 HP", "Drift Mode"], image: "images/cars/vw-golf-r.jpg", mpg: "23/30" },
+            { id: 223, brand: "Volkswagen", model: "Jetta", year: 2026, price: 22995, mileage: 0, condition: "new", bodyType: "Sedan", fuel: "Gasoline", transmission: "Automatic", color: "Pure White", features: ["SEL", "BeatsAudio", "Sunroof", "Digital Cockpit"], image: "images/cars/vw-jetta.jpg", mpg: "29/40" },
+            { id: 224, brand: "Volkswagen", model: "Arteon", year: 2023, price: 42995, mileage: 15000, condition: "used", bodyType: "Sedan", fuel: "Gasoline", transmission: "Automatic", color: "Oryx White", features: ["SEL R-Line", "4MOTION", "Shooting Brake", "Harman Kardon"], image: "images/cars/vw-arteon.jpg", mpg: "22/31" },
+
+            // Tesla Vehicles
+            { id: 225, brand: "Tesla", model: "Model S", year: 2026, price: 79995, mileage: 0, condition: "new", bodyType: "Sedan", fuel: "Electric", transmission: "Automatic", color: "Pearl White", features: ["Plaid", "1020 HP", "396 mi range", "Yoke"], image: "images/cars/tesla-model-s.jpg", mpg: "396 mi range" },
+            { id: 226, brand: "Tesla", model: "Model 3", year: 2026, price: 38995, mileage: 0, condition: "new", bodyType: "Sedan", fuel: "Electric", transmission: "Automatic", color: "Midnight Silver", features: ["Long Range", "AWD", "341 mi range", "Autopilot"], image: "images/cars/tesla-model-3.jpg", mpg: "341 mi range" },
+            { id: 227, brand: "Tesla", model: "Model X", year: 2026, price: 89995, mileage: 0, condition: "new", bodyType: "SUV", fuel: "Electric", transmission: "Automatic", color: "Deep Blue", features: ["Plaid", "1020 HP", "335 mi range", "Falcon Doors"], image: "images/cars/tesla-model-x.jpg", mpg: "335 mi range" },
+            { id: 228, brand: "Tesla", model: "Model Y", year: 2026, price: 48995, mileage: 0, condition: "new", bodyType: "SUV", fuel: "Electric", transmission: "Automatic", color: "Solid Black", features: ["Performance", "AWD", "285 mi range", "Track Mode"], image: "images/cars/tesla-model-y.jpg", mpg: "285 mi range" },
+            { id: 229, brand: "Tesla", model: "Cybertruck", year: 2026, price: 99995, mileage: 0, condition: "new", bodyType: "Truck", fuel: "Electric", transmission: "Automatic", color: "Stainless Steel", features: ["Cyberbeast", "845 HP", "320 mi range", "Steer-by-Wire"], image: "images/cars/tesla-cybertruck.jpg", mpg: "320 mi range" },
+
+            // Porsche Vehicles
+            { id: 230, brand: "Porsche", model: "911", year: 2026, price: 114995, mileage: 0, condition: "new", bodyType: "Coupe", fuel: "Gasoline", transmission: "Automatic", color: "Guards Red", features: ["Carrera S", "473 HP", "PDK", "Sport Chrono"], image: "images/cars/porsche-911.jpg", mpg: "18/24" },
+            { id: 231, brand: "Porsche", model: "Cayenne", year: 2026, price: 82995, mileage: 0, condition: "new", bodyType: "SUV", fuel: "Hybrid", transmission: "Automatic", color: "Dolomite Silver", features: ["S E-Hybrid", "PHEV", "46 mi EV", "Air Suspension"], image: "images/cars/porsche-cayenne.jpg", mpg: "60 MPGe" },
+            { id: 232, brand: "Porsche", model: "Macan", year: 2026, price: 64995, mileage: 0, condition: "new", bodyType: "SUV", fuel: "Electric", transmission: "Automatic", color: "Ice Grey", features: ["Electric", "402 HP", "308 mi range", "Porsche Active"], image: "images/cars/porsche-macan-ev.jpg", mpg: "308 mi range" },
+            { id: 233, brand: "Porsche", model: "Panamera", year: 2026, price: 104995, mileage: 0, condition: "new", bodyType: "Sedan", fuel: "Hybrid", transmission: "Automatic", color: "Carrara White", features: ["4S E-Hybrid", "PHEV", "36 mi EV", "Active Ride"], image: "images/cars/porsche-panamera.jpg", mpg: "56 MPGe" },
+            { id: 234, brand: "Porsche", model: "Taycan", year: 2026, price: 92995, mileage: 0, condition: "new", bodyType: "Sedan", fuel: "Electric", transmission: "Automatic", color: "Frozen Blue", features: ["4S", "AWD", "320 mi range", "Porsche Active"], image: "images/cars/porsche-taycan.jpg", mpg: "320 mi range" },
+            { id: 235, brand: "Porsche", model: "718 Cayman", year: 2025, price: 68995, mileage: 4000, condition: "used", bodyType: "Coupe", fuel: "Gasoline", transmission: "Manual", color: "Python Green", features: ["GT4", "6MT", "414 HP", "Clubsport"], image: "images/cars/porsche-718.jpg", mpg: "17/23" },
+            { id: 236, brand: "Porsche", model: "718 Boxster", year: 2025, price: 70995, mileage: 3000, condition: "used", bodyType: "Convertible", fuel: "Gasoline", transmission: "Manual", color: "Agate Grey", features: ["Spyder", "6MT", "414 HP", "Soft Top"], image: "images/cars/porsche-boxster.jpg", mpg: "17/24" },
+
+            // Jaguar Vehicles
+            { id: 237, brand: "Jaguar", model: "F-PACE", year: 2025, price: 56995, mileage: 8000, condition: "used", bodyType: "SUV", fuel: "Gasoline", transmission: "Automatic", color: "Santorini Black", features: ["R-Dynamic S", "P400", "AWD", "Meridian"], image: "images/cars/jaguar-f-pace.jpg", mpg: "18/24" },
+            { id: 238, brand: "Jaguar", model: "XE", year: 2024, price: 48995, mileage: 12000, condition: "used", bodyType: "Sedan", fuel: "Gasoline", transmission: "Automatic", color: "British Racing Green", features: ["R-Dynamic S", "P300", "AWD", "Meridian"], image: "images/cars/jaguar-xe.jpg", mpg: "22/30" },
+            { id: 239, brand: "Jaguar", model: "XF", year: 2024, price: 54995, mileage: 10000, condition: "used", bodyType: "Sedan", fuel: "Gasoline", transmission: "Automatic", color: "Carpathian Grey", features: ["R-Dynamic SE", "P300", "AWD", "Meridian"], image: "images/cars/jaguar-xf.jpg", mpg: "21/30" },
+            { id: 240, brand: "Jaguar", model: "F-TYPE", year: 2024, price: 79995, mileage: 5000, condition: "used", bodyType: "Coupe", fuel: "Gasoline", transmission: "Automatic", color: "Sunset Gold", features: ["R", "575 HP", "AWD", "Meridian"], image: "images/cars/jaguar-f-type.jpg", mpg: "16/24" },
+
+            // Land Rover Vehicles
+            { id: 241, brand: "Land Rover", model: "Range Rover", year: 2026, price: 109995, mileage: 0, condition: "new", bodyType: "SUV", fuel: "Hybrid", transmission: "Automatic", color: "Belgravia Green", features: ["Autobiography", "PHEV", "48 mi EV", "Meridian"], image: "images/cars/land-rover-range-rover.jpg", mpg: "62 MPGe" },
+            { id: 242, brand: "Land Rover", model: "Range Rover Sport", year: 2026, price: 94995, mileage: 0, condition: "new", bodyType: "SUV", fuel: "Hybrid", transmission: "Automatic", color: "Santorini Black", features: ["Autobiography", "PHEV", "51 mi EV", "Meridian"], image: "images/cars/land-rover-range-rover-sport.jpg", mpg: "65 MPGe" },
+            { id: 243, brand: "Land Rover", model: "Defender", year: 2026, price: 58995, mileage: 0, condition: "new", bodyType: "SUV", fuel: "Gasoline", transmission: "Automatic", color: "Pangea Green", features: ["110 V8", "518 HP", "4WD", "Meridian"], image: "images/cars/land-rover-defender.jpg", mpg: "15/19" },
+            { id: 244, brand: "Land Rover", model: "Discovery", year: 2026, price: 61995, mileage: 0, condition: "new", bodyType: "SUV", fuel: "Gasoline", transmission: "Automatic", color: "Hakuba Silver", features: ["Metropolitan", "3-Row", "Air Suspension", "Meridian"], image: "images/cars/land-rover-discovery.jpg", mpg: "16/21" },
+            { id: 245, brand: "Land Rover", model: "Velar", year: 2026, price: 61995, mileage: 0, condition: "new", bodyType: "SUV", fuel: "Gasoline", transmission: "Automatic", color: "Arroios Grey", features: ["R-Dynamic HSE", "P400", "Air Suspension", "Meridian"], image: "images/cars/land-rover-velar.jpg", mpg: "18/24" },
+            { id: 246, brand: "Land Rover", model: "Evoque", year: 2026, price: 48995, mileage: 0, condition: "new", bodyType: "SUV", fuel: "Gasoline", transmission: "Automatic", color: "Seoul Pearl Silver", features: ["R-Dynamic HSE", "P300", "ClearSight", "Meridian"], image: "images/cars/land-rover-evoque.jpg", mpg: "20/27" },
+
+            // Mitsubishi Vehicles
+            { id: 247, brand: "Mitsubishi", model: "Outlander", year: 2026, price: 29995, mileage: 0, condition: "new", bodyType: "SUV", fuel: "Hybrid", transmission: "Automatic", color: "White Diamond", features: ["PHEV", "SEL", "38 mi EV", "Super All-Wheel"], image: "images/cars/mitsubishi-outlander.jpg", mpg: "64 MPGe" },
+            { id: 248, brand: "Mitsubishi", model: "Eclipse Cross", year: 2025, price: 26995, mileage: 10000, condition: "used", bodyType: "SUV", fuel: "Gasoline", transmission: "Automatic", color: "Red Diamond", features: ["SEL", "AWC", "Head-Up", "Rockford"], image: "images/cars/mitsubishi-eclipse-cross.jpg", mpg: "25/26" },
+            { id: 249, brand: "Mitsubishi", model: "Mirage", year: 2024, price: 17995, mileage: 15000, condition: "used", bodyType: "Hatchback", fuel: "Gasoline", transmission: "Automatic", color: "Sand Yellow", features: ["ES", "CVT", "7" Display", "Backup Camera"], image: "images/cars/mitsubishi-mirage.jpg", mpg: "36/43" },
+
+            // Mini Vehicles
+            { id: 250, brand: "Mini", model: "Cooper", year: 2026, price: 32995, mileage: 0, condition: "new", bodyType: "Hatchback", fuel: "Electric", transmission: "Automatic", color: "British Racing Green", features: ["SE", "Electric", "114 mi range", "Circular OLED"], image: "images/cars/mini-cooper.jpg", mpg: "114 mi range" },
+            { id: 251, brand: "Mini", model: "Countryman", year: 2026, price: 38995, mileage: 0, condition: "new", bodyType: "SUV", fuel: "Electric", transmission: "Automatic", color: "Nanuq White", features: ["SE ALL4", "Electric", "269 mi range", "Circular OLED"], image: "images/cars/mini-countryman.jpg", mpg: "269 mi range" },
+            { id: 252, brand: "Mini", model: "Convertible", year: 2024, price: 38995, mileage: 8000, condition: "used", bodyType: "Convertible", fuel: "Gasoline", transmission: "Automatic", color: "Zesty Yellow", features: ["S", "189 HP", "Soft Top", "Harman Kardon"], image: "images/cars/mini-convertible.jpg", mpg: "26/35" }
+        ];
+
+        let currentCars = [...carDatabase];
+        let currentFilter = 'all';
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            displayCars(currentCars);
+        });
+
+        // Display Cars
+        function displayCars(cars) {
+            const grid = document.getElementById('carsGrid');
+            const loading = document.getElementById('loading');
+            const noResults = document.getElementById('noResults');
+            
+            loading.classList.add('active');
+            grid.innerHTML = '';
+            
+            setTimeout(() => {
+                loading.classList.remove('active');
+                
+                if (cars.length === 0) {
+                    noResults.classList.add('active');
+                    return;
+                }
+                
+                noResults.classList.remove('active');
+                
+                cars.forEach(car => {
+                    const carCard = createCarCard(car);
+                    grid.innerHTML += carCard;
+                });
+            }, 500);
+        }
+
+        // Create Car Card HTML
+        function createCarCard(car) {
+            const monthlyPayment = Math.round(car.price * 0.015);
+            const badgeClass = car.condition === 'new' ? 'badge-new' : 'badge-used';
+            
+            return `
+                <div class="car-card" onclick="openCarModal(${car.id})">
+                    <span class="car-badge ${badgeClass}">${car.condition === 'new' ? 'New' : 'Used'}</span>
+                    <div class="car-favorite" onclick="event.stopPropagation(); toggleFavorite(this)">
+                        <i class="far fa-heart"></i>
+                    </div>
+                    <div class="car-image">
+                        <img src="${car.image}" alt="${car.year} ${car.brand} ${car.model}" onerror="this.src='images/cars/placeholder.jpg'">
+                    </div>
+                    <div class="car-info">
+                        <h3 class="car-title">${car.year} ${car.brand} ${car.model}</h3>
+                        <div class="car-meta">
+                            <span><i class="fas fa-road"></i> ${car.mileage.toLocaleString()} mi</span>
+                            <span><i class="fas fa-gas-pump"></i> ${car.fuel}</span>
+                            <span><i class="fas fa-cog"></i> ${car.transmission}</span>
+                        </div>
+                        <div class="car-features">
+                            ${car.features.slice(0, 3).map(f => `<span class="feature-tag">${f}</span>`).join('')}
+                        </div>
+                        <div class="car-price-section">
+                            <div>
+                                <div class="car-price">$${car.price.toLocaleString()}</div>
+                                <div class="car-payment">$${monthlyPayment}/mo</div>
+                            </div>
+                        </div>
+                        <div class="car-actions">
+                            <button class="btn btn-primary btn-small" onclick="event.stopPropagation(); openCarModal(${car.id})">
+                                <i class="fas fa-info-circle"></i> Details
+                            </button>
+                            <button class="btn btn-outline btn-small" onclick="event.stopPropagation(); scheduleTestDrive(${car.id})">
+                                <i class="fas fa-calendar"></i> Test Drive
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Search Functionality
+        function handleSearch(e) {
+            e.preventDefault();
+            const keyword = document.getElementById('keywordSearch').value.toLowerCase();
+            const brand = document.getElementById('brandFilter').value;
+            const priceRange = document.getElementById('priceFilter').value;
+            const bodyType = document.getElementById('bodyFilter').value;
+            
+            let filtered = carDatabase.filter(car => {
+                // Keyword search
+                const matchesKeyword = !keyword || 
+                    car.brand.toLowerCase().includes(keyword) ||
+                    car.model.toLowerCase().includes(keyword) ||
+                    car.year.toString().includes(keyword) ||
+                    car.features.some(f => f.toLowerCase().includes(keyword));
+                
+                // Brand filter
+                const matchesBrand = !brand || car.brand === brand;
+                
+                // Price filter
+                let matchesPrice = true;
+                if (priceRange) {
+                    const [min, max] = priceRange.split('-').map(p => p.replace('+', ''));
+                    if (max) {
+                        matchesPrice = car.price >= parseInt(min) && car.price <= parseInt(max);
+                    } else {
+                        matchesPrice = car.price >= parseInt(min);
+                    }
+                }
+                
+                // Body type filter
+                const matchesBody = !bodyType || car.bodyType === bodyType;
+                
+                // Condition filter (from tabs)
+                let matchesCondition = true;
+                if (currentFilter !== 'all') {
+                    if (currentFilter === 'certified') {
+                        matchesCondition = car.condition === 'used' && car.mileage < 50000;
+                    } else {
+                        matchesCondition = car.condition === currentFilter;
+                    }
+                }
+                
+                return matchesKeyword && matchesBrand && matchesPrice && matchesBody && matchesCondition;
+            });
+            
+            currentCars = filtered;
+            displayCars(currentCars);
+        }
+
+        // Filter by Type
+        function filterByType(type) {
+            currentFilter = type;
+            
+            // Update active tab
+            document.querySelectorAll('.filter-tag').forEach(tag => {
+                tag.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            handleSearch({ preventDefault: () => {} });
+        }
+
+        // Filter by Brand
+        function filterByBrand() {
+            handleSearch({ preventDefault: () => {} });
+        }
+
+        function filterByBrandName(brand) {
+            document.getElementById('brandFilter').value = brand;
+            handleSearch({ preventDefault: () => {} });
+            document.getElementById('inventory').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Switch Tab
+        function switchTab(type) {
+            currentFilter = type;
+            
+            document.querySelectorAll('.search-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            handleSearch({ preventDefault: () => {} });
+        }
+
+        // Sort Cars
+        function sortCars(sortType) {
+            let sorted = [...currentCars];
+            
+            switch(sortType) {
+                case 'price-low':
+                    sorted.sort((a, b) => a.price - b.price);
+                    break;
+                case 'price-high':
+                    sorted.sort((a, b) => b.price - a.price);
+                    break;
+                case 'year-new':
+                    sorted.sort((a, b) => b.year - a.year);
+                    break;
+                case 'year-old':
+                    sorted.sort((a, b) => a.year - b.year);
+                    break;
+                case 'mileage':
+                    sorted.sort((a, b) => a.mileage - b.mileage);
+                    break;
+            }
+            
+            displayCars(sorted);
+        }
+
+        // Toggle Favorite
+        function toggleFavorite(btn) {
+            const icon = btn.querySelector('i');
+            if (icon.classList.contains('far')) {
+                icon.classList.remove('far');
+                icon.classList.add('fas');
+                btn.style.background = '#c53030';
+                btn.style.color = 'white';
+            } else {
+                icon.classList.remove('fas');
+                icon.classList.add('far');
+                btn.style.background = 'white';
+                btn.style.color = 'var(--dark)';
+            }
+        }
+
+        // Open Car Modal
+        function openCarModal(carId) {
+            const car = carDatabase.find(c => c.id === carId);
+            if (!car) return;
+            
+            const modal = document.getElementById('carModal');
+            const content = document.getElementById('modalContent');
+            
+            content.innerHTML = `
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0;">
+                    <div style="height: 400px;">
+                        <img src="${car.image}" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.src='images/cars/placeholder.jpg'">
+                    </div>
+                    <div style="padding: 40px;">
+                        <span style="display: inline-block; padding: 6px 16px; background: ${car.condition === 'new' ? '#38a169' : '#ed8936'}; color: white; border-radius: 20px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; margin-bottom: 15px;">${car.condition === 'new' ? 'New' : 'Used'}</span>
+                        <h2 style="font-size: 2rem; margin-bottom: 10px; color: var(--primary);">${car.year} ${car.brand} ${car.model}</h2>
+                        <div style="font-size: 2rem; font-weight: 800; color: var(--secondary); margin-bottom: 20px;">$${car.price.toLocaleString()}</div>
+                        
+                        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; margin-bottom: 25px;">
+                            <div style="padding: 15px; background: #f7fafc; border-radius: 8px;">
+                                <div style="font-size: 0.8rem; color: var(--gray);">Mileage</div>
+                                <div style="font-weight: 600;">${car.mileage.toLocaleString()} mi</div>
+                            </div>
+                            <div style="padding: 15px; background: #f7fafc; border-radius: 8px;">
+                                <div style="font-size: 0.8rem; color: var(--gray);">Fuel Type</div>
+                                <div style="font-weight: 600;">${car.fuel}</div>
+                            </div>
+                            <div style="padding: 15px; background: #f7fafc; border-radius: 8px;">
+                                <div style="font-size: 0.8rem; color: var(--gray);">Transmission</div>
+                                <div style="font-weight: 600;">${car.transmission}</div>
+                            </div>
+                            <div style="padding: 15px; background: #f7fafc; border-radius: 8px;">
+                                <div style="font-size: 0.8rem; color: var(--gray);">MPG/Range</div>
+                                <div style="font-weight: 600;">${car.mpg}</div>
+                            </div>
+                        </div>
+                        
+                        <div style="margin-bottom: 25px;">
+                            <h4 style="margin-bottom: 10px;">Key Features</h4>
+                            <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+                                ${car.features.map(f => `<span style="padding: 6px 14px; background: #edf2f7; border-radius: 15px; font-size: 0.85rem;">${f}</span>`).join('')}
+                            </div>
+                        </div>
+                        
+                        <div style="display: flex; gap: 15px;">
+                            <button class="btn btn-primary" style="flex: 1; justify-content: center;">
+                                <i class="fas fa-calculator"></i> Calculate Payment
+                            </button>
+                            <button class="btn btn-outline" style="flex: 1; justify-content: center;">
+                                <i class="fas fa-phone"></i> Contact Dealer
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            modal.classList.add('active');
+        }
+
+        // Close Modal
+        function closeModal() {
+            document.getElementById('carModal').classList.remove('active');
+        }
+
+        // Schedule Test Drive
+        function scheduleTestDrive(carId) {
+            alert('Test drive scheduling form would open here. Our team will contact you shortly!');
+        }
+
+        // Close modal on outside click
+        window.onclick = function(event) {
+            const modal = document.getElementById('carModal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        }
+    </script>
+</body>
+  </html>
